@@ -31,13 +31,13 @@ function RsvpPage() {
 
   return (
     <PageShell>
-      <section className="relative py-20 px-4 bg-maroon-deep text-cream overflow-hidden min-h-screen flex items-center">
-        <img src={elephant} alt="" aria-hidden className="absolute -bottom-4 -left-6 w-32 md:w-56 opacity-90 pointer-events-none" loading="lazy" />
-        <img src={elephant} alt="" aria-hidden className="absolute -bottom-4 -right-6 w-32 md:w-56 opacity-90 pointer-events-none -scale-x-100" loading="lazy" />
+      <section className="relative py-20 px-4 min-h-screen flex items-center">
+        <img src={elephant} alt="" aria-hidden className="absolute bottom-28 -left-4 w-28 md:w-44 opacity-90 pointer-events-none" loading="lazy" />
+        <img src={elephant} alt="" aria-hidden className="absolute bottom-28 -right-4 w-28 md:w-44 opacity-90 pointer-events-none -scale-x-100" loading="lazy" />
 
         <div className="max-w-xl mx-auto text-center relative z-10 w-full">
           <p className="label text-[10px] text-gold">With Joy in Our Hearts</p>
-          <h2 className="script text-5xl md:text-6xl text-cream mt-2">Will You Join Us?</h2>
+          <h2 className="script text-5xl md:text-6xl text-maroon mt-2">Will You Join Us?</h2>
           <div className="flex items-center justify-center gap-4 my-6">
             <span className="h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
             <span className="text-gold">❋</span>
