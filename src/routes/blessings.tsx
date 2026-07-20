@@ -25,43 +25,44 @@ function BlessingsPage() {
 
   return (
     <PageShell>
-      <section className="relative py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center">
-            <p className="label text-[10px] text-gold">Ashirwad</p>
-            <h2 className="script text-5xl md:text-6xl text-maroon mt-2">Shower Your Blessings</h2>
+      <section className="w-full h-full flex flex-col items-center px-3 pt-20 pb-16">
+        <div className="max-w-5xl w-full mx-auto flex flex-col min-h-0 h-full">
+          <div className="text-center shrink-0">
+            <p className="label text-[9px] text-gold">Ashirwad</p>
+            <h2 className="script text-2xl sm:text-3xl md:text-5xl text-maroon mt-1">Shower Your Blessings</h2>
             <Divider />
-            <p className="display italic text-maroon-deep/70 max-w-md mx-auto">Your kind words make our celebration more special.</p>
           </div>
 
-          <form onSubmit={submit} className="paper-card rounded-2xl p-6 md:p-8 mt-8 space-y-4">
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" maxLength={60}
-              className="w-full bg-cream/60 border border-gold/30 rounded-lg px-4 py-3 focus:outline-none focus:border-gold text-maroon-deep placeholder:text-maroon/40" />
-            <textarea value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="Write your blessing for the couple…" rows={4} maxLength={400}
-              className="w-full bg-cream/60 border border-gold/30 rounded-lg px-4 py-3 focus:outline-none focus:border-gold text-maroon-deep placeholder:text-maroon/40 resize-none" />
-            {err && <p className="text-destructive text-sm italic">{err}</p>}
-            <button type="submit" className="px-8 py-3 bg-maroon text-cream label text-[10px] rounded-full hover:bg-maroon-deep transition-colors">
-              Send Blessing
-            </button>
-          </form>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2 min-h-0 flex-1">
+            <form onSubmit={submit} className="paper-card rounded-xl p-3 md:p-4 space-y-2 shrink-0">
+              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" maxLength={60}
+                className="w-full bg-cream/60 border border-gold/30 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold text-maroon-deep placeholder:text-maroon/40" />
+              <textarea value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="Write your blessing…" rows={3} maxLength={400}
+                className="w-full bg-cream/60 border border-gold/30 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold text-maroon-deep placeholder:text-maroon/40 resize-none" />
+              {err && <p className="text-destructive text-xs italic">{err}</p>}
+              <button type="submit" className="px-6 py-2 bg-maroon text-cream label text-[10px] rounded-full hover:bg-maroon-deep transition-colors">
+                Send Blessing
+              </button>
+            </form>
 
-          <div className="grid md:grid-cols-2 gap-4 mt-8">
-            <AnimatePresence initial={false}>
-              {items.map((b, i) => (
-                <motion.article
-                  key={`${b.name}-${i}`}
-                  layout
-                  initial={{ opacity: 0, y: 20, rotateX: -15 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  className="paper-card rounded-xl p-6 relative"
-                >
-                  <span className="absolute top-3 right-4 text-gold text-2xl">❋</span>
-                  <p className="display italic text-maroon-deep/85 leading-relaxed">"{b.message}"</p>
-                  <p className="mt-4 label text-[10px] text-gold">— {b.name}</p>
-                </motion.article>
-              ))}
-            </AnimatePresence>
+            <div className="overflow-y-auto pr-1 space-y-2 min-h-0">
+              <AnimatePresence initial={false}>
+                {items.map((b, i) => (
+                  <motion.article
+                    key={`${b.name}-${i}`}
+                    layout
+                    initial={{ opacity: 0, y: 20, rotateX: -15 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    className="paper-card rounded-lg p-3 relative"
+                  >
+                    <span className="absolute top-2 right-3 text-gold text-lg">❋</span>
+                    <p className="display italic text-xs md:text-sm text-maroon-deep/85 leading-snug pr-6">"{b.message}"</p>
+                    <p className="mt-1 label text-[9px] text-gold">— {b.name}</p>
+                  </motion.article>
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </section>
