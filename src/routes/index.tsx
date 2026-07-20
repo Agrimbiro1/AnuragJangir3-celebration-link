@@ -76,82 +76,34 @@ function Welcome() {
 
       <PageShell showGarland={false} showCorners={false}>
         <section className="relative w-full h-full flex flex-col items-center justify-center px-4 pb-16 overflow-hidden">
-          {/* Painted arch backdrop — contained so it doesn't zoom on desktop */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden>
-            <motion.img
-              src={heroArch}
-              alt=""
-              className="h-full w-auto max-w-none object-contain opacity-90 animate-arch-glow"
-              initial={{ scale: 1.04, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.9 }}
-              transition={{ duration: 1.6, ease: "easeOut" }}
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-cream/40 via-transparent to-cream/60" aria-hidden />
-
-          {/* Top lotus garland — sways gently from top */}
+          {/* Full-screen painted arch backdrop with subtle breathing animation */}
           <motion.img
-            src={garland}
+            src={heroArch}
             alt=""
             aria-hidden
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] max-w-[560px] md:max-w-[760px] lg:max-w-[880px] animate-sway origin-top pointer-events-none z-[5] opacity-95"
-            initial={{ y: -80, opacity: 0 }}
-            animate={{ y: 0, opacity: 0.95 }}
-            transition={{ duration: 1.4, ease: "easeOut" }}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ scale: 1.08, opacity: 0 }}
+            animate={{ scale: [1, 1.04, 1], opacity: 1 }}
+            transition={{
+              opacity: { duration: 1.4, ease: "easeOut" },
+              scale: { duration: 18, repeat: Infinity, ease: "easeInOut" },
+            }}
           />
-
-          {/* Bottom lotus garland — mirrored, sways from bottom */}
-          <motion.img
-            src={garland}
-            alt=""
+          {/* Soft glow overlay pulsing on the arch */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
             aria-hidden
-            className="absolute bottom-14 left-1/2 -translate-x-1/2 w-[92%] max-w-[560px] md:max-w-[760px] lg:max-w-[880px] animate-sway-bottom pointer-events-none z-[5] opacity-90"
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 0.9 }}
-            transition={{ duration: 1.4, delay: 0.2, ease: "easeOut" }}
+            style={{
+              background:
+                "radial-gradient(ellipse at center, oklch(0.72 0.13 75 / 0.18) 0%, transparent 55%)",
+            }}
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           />
-
-          {/* Side foliage / plants — sway */}
-          <motion.img
-            src={foliage}
-            alt=""
-            aria-hidden
-            className="absolute bottom-14 left-0 w-24 sm:w-32 md:w-52 lg:w-64 opacity-85 pointer-events-none z-[6] animate-leaf-sway"
-            initial={{ x: -60, opacity: 0 }}
-            animate={{ x: 0, opacity: 0.85 }}
-            transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-          />
-          <motion.img
-            src={foliage}
-            alt=""
-            aria-hidden
-            className="absolute bottom-14 right-0 w-24 sm:w-32 md:w-52 lg:w-64 opacity-85 pointer-events-none z-[6] animate-leaf-sway-mirror"
-            initial={{ x: 60, opacity: 0 }}
-            animate={{ x: 0, opacity: 0.85 }}
-            transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-          />
-
-          {/* Ceremonial elephants — walk in from sides, bob gently */}
-          <motion.img
-            src={elephant}
-            alt=""
-            aria-hidden
-            className="absolute bottom-16 left-2 sm:left-6 md:left-16 w-20 sm:w-28 md:w-40 lg:w-48 opacity-95 pointer-events-none z-[7] animate-elephant drop-shadow-[0_10px_20px_rgba(122,31,43,0.25)]"
-            initial={{ x: -120, opacity: 0 }}
-            animate={{ x: 0, opacity: 0.95 }}
-            transition={{ duration: 1.6, delay: 0.6, ease: "easeOut" }}
-          />
-          <motion.img
-            src={elephant}
-            alt=""
-            aria-hidden
-            className="absolute bottom-16 right-2 sm:right-6 md:right-16 w-20 sm:w-28 md:w-40 lg:w-48 opacity-95 pointer-events-none z-[7] animate-elephant-mirror drop-shadow-[0_10px_20px_rgba(122,31,43,0.25)]"
-            initial={{ x: 120, opacity: 0 }}
-            animate={{ x: 0, opacity: 0.95 }}
-            transition={{ duration: 1.6, delay: 0.6, ease: "easeOut" }}
-          />
+          <div className="absolute inset-0 bg-gradient-to-b from-cream/30 via-transparent to-cream/50" aria-hidden />
 
           <Petals />
+
 
 
           <motion.div
