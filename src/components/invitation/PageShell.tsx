@@ -41,10 +41,27 @@ export function PageShell({
 
       {showCorners && (
         <>
-          <img src={corner} alt="" aria-hidden className="absolute top-0 left-0 w-16 md:w-32 opacity-80 pointer-events-none z-0" loading="lazy" />
-          <img src={corner} alt="" aria-hidden className="absolute top-0 right-0 w-16 md:w-32 opacity-80 pointer-events-none -scale-x-100 z-0" loading="lazy" />
-          <img src={corner} alt="" aria-hidden className="absolute bottom-16 left-0 w-16 md:w-28 opacity-70 pointer-events-none -scale-y-100 z-0" loading="lazy" />
-          <img src={corner} alt="" aria-hidden className="absolute bottom-16 right-0 w-16 md:w-28 opacity-70 pointer-events-none -scale-100 z-0" loading="lazy" />
+          {/* Mobile: small corners */}
+          <img src={corner} alt="" aria-hidden className="absolute top-0 left-0 w-20 opacity-80 pointer-events-none z-0 md:hidden" loading="lazy" />
+          <img src={corner} alt="" aria-hidden className="absolute top-0 right-0 w-20 opacity-80 pointer-events-none -scale-x-100 z-0 md:hidden" loading="lazy" />
+          <img src={corner} alt="" aria-hidden className="absolute bottom-16 left-0 w-20 opacity-70 pointer-events-none -scale-y-100 z-0 md:hidden" loading="lazy" />
+          <img src={corner} alt="" aria-hidden className="absolute bottom-16 right-0 w-20 opacity-70 pointer-events-none -scale-100 z-0 md:hidden" loading="lazy" />
+
+          {/* Desktop: full-height side panels of Pichwai foliage */}
+          <img
+            src={corner}
+            alt=""
+            aria-hidden
+            className="hidden md:block absolute top-0 left-0 h-full w-[32vw] max-w-[520px] object-cover object-right opacity-90 pointer-events-none z-0"
+            loading="lazy"
+          />
+          <img
+            src={corner}
+            alt=""
+            aria-hidden
+            className="hidden md:block absolute top-0 right-0 h-full w-[32vw] max-w-[520px] object-cover object-left opacity-90 pointer-events-none -scale-x-100 z-0"
+            loading="lazy"
+          />
         </>
       )}
 
