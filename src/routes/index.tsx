@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import heroArch from "@/assets/hero-arch.jpg";
 import ganesha from "@/assets/ganesha.png";
-import garland from "@/assets/lotus-garland.png";
-import elephant from "@/assets/elephant.png";
-import foliage from "@/assets/corner-foliage.png";
 import { invitation } from "@/lib/invitation-data";
 import { Divider } from "@/components/invitation/Divider";
 import { Petals } from "@/components/invitation/Petals";
 import { PageShell } from "@/components/invitation/PageShell";
+
 
 
 export const Route = createFileRoute("/")({ component: Welcome });
