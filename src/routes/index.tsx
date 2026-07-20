@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import heroArch from "@/assets/hero-arch.jpg";
+import heroArchDesktop from "@/assets/hero-arch-desktop.jpg";
+
 import ganesha from "@/assets/ganesha.png";
 import { invitation } from "@/lib/invitation-data";
 import { Divider } from "@/components/invitation/Divider";
