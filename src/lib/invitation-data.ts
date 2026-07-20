@@ -1,0 +1,53 @@
+export const invitation = {
+  groom: "Aarav",
+  bride: "Ishani",
+  eventType: "Engagement Ceremony",
+  welcome: "With the blessings of Lord Ganesha and our elders, we joyfully invite you to celebrate the engagement of",
+  targetDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 62).toISOString(),
+  events: [
+    {
+      name: "Ganesh Puja & Ring Ceremony",
+      date: "Sunday, 21 September 2026",
+      time: "10:30 AM onwards",
+      venue: "The Grand Ballroom, Heritage Palace, Jaipur",
+      note: "Traditional blessings followed by the exchange of rings",
+      dress: "Indian Traditional",
+    },
+    {
+      name: "Sangeet & Reception",
+      date: "Sunday, 21 September 2026",
+      time: "7:00 PM onwards",
+      venue: "Sunset Lawn, Heritage Palace, Jaipur",
+      note: "An evening of music, dance and dinner",
+      dress: "Festive Indian",
+    },
+  ],
+  groomFamily: {
+    surname: "The Kapoor Family",
+    parents: "Shri. Rajesh & Smt. Anjali Kapoor",
+    siblings: "Rhea Kapoor (sister)",
+    note: "With immense joy and gratitude, we welcome you into our home to bless our son.",
+    contactName: "Rajesh Kapoor",
+    contactPhone: "+91 98765 43210",
+  },
+  brideFamily: {
+    surname: "The Malhotra Family",
+    parents: "Shri. Vikram & Smt. Meera Malhotra",
+    siblings: "Advait Malhotra (brother)",
+    note: "It is our greatest honour to have you share this precious moment with our daughter.",
+    contactName: "Vikram Malhotra",
+    contactPhone: "+91 98765 43211",
+  },
+  venue: {
+    name: "Heritage Palace, Jaipur",
+    address: "Jawahar Circle Road, Malviya Nagar, Jaipur, Rajasthan 302017",
+    mapUrl: "https://maps.google.com/?q=Heritage+Palace+Jaipur",
+    embed: "https://www.google.com/maps?q=Jaipur+Rajasthan&output=embed",
+  },
+  seedBlessings: [
+    { name: "The Sharma Family", message: "May your union be blessed with endless love, laughter and light. Congratulations to the beautiful couple!" },
+    { name: "Ananya & Karan", message: "So thrilled for you both. Wishing you a lifetime of togetherness and shared dreams." },
+    { name: "Dadi Ji", message: "Bless you, my children. May Lord Ganesha's grace always guide your path together." },
+  ],
+  closing: "Two souls, one journey — bound by love, guided by blessings.",
+};
