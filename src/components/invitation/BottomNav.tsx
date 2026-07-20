@@ -26,28 +26,28 @@ export function BottomNav() {
       transition={{ duration: 0.6, delay: 0.3 }}
       className="fixed bottom-0 inset-x-0 z-40 pb-[env(safe-area-inset-bottom)] pointer-events-none"
     >
-      <div className="mx-auto max-w-2xl px-3 pb-3 pointer-events-auto">
-        <div className="rounded-2xl bg-maroon-deep/95 backdrop-blur-md border border-gold/40 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.4)] px-3 py-2 flex items-center gap-2">
+      <div className="mx-auto max-w-xl px-2 pb-2 pointer-events-auto">
+        <div className="rounded-xl bg-maroon-deep/95 backdrop-blur-md border border-gold/40 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.4)] px-2 py-1.5 flex items-center gap-1.5">
           {prev ? (
             <Link
               to={prev.path}
-              className="flex-1 min-w-0 flex items-center gap-2 px-3 py-2 rounded-xl bg-cream/5 hover:bg-cream/10 transition text-cream"
+              className="min-w-0 flex items-center gap-1 px-2 py-1 rounded-lg bg-cream/5 hover:bg-cream/10 transition text-cream"
             >
-              <span className="text-gold">←</span>
-              <span className="truncate label text-[10px]">{prev.label}</span>
+              <span className="text-gold text-xs">←</span>
+              <span className="truncate label text-[9px] hidden sm:inline">{prev.label}</span>
             </Link>
           ) : (
-            <div className="flex-1" />
+            <div className="w-8" />
           )}
 
-          <div className="flex items-center gap-1 px-2">
+          <div className="flex-1 flex items-center justify-center gap-1">
             {pages.map((p, i) => (
               <Link
                 key={p.path}
                 to={p.path}
                 aria-label={p.label}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  i === idx ? "bg-gold w-4" : "bg-cream/30 hover:bg-cream/60"
+                className={`h-1.5 rounded-full transition-all ${
+                  i === idx ? "bg-gold w-4" : "bg-cream/30 hover:bg-cream/60 w-1.5"
                 }`}
               />
             ))}
@@ -56,13 +56,13 @@ export function BottomNav() {
           {next ? (
             <Link
               to={next.path}
-              className="flex-1 min-w-0 flex items-center justify-end gap-2 px-3 py-2 rounded-xl bg-gold text-maroon-deep hover:brightness-110 transition"
+              className="min-w-0 flex items-center gap-1 px-2 py-1 rounded-lg bg-gold text-maroon-deep hover:brightness-110 transition"
             >
-              <span className="truncate label text-[10px]">{next.label}</span>
-              <span>→</span>
+              <span className="truncate label text-[9px] hidden sm:inline">{next.label}</span>
+              <span className="text-xs">→</span>
             </Link>
           ) : (
-            <div className="flex-1" />
+            <div className="w-8" />
           )}
         </div>
       </div>

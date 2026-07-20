@@ -37,21 +37,21 @@ function CountdownPage() {
 
   return (
     <PageShell>
-      <section className="relative py-20 px-4 min-h-screen flex items-center">
+      <section className="w-full h-full flex items-center justify-center px-4 pt-20 pb-16">
         <div className="max-w-3xl mx-auto text-center w-full">
-          <p className="label text-[10px] text-gold">Counting Down to Our Special Day</p>
-          <h2 className="script text-5xl md:text-6xl text-maroon mt-2">Until We Say Yes</h2>
+          <p className="label text-[9px] text-gold">Counting Down to Our Special Day</p>
+          <h2 className="script text-3xl sm:text-4xl md:text-6xl text-maroon mt-1">Until We Say Yes</h2>
           <Divider />
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="paper-card rounded-3xl p-8 md:p-12 mt-6 relative"
+            className="paper-card rounded-2xl p-4 md:p-8 mt-4 relative"
           >
-            <div className="absolute inset-2 rounded-2xl border border-gold/40 pointer-events-none" />
+            <div className="absolute inset-1.5 rounded-xl border border-gold/40 pointer-events-none" />
             {done ? (
-              <p className="script text-4xl text-maroon">Today's the day! 🌸</p>
+              <p className="script text-3xl text-maroon">Today's the day! 🌸</p>
             ) : (
               <div className="grid grid-cols-4 gap-2 md:gap-6">
                 {units.map((u) => (
@@ -61,19 +61,19 @@ function CountdownPage() {
                       initial={{ scale: 0.9, opacity: 0.5 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.4 }}
-                      className="display text-4xl md:text-6xl text-maroon-deep tabular-nums"
+                      className="display text-3xl sm:text-4xl md:text-6xl text-maroon-deep tabular-nums"
                       style={{ textShadow: "0 2px 12px oklch(0.72 0.13 75 / 0.35)" }}
                     >
                       {String(u.v).padStart(2, "0")}
                     </motion.span>
-                    <span className="label text-[9px] md:text-[10px] text-gold mt-2">{u.l}</span>
+                    <span className="label text-[9px] md:text-[10px] text-gold mt-1">{u.l}</span>
                   </div>
                 ))}
               </div>
             )}
           </motion.div>
 
-          <p className="display italic text-maroon-deep/70 mt-6">Every moment brings us closer to forever.</p>
+          <p className="display italic text-maroon-deep/70 text-xs md:text-sm mt-3">Every moment brings us closer to forever.</p>
         </div>
       </section>
     </PageShell>

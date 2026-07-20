@@ -13,20 +13,20 @@ function FamiliesPage() {
   const [openB, setOpenB] = useState(false);
   return (
     <PageShell>
-      <section className="relative py-20 px-4 bg-[radial-gradient(ellipse_at_center,oklch(0.94_0.035_80)_0%,transparent_70%)]">
-        <div className="max-w-5xl mx-auto">
+      <section className="w-full h-full flex flex-col items-center justify-center px-3 pt-24 pb-16 md:pt-28">
+        <div className="max-w-5xl w-full mx-auto">
           <div className="text-center">
-            <p className="label text-[10px] text-gold">Two Families, One Union</p>
-            <h2 className="script text-5xl md:text-6xl text-maroon mt-2">Our Families</h2>
+            <p className="label text-[9px] text-gold">Two Families, One Union</p>
+            <h2 className="script text-2xl sm:text-3xl md:text-5xl text-maroon mt-1">Our Families</h2>
             <Divider />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6 mt-3">
             <FamilyCard side="Groom's Side" data={invitation.groomFamily} open={openG} setOpen={setOpenG} />
             <FamilyCard side="Bride's Side" data={invitation.brideFamily} open={openB} setOpen={setOpenB} />
           </div>
 
-          <img src={cows} alt="" aria-hidden className="mt-12 w-full max-w-3xl mx-auto opacity-90" loading="lazy" />
+          <img src={cows} alt="" aria-hidden className="mt-3 w-full max-w-md md:max-w-xl mx-auto opacity-90 max-h-24 md:max-h-32 object-contain" loading="lazy" />
         </div>
       </section>
     </PageShell>
@@ -39,18 +39,18 @@ function FamilyCard({ side, data, open, setOpen }: { side: string; data: typeof 
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9 }}
-      className="paper-card rounded-2xl p-7 text-center"
+      className="paper-card rounded-xl p-3 md:p-5 text-center"
     >
-      <p className="label text-[10px] text-gold">{side}</p>
-      <h3 className="script text-4xl text-maroon mt-2">{data.surname}</h3>
-      <div className="my-4 h-px gold-divider mx-auto w-32" />
-      <p className="display text-lg text-maroon-deep">{data.parents}</p>
-      <p className="italic text-maroon-deep/70 mt-2">{data.note}</p>
+      <p className="label text-[9px] text-gold">{side}</p>
+      <h3 className="script text-xl md:text-3xl text-maroon mt-1">{data.surname}</h3>
+      <div className="my-2 h-px gold-divider mx-auto w-24" />
+      <p className="display text-sm md:text-base text-maroon-deep">{data.parents}</p>
+      <p className="italic text-maroon-deep/70 text-[11px] md:text-sm mt-1">{data.note}</p>
       <button
         onClick={() => setOpen(!open)}
-        className="mt-6 px-6 py-2 bg-maroon text-cream label text-[10px] rounded-full hover:bg-maroon-deep transition-colors"
+        className="mt-2 px-4 py-1.5 bg-maroon text-cream label text-[9px] rounded-full hover:bg-maroon-deep transition-colors"
       >
-        {open ? "Hide Family Details" : "Show Family Details"}
+        {open ? "Hide Details" : "Show Details"}
       </button>
       <AnimatePresence>
         {open && (
@@ -61,10 +61,10 @@ function FamilyCard({ side, data, open, setOpen }: { side: string; data: typeof 
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <div className="pt-4 mt-4 border-t border-gold/25 text-sm space-y-2">
-              <p><span className="label text-[10px] text-gold mr-2">Siblings</span>{data.siblings}</p>
-              <p><span className="label text-[10px] text-gold mr-2">Contact</span>{data.contactName}</p>
-              <a href={`tel:${data.contactPhone.replace(/\s/g, "")}`} className="inline-block mt-2 px-4 py-2 rounded-full bg-gold text-maroon-deep label text-[10px]">
+            <div className="pt-2 mt-2 border-t border-gold/25 text-[11px] md:text-xs space-y-1">
+              <p><span className="label text-[9px] text-gold mr-1">Siblings</span>{data.siblings}</p>
+              <p><span className="label text-[9px] text-gold mr-1">Contact</span>{data.contactName}</p>
+              <a href={`tel:${data.contactPhone.replace(/\s/g, "")}`} className="inline-block mt-1 px-3 py-1 rounded-full bg-gold text-maroon-deep label text-[9px]">
                 {data.contactPhone}
               </a>
             </div>

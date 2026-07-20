@@ -33,17 +33,17 @@ function GalleryPage() {
   const [open, setOpen] = useState<number | null>(null);
   return (
     <PageShell>
-      <section className="relative py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center">
-            <p className="label text-[10px] text-gold">Moments in Time</p>
-            <h2 className="script text-5xl md:text-6xl text-maroon mt-2">Our Story</h2>
+      <section className="w-full h-full flex flex-col items-center justify-center px-3 pt-24 pb-16 md:pt-28">
+        <div className="max-w-5xl w-full mx-auto flex flex-col min-h-0">
+          <div className="text-center shrink-0">
+            <p className="label text-[9px] text-gold">Moments in Time</p>
+            <h2 className="script text-2xl sm:text-3xl md:text-5xl text-maroon mt-1">Our Story</h2>
             <Divider />
           </div>
 
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 relative">
-            <FloatSvg className="absolute -top-4 -left-2 w-10 text-gold/60 animate-pulse-gold pointer-events-none" />
-            <FloatSvg className="absolute top-1/2 -right-3 w-12 text-rose/70 animate-pulse-gold pointer-events-none" />
+          <div className="mt-3 grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3 relative min-h-0">
+            <FloatSvg className="absolute -top-2 -left-1 w-6 md:w-8 text-gold/60 animate-pulse-gold pointer-events-none z-10" />
+            <FloatSvg className="absolute top-1/2 -right-1 w-6 md:w-8 text-rose/70 animate-pulse-gold pointer-events-none z-10" />
             {galleryImages.map((g, i) => (
               <motion.button
                 type="button"
@@ -51,11 +51,11 @@ function GalleryPage() {
                 onClick={() => setOpen(i)}
                 initial={{ opacity: 0, y: 20, rotate: i % 2 === 0 ? -2 : 2 }}
                 animate={{ opacity: 1, y: 0, rotate: 0 }}
-                whileHover={{ y: -6, rotate: i % 2 === 0 ? -1.5 : 1.5 }}
+                whileHover={{ y: -4, rotate: i % 2 === 0 ? -1.5 : 1.5 }}
                 transition={{ duration: 0.6, delay: i * 0.08 }}
-                className={`overflow-hidden rounded-xl paper-card p-1.5 group ${i === 0 ? "col-span-2 md:col-span-2 row-span-2" : ""}`}
+                className={`overflow-hidden rounded-lg paper-card p-1 group ${i === 0 ? "col-span-2 row-span-2" : ""}`}
               >
-                <img src={g.url} alt={g.alt} loading="lazy" className={`w-full ${i === 0 ? "aspect-[4/3]" : "aspect-square"} object-cover rounded-lg group-hover:scale-105 transition-transform duration-700`} />
+                <img src={g.url} alt={g.alt} loading="lazy" className={`w-full h-full ${i === 0 ? "aspect-square" : "aspect-square"} object-cover rounded-md group-hover:scale-105 transition-transform duration-700`} />
               </motion.button>
             ))}
           </div>
@@ -73,7 +73,7 @@ function GalleryPage() {
                 src={galleryImages[open].url} alt={galleryImages[open].alt}
                 className="max-h-[85vh] max-w-full rounded-xl shadow-2xl"
               />
-              <button onClick={() => setOpen(null)} className="absolute top-6 right-6 text-cream label text-xs">Close ✕</button>
+              <button onClick={() => setOpen(null)} className="absolute top-4 right-4 text-cream label text-xs">Close ✕</button>
             </motion.div>
           )}
         </AnimatePresence>
