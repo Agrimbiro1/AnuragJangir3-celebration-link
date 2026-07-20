@@ -9,8 +9,56 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VenueRouteImport } from './routes/venue'
+import { Route as RsvpRouteImport } from './routes/rsvp'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FamiliesRouteImport } from './routes/families'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as CountdownRouteImport } from './routes/countdown'
+import { Route as ClosingRouteImport } from './routes/closing'
+import { Route as BlessingsRouteImport } from './routes/blessings'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VenueRoute = VenueRouteImport.update({
+  id: '/venue',
+  path: '/venue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RsvpRoute = RsvpRouteImport.update({
+  id: '/rsvp',
+  path: '/rsvp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FamiliesRoute = FamiliesRouteImport.update({
+  id: '/families',
+  path: '/families',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CountdownRoute = CountdownRouteImport.update({
+  id: '/countdown',
+  path: '/countdown',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClosingRoute = ClosingRouteImport.update({
+  id: '/closing',
+  path: '/closing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlessingsRoute = BlessingsRouteImport.update({
+  id: '/blessings',
+  path: '/blessings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +67,144 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blessings': typeof BlessingsRoute
+  '/closing': typeof ClosingRoute
+  '/countdown': typeof CountdownRoute
+  '/events': typeof EventsRoute
+  '/families': typeof FamiliesRoute
+  '/gallery': typeof GalleryRoute
+  '/rsvp': typeof RsvpRoute
+  '/venue': typeof VenueRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blessings': typeof BlessingsRoute
+  '/closing': typeof ClosingRoute
+  '/countdown': typeof CountdownRoute
+  '/events': typeof EventsRoute
+  '/families': typeof FamiliesRoute
+  '/gallery': typeof GalleryRoute
+  '/rsvp': typeof RsvpRoute
+  '/venue': typeof VenueRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blessings': typeof BlessingsRoute
+  '/closing': typeof ClosingRoute
+  '/countdown': typeof CountdownRoute
+  '/events': typeof EventsRoute
+  '/families': typeof FamiliesRoute
+  '/gallery': typeof GalleryRoute
+  '/rsvp': typeof RsvpRoute
+  '/venue': typeof VenueRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/blessings'
+    | '/closing'
+    | '/countdown'
+    | '/events'
+    | '/families'
+    | '/gallery'
+    | '/rsvp'
+    | '/venue'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blessings'
+    | '/closing'
+    | '/countdown'
+    | '/events'
+    | '/families'
+    | '/gallery'
+    | '/rsvp'
+    | '/venue'
+  id:
+    | '__root__'
+    | '/'
+    | '/blessings'
+    | '/closing'
+    | '/countdown'
+    | '/events'
+    | '/families'
+    | '/gallery'
+    | '/rsvp'
+    | '/venue'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlessingsRoute: typeof BlessingsRoute
+  ClosingRoute: typeof ClosingRoute
+  CountdownRoute: typeof CountdownRoute
+  EventsRoute: typeof EventsRoute
+  FamiliesRoute: typeof FamiliesRoute
+  GalleryRoute: typeof GalleryRoute
+  RsvpRoute: typeof RsvpRoute
+  VenueRoute: typeof VenueRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/venue': {
+      id: '/venue'
+      path: '/venue'
+      fullPath: '/venue'
+      preLoaderRoute: typeof VenueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rsvp': {
+      id: '/rsvp'
+      path: '/rsvp'
+      fullPath: '/rsvp'
+      preLoaderRoute: typeof RsvpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/families': {
+      id: '/families'
+      path: '/families'
+      fullPath: '/families'
+      preLoaderRoute: typeof FamiliesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/countdown': {
+      id: '/countdown'
+      path: '/countdown'
+      fullPath: '/countdown'
+      preLoaderRoute: typeof CountdownRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/closing': {
+      id: '/closing'
+      path: '/closing'
+      fullPath: '/closing'
+      preLoaderRoute: typeof ClosingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blessings': {
+      id: '/blessings'
+      path: '/blessings'
+      fullPath: '/blessings'
+      preLoaderRoute: typeof BlessingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlessingsRoute: BlessingsRoute,
+  ClosingRoute: ClosingRoute,
+  CountdownRoute: CountdownRoute,
+  EventsRoute: EventsRoute,
+  FamiliesRoute: FamiliesRoute,
+  GalleryRoute: GalleryRoute,
+  RsvpRoute: RsvpRoute,
+  VenueRoute: VenueRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
