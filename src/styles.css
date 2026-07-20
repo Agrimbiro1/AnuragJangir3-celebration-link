@@ -115,10 +115,23 @@
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px);} to { opacity: 1; transform: none;} }
 @keyframes sway { 0%,100% { transform: rotate(-1.2deg);} 50% { transform: rotate(1.2deg);} }
+@keyframes swayBottom { 0%,100% { transform: rotate(-1.2deg) scaleY(-1);} 50% { transform: rotate(1.2deg) scaleY(-1);} }
 @keyframes floatUp { 0% { opacity: 0; transform: translateY(20px) scale(0.9);} 50% { opacity: .8;} 100% { opacity: 0; transform: translateY(-120px) scale(1.1);} }
 @keyframes shimmer { 0%,100% { opacity: .6;} 50% { opacity: 1;} }
 @keyframes pulseGold { 0%,100% { text-shadow: 0 0 0 transparent;} 50% { text-shadow: 0 0 24px oklch(0.72 0.13 75 / 0.6);} }
+@keyframes elephantBob { 0%,100% { transform: translateY(0) rotate(0deg);} 50% { transform: translateY(-6px) rotate(1.5deg);} }
+@keyframes elephantBobMirror { 0%,100% { transform: translateY(0) rotate(0deg) scaleX(-1);} 50% { transform: translateY(-6px) rotate(-1.5deg) scaleX(-1);} }
+@keyframes leafSway { 0%,100% { transform: rotate(-2deg);} 50% { transform: rotate(2deg);} }
+@keyframes leafSwayMirror { 0%,100% { transform: rotate(-2deg) scaleX(-1);} 50% { transform: rotate(2deg) scaleX(-1);} }
+@keyframes archGlow { 0%,100% { filter: drop-shadow(0 0 20px oklch(0.72 0.13 75 / 0.15));} 50% { filter: drop-shadow(0 0 40px oklch(0.72 0.13 75 / 0.35));} }
 
 @utility animate-sway { animation: sway 6s ease-in-out infinite; transform-origin: top center; }
+@utility animate-sway-bottom { animation: swayBottom 6s ease-in-out infinite; transform-origin: bottom center; }
 @utility animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
 @utility animate-pulse-gold { animation: pulseGold 2.5s ease-in-out infinite; }
+@utility animate-elephant { animation: elephantBob 4.5s ease-in-out infinite; transform-origin: bottom center; }
+@utility animate-elephant-mirror { animation: elephantBobMirror 4.5s ease-in-out infinite; transform-origin: bottom center; }
+@utility animate-leaf-sway { animation: leafSway 7s ease-in-out infinite; transform-origin: bottom left; }
+@utility animate-leaf-sway-mirror { animation: leafSwayMirror 7s ease-in-out infinite; transform-origin: bottom right; }
+@utility animate-arch-glow { animation: archGlow 5s ease-in-out infinite; }
+
