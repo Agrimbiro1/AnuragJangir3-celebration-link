@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import heroArch from "@/assets/hero-arch.jpg";
+import heroArchDesktop from "@/assets/hero-arch-desktop.jpg";
+
 import ganesha from "@/assets/ganesha.png";
 import { invitation } from "@/lib/invitation-data";
 import { Divider } from "@/components/invitation/Divider";
@@ -81,7 +83,7 @@ function Welcome() {
             src={heroArch}
             alt=""
             aria-hidden
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover md:hidden"
             initial={{ scale: 1.08, opacity: 0 }}
             animate={{ scale: [1, 1.04, 1], opacity: 1 }}
             transition={{
@@ -89,6 +91,19 @@ function Welcome() {
               scale: { duration: 18, repeat: Infinity, ease: "easeInOut" },
             }}
           />
+          <motion.img
+            src={heroArchDesktop}
+            alt=""
+            aria-hidden
+            className="hidden md:block absolute inset-0 w-full h-full object-cover"
+            initial={{ scale: 1.06, opacity: 0 }}
+            animate={{ scale: [1, 1.03, 1], opacity: 1 }}
+            transition={{
+              opacity: { duration: 1.4, ease: "easeOut" },
+              scale: { duration: 22, repeat: Infinity, ease: "easeInOut" },
+            }}
+          />
+
           {/* Soft glow overlay pulsing on the arch */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
