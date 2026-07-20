@@ -31,13 +31,13 @@ function RsvpPage() {
 
   return (
     <PageShell>
-      <section className="relative py-20 px-4 bg-maroon-deep text-cream overflow-hidden min-h-screen flex items-center">
-        <img src={elephant} alt="" aria-hidden className="absolute -bottom-4 -left-6 w-32 md:w-56 opacity-90 pointer-events-none" loading="lazy" />
-        <img src={elephant} alt="" aria-hidden className="absolute -bottom-4 -right-6 w-32 md:w-56 opacity-90 pointer-events-none -scale-x-100" loading="lazy" />
+      <section className="relative py-20 px-4 min-h-screen flex items-center">
+        <img src={elephant} alt="" aria-hidden className="absolute bottom-28 -left-4 w-28 md:w-44 opacity-90 pointer-events-none" loading="lazy" />
+        <img src={elephant} alt="" aria-hidden className="absolute bottom-28 -right-4 w-28 md:w-44 opacity-90 pointer-events-none -scale-x-100" loading="lazy" />
 
         <div className="max-w-xl mx-auto text-center relative z-10 w-full">
           <p className="label text-[10px] text-gold">With Joy in Our Hearts</p>
-          <h2 className="script text-5xl md:text-6xl text-cream mt-2">Will You Join Us?</h2>
+          <h2 className="script text-5xl md:text-6xl text-maroon mt-2">Will You Join Us?</h2>
           <div className="flex items-center justify-center gap-4 my-6">
             <span className="h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
             <span className="text-gold">❋</span>
@@ -47,12 +47,12 @@ function RsvpPage() {
           <AnimatePresence mode="wait">
             {state === "idle" && (
               <motion.div key="idle" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-                <p className="display italic text-lg text-cream/85 mb-8 max-w-md mx-auto leading-relaxed">
+                <p className="display italic text-lg text-maroon-deep/80 mb-8 max-w-md mx-auto leading-relaxed">
                   "In the garden of our lives, your presence blooms as the most cherished flower. Grace our celebration with your love."
                 </p>
                 <button
                   onClick={() => setState("confirming")}
-                  className="px-10 py-4 bg-gold text-maroon-deep label text-xs rounded-full shadow-[0_10px_40px_-10px_rgba(201,162,39,0.6)] hover:scale-105 transition-transform"
+                  className="px-10 py-4 bg-maroon text-cream label text-xs rounded-full shadow-[0_10px_40px_-10px_rgba(122,31,43,0.5)] hover:bg-maroon-deep hover:scale-105 transition-all"
                 >
                   Accept Invitation
                 </button>
@@ -60,16 +60,16 @@ function RsvpPage() {
             )}
 
             {state === "confirming" && (
-              <motion.form key="confirming" onSubmit={submit} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-4 max-w-sm mx-auto text-left">
+              <motion.form key="confirming" onSubmit={submit} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="paper-card rounded-2xl p-6 space-y-4 max-w-sm mx-auto text-left">
                 <div>
                   <label className="label text-[10px] text-gold block mb-2">Your Name</label>
-                  <input required maxLength={80} value={name} onChange={(e) => setName(e.target.value.slice(0, 80))} className="w-full bg-cream/10 border border-gold/40 rounded-lg px-4 py-3 text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold" placeholder="Full name" />
+                  <input required maxLength={80} value={name} onChange={(e) => setName(e.target.value.slice(0, 80))} className="w-full bg-cream/60 border border-gold/40 rounded-lg px-4 py-3 text-maroon-deep placeholder:text-maroon/40 focus:outline-none focus:border-gold" placeholder="Full name" />
                 </div>
                 <div>
                   <label className="label text-[10px] text-gold block mb-2">Guests attending</label>
-                  <input required type="number" min={1} max={10} value={guests} onChange={(e) => setGuests(Math.max(1, Math.min(10, Number(e.target.value) || 1)))} className="w-full bg-cream/10 border border-gold/40 rounded-lg px-4 py-3 text-cream focus:outline-none focus:border-gold" />
+                  <input required type="number" min={1} max={10} value={guests} onChange={(e) => setGuests(Math.max(1, Math.min(10, Number(e.target.value) || 1)))} className="w-full bg-cream/60 border border-gold/40 rounded-lg px-4 py-3 text-maroon-deep focus:outline-none focus:border-gold" />
                 </div>
-                <button type="submit" className="w-full mt-2 py-4 bg-gold text-maroon-deep label text-xs rounded-full hover:scale-[1.02] transition-transform">
+                <button type="submit" className="w-full mt-2 py-4 bg-maroon text-cream label text-xs rounded-full hover:bg-maroon-deep hover:scale-[1.02] transition-all">
                   Confirm With Joy 🎉
                 </button>
               </motion.form>

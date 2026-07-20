@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import garland from "@/assets/lotus-garland.png";
 import { invitation } from "@/lib/invitation-data";
 import { PageShell } from "@/components/invitation/PageShell";
 
@@ -10,7 +9,7 @@ function ClosingPage() {
   return (
     <PageShell>
       <section className="relative py-24 px-4 text-center overflow-hidden min-h-screen flex items-center">
-        <img src={garland} alt="" aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-[95%] max-w-[820px] opacity-70 rotate-180 pointer-events-none" loading="lazy" />
+
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

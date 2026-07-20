@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import corner from "@/assets/corner-foliage.png";
 import { invitation } from "@/lib/invitation-data";
 import { Divider } from "@/components/invitation/Divider";
 import { PageShell } from "@/components/invitation/PageShell";
@@ -11,9 +10,6 @@ function EventsPage() {
   return (
     <PageShell>
       <section className="relative py-20 px-4">
-        <img src={corner} alt="" aria-hidden className="absolute top-0 left-0 w-32 md:w-56 opacity-90 pointer-events-none" loading="lazy" />
-        <img src={corner} alt="" aria-hidden className="absolute top-0 right-0 w-32 md:w-56 opacity-90 pointer-events-none -scale-x-100" loading="lazy" />
-
         <div className="max-w-4xl mx-auto relative">
           <div className="text-center">
             <p className="label text-[10px] text-gold">Shubh Muhurat</p>
