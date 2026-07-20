@@ -31,28 +31,28 @@ function RsvpPage() {
 
   return (
     <PageShell>
-      <section className="relative py-20 px-4 min-h-screen flex items-center">
-        <img src={elephant} alt="" aria-hidden className="absolute bottom-28 -left-4 w-28 md:w-44 opacity-90 pointer-events-none" loading="lazy" />
-        <img src={elephant} alt="" aria-hidden className="absolute bottom-28 -right-4 w-28 md:w-44 opacity-90 pointer-events-none -scale-x-100" loading="lazy" />
+      <section className="relative w-full h-full flex items-center justify-center px-4 pt-20 pb-16">
+        <img src={elephant} alt="" aria-hidden className="absolute bottom-16 -left-4 w-20 md:w-32 opacity-90 pointer-events-none" loading="lazy" />
+        <img src={elephant} alt="" aria-hidden className="absolute bottom-16 -right-4 w-20 md:w-32 opacity-90 pointer-events-none -scale-x-100" loading="lazy" />
 
         <div className="max-w-xl mx-auto text-center relative z-10 w-full">
-          <p className="label text-[10px] text-gold">With Joy in Our Hearts</p>
-          <h2 className="script text-5xl md:text-6xl text-maroon mt-2">Will You Join Us?</h2>
-          <div className="flex items-center justify-center gap-4 my-6">
-            <span className="h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
+          <p className="label text-[9px] text-gold">With Joy in Our Hearts</p>
+          <h2 className="script text-3xl sm:text-4xl md:text-6xl text-maroon mt-1">Will You Join Us?</h2>
+          <div className="flex items-center justify-center gap-3 my-3">
+            <span className="h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent" />
             <span className="text-gold">❋</span>
-            <span className="h-px w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
+            <span className="h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent" />
           </div>
 
           <AnimatePresence mode="wait">
             {state === "idle" && (
               <motion.div key="idle" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-                <p className="display italic text-lg text-maroon-deep/80 mb-8 max-w-md mx-auto leading-relaxed">
+                <p className="display italic text-sm md:text-base text-maroon-deep/80 mb-4 max-w-md mx-auto leading-relaxed">
                   "In the garden of our lives, your presence blooms as the most cherished flower. Grace our celebration with your love."
                 </p>
                 <button
                   onClick={() => setState("confirming")}
-                  className="px-10 py-4 bg-maroon text-cream label text-xs rounded-full shadow-[0_10px_40px_-10px_rgba(122,31,43,0.5)] hover:bg-maroon-deep hover:scale-105 transition-all"
+                  className="px-8 py-3 bg-maroon text-cream label text-xs rounded-full shadow-[0_10px_40px_-10px_rgba(122,31,43,0.5)] hover:bg-maroon-deep hover:scale-105 transition-all"
                 >
                   Accept Invitation
                 </button>
@@ -60,25 +60,25 @@ function RsvpPage() {
             )}
 
             {state === "confirming" && (
-              <motion.form key="confirming" onSubmit={submit} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="paper-card rounded-2xl p-6 space-y-4 max-w-sm mx-auto text-left">
+              <motion.form key="confirming" onSubmit={submit} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="paper-card rounded-2xl p-4 md:p-5 space-y-3 max-w-sm mx-auto text-left">
                 <div>
-                  <label className="label text-[10px] text-gold block mb-2">Your Name</label>
-                  <input required maxLength={80} value={name} onChange={(e) => setName(e.target.value.slice(0, 80))} className="w-full bg-cream/60 border border-gold/40 rounded-lg px-4 py-3 text-maroon-deep placeholder:text-maroon/40 focus:outline-none focus:border-gold" placeholder="Full name" />
+                  <label className="label text-[9px] text-gold block mb-1">Your Name</label>
+                  <input required maxLength={80} value={name} onChange={(e) => setName(e.target.value.slice(0, 80))} className="w-full bg-cream/60 border border-gold/40 rounded-lg px-3 py-2 text-sm text-maroon-deep placeholder:text-maroon/40 focus:outline-none focus:border-gold" placeholder="Full name" />
                 </div>
                 <div>
-                  <label className="label text-[10px] text-gold block mb-2">Guests attending</label>
-                  <input required type="number" min={1} max={10} value={guests} onChange={(e) => setGuests(Math.max(1, Math.min(10, Number(e.target.value) || 1)))} className="w-full bg-cream/60 border border-gold/40 rounded-lg px-4 py-3 text-maroon-deep focus:outline-none focus:border-gold" />
+                  <label className="label text-[9px] text-gold block mb-1">Guests attending</label>
+                  <input required type="number" min={1} max={10} value={guests} onChange={(e) => setGuests(Math.max(1, Math.min(10, Number(e.target.value) || 1)))} className="w-full bg-cream/60 border border-gold/40 rounded-lg px-3 py-2 text-sm text-maroon-deep focus:outline-none focus:border-gold" />
                 </div>
-                <button type="submit" className="w-full mt-2 py-4 bg-maroon text-cream label text-xs rounded-full hover:bg-maroon-deep hover:scale-[1.02] transition-all">
+                <button type="submit" className="w-full mt-1 py-3 bg-maroon text-cream label text-xs rounded-full hover:bg-maroon-deep hover:scale-[1.02] transition-all">
                   Confirm With Joy 🎉
                 </button>
               </motion.form>
             )}
 
             {state === "done" && (
-              <motion.div key="done" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="paper-card rounded-2xl p-8 text-maroon-deep">
-                <p className="script text-4xl text-maroon">Thank you, {name || "friend"} ✿</p>
-                <p className="display italic mt-3">We can't wait to celebrate with you.</p>
+              <motion.div key="done" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="paper-card rounded-2xl p-5 md:p-6 text-maroon-deep">
+                <p className="script text-3xl md:text-4xl text-maroon">Thank you, {name || "friend"} ✿</p>
+                <p className="display italic text-sm md:text-base mt-2">We can't wait to celebrate with you.</p>
               </motion.div>
             )}
           </AnimatePresence>
