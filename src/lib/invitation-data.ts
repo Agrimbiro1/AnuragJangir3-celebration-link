@@ -29,6 +29,16 @@ export const invitation = {
     note: "With immense joy and gratitude, we welcome you into our home to bless our son.",
     contactName: "Rajesh Kapoor",
     contactPhone: "+91 98765 43210",
+    members: [
+      { name: "Shri. Rajesh Kapoor", relation: "Father" },
+      { name: "Smt. Anjali Kapoor", relation: "Mother" },
+      { name: "Rhea Kapoor", relation: "Sister" }
+    ],
+    contact: {
+      name: "Rajesh Kapoor",
+      relation: "Father",
+      phone: "+91 98765 43210"
+    }
   },
   brideFamily: {
     surname: "The Malhotra Family",
@@ -37,6 +47,16 @@ export const invitation = {
     note: "It is our greatest honour to have you share this precious moment with our daughter.",
     contactName: "Vikram Malhotra",
     contactPhone: "+91 98765 43211",
+    members: [
+      { name: "Shri. Vikram Malhotra", relation: "Father" },
+      { name: "Smt. Meera Malhotra", relation: "Mother" },
+      { name: "Advait Malhotra", relation: "Brother" }
+    ],
+    contact: {
+      name: "Advait Malhotra",
+      relation: "Brother",
+      phone: "+91 98765 43211"
+    }
   },
   venue: {
     name: "Heritage Palace, Jaipur",

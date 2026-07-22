@@ -1,79 +1,79 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { BottomNav } from "./BottomNav";
-import garland from "@/assets/lotus-garland.png";
-import corner from "@/assets/corner-foliage.png";
+import { AnimatedFoliage } from "./AnimatedFoliage";
+import cleanArchPortrait from "@/assets/clean-arch-portrait.png";
+import heroArchDesktop from "@/assets/hero-arch-desktop.jpg";
+import { PremiumBackground } from "./AnimatedDecorations";
 
 export function PageShell({
   children,
   className = "",
+  showFoliage = true,
   showGarland = true,
   showCorners = true,
+  showBottomNav = true,
+  showArch = true, // New prop for inner pages
 }: {
   children: ReactNode;
   className?: string;
+  showFoliage?: boolean;
   showGarland?: boolean;
   showCorners?: boolean;
+  showBottomNav?: boolean;
+  showArch?: boolean;
 }) {
+  // Use AnimatedFoliage if any of the old props are true (for backward compatibility)
+  const renderPlants = showFoliage && (showGarland || showCorners);
+
   return (
     <main className="fixed inset-0 text-maroon-deep overflow-hidden bg-cream">
-      {/* Pichwai paper backdrop */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,oklch(0.95_0.04_80)_0%,oklch(0.92_0.035_75)_60%,oklch(0.88_0.045_70)_100%)]" />
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.15] mix-blend-multiply"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.35 0 0 0 0 0.15 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-        }}
-      />
-
-      {showGarland && (
-        <motion.img
-          src={garland}
-          alt=""
-          aria-hidden
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[85%] max-w-[520px] md:max-w-[640px] animate-sway origin-top pointer-events-none z-0 opacity-95"
-          initial={{ y: -60, opacity: 0 }}
-          animate={{ y: 0, opacity: 0.95 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-        />
-      )}
-
-      {showCorners && (
+      {/* Background Arch for Inner Pages */}
+      {showArch && (
         <>
-          {/* Mobile: small corners */}
-          <img src={corner} alt="" aria-hidden className="absolute top-0 left-0 w-20 opacity-80 pointer-events-none z-0 md:hidden" loading="lazy" />
-          <img src={corner} alt="" aria-hidden className="absolute top-0 right-0 w-20 opacity-80 pointer-events-none -scale-x-100 z-0 md:hidden" loading="lazy" />
-          <img src={corner} alt="" aria-hidden className="absolute bottom-16 left-0 w-20 opacity-70 pointer-events-none -scale-y-100 z-0 md:hidden" loading="lazy" />
-          <img src={corner} alt="" aria-hidden className="absolute bottom-16 right-0 w-20 opacity-70 pointer-events-none -scale-100 z-0 md:hidden" loading="lazy" />
-
-          {/* Desktop: full-height side panels of Pichwai foliage */}
-          <img
-            src={corner}
+          <motion.img
+            src={cleanArchPortrait}
             alt=""
             aria-hidden
-            className="hidden md:block absolute top-0 left-0 h-full w-[32vw] max-w-[520px] object-cover object-right opacity-90 pointer-events-none z-0"
-            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover object-top origin-top md:hidden"
+            initial={{ scale: 1.35 }}
+            animate={{ scale: [1.35, 1.37, 1.35] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
           />
-          <img
-            src={corner}
+          <motion.img
+            src={heroArchDesktop}
             alt=""
             aria-hidden
-            className="hidden md:block absolute top-0 right-0 h-full w-[32vw] max-w-[520px] object-cover object-left opacity-90 pointer-events-none -scale-x-100 z-0"
-            loading="lazy"
+            className="hidden md:block absolute inset-0 w-full h-full object-cover object-center"
+            initial={{ scale: 1.01 }}
+            animate={{ scale: [1, 1.005, 1] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
           />
         </>
       )}
 
+      {!showArch && (
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,oklch(0.95_0.04_80)_0%,oklch(0.92_0.035_75)_60%,oklch(0.88_0.045_70)_100%)]" />
+      )}
+
+      {/* Global Premium Background Animations (Sparkles and Corner Mandalas) */}
+      <PremiumBackground />
+
+      {/* We only render AnimatedFoliage if not showing the Arch, 
+          because the Arch background already has the rich foliage built-in! */}
+      {renderPlants && !showArch && <AnimatedFoliage />}
+
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`relative z-10 h-full w-full overflow-hidden flex ${className}`}
+        initial={{ opacity: 0, y: 15, filter: "blur(8px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className={`relative z-10 h-full w-full overflow-hidden flex flex-col 
+          ${showArch ? "pt-[15vh] pb-[20vh] px-4 md:px-[15vw] items-center justify-center" : ""} 
+          ${className}`}
       >
         {children}
       </motion.div>
-      <BottomNav />
+      {showBottomNav && <BottomNav />}
     </main>
   );
 }

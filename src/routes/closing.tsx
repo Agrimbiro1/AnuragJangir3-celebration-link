@@ -8,7 +8,7 @@ export const Route = createFileRoute("/closing")({ component: ClosingPage });
 function ClosingPage() {
   return (
     <PageShell>
-      <section className="w-full h-full flex items-center justify-center px-4 pt-20 pb-16 text-center">
+      <section className="w-full h-full flex items-center justify-center px-4 text-center origin-center scale-[0.90] sm:scale-100 mt-[-4vh] md:mt-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
