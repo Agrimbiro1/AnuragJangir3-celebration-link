@@ -1,6 +1,6 @@
 export const invitation = {
-  groom: "Aarav",
-  bride: "Ishani",
+  groom: "Rohan",
+  bride: "Ananya",
   eventType: "Engagement Ceremony",
   welcome: "With the blessings of Lord Ganesha and our elders, we joyfully invite you to celebrate the engagement of",
   targetDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 62).toISOString(),

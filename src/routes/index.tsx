@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, useRef } from "react";
 import confetti from "canvas-confetti";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import heroArch from "@/assets/hero-arch.jpg";
 import heroArchDesktop from "@/assets/hero-arch-desktop.jpg";
 
@@ -14,6 +14,7 @@ import { PageShell } from "@/components/invitation/PageShell";
 import { OpeningAnimation } from "@/components/invitation/OpeningAnimation";
 import { RotatingMandala, AnimatedDivider } from "@/components/invitation/AnimatedDecorations";
 import { ThreeBackground } from "@/components/invitation/ThreeBackground";
+import { AnimatedMandalaBackground } from "@/components/invitation/AnimatedMandalaBackground";
 
 
 
@@ -24,25 +25,6 @@ function Welcome() {
   const [isNavigating, setIsNavigating] = useState(false);
   const [clickPos, setClickPos] = useState({ x: 0, y: 0 });
   const navigate = useNavigate();
-  
-  // 3D Tilt Effect
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [5, -5]);
-  const rotateY = useTransform(x, [-100, 100], [-5, 5]);
-
-  const handleMouseMove = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set(event.clientX - centerX);
-    y.set(event.clientY - centerY);
-  };
-  
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
 
   const handleOpenInvitation = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -96,78 +78,105 @@ function Welcome() {
             }}
           />
 
-          {/* Soft glow overlay pulsing on the arch */}
+          {/* Soft ambient radiance overlay pulsing on the arch */}
           <motion.div
-            className="absolute inset-0 pointer-events-none"
-            aria-hidden
+            className="absolute inset-0 pointer-events-none z-10"
             style={{
               background:
-                "radial-gradient(ellipse at center, oklch(0.72 0.13 75 / 0.18) 0%, transparent 55%)",
+                "radial-gradient(ellipse at 50% 30%, rgba(212, 175, 55, 0.25) 0%, rgba(122, 31, 43, 0.08) 50%, transparent 75%)",
             }}
-            animate={{ opacity: [0.5, 1, 0.5] }}
+            animate={{ opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-cream/30 via-transparent to-cream/50" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-b from-cream/20 via-transparent to-cream/40 pointer-events-none" aria-hidden />
 
           <ThreeBackground />
+          <AnimatedMandalaBackground />
           <Petals />
           <FallingLeaves />
 
           <motion.div
-            style={{ rotateX, rotateY, perspective: 1000 }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-20 w-full flex flex-col items-center text-center mx-auto origin-center scale-[0.85] sm:scale-[0.90] md:scale-100 mt-[12vh] sm:mt-16 md:mt-10"
+            className="relative z-20 w-full flex flex-col items-center text-center mx-auto origin-center scale-[0.85] sm:scale-[0.90] md:scale-100 mt-[10vh] sm:mt-14 md:mt-8 px-4 select-none"
           >
-            <div className="relative flex justify-center items-center mb-2 sm:mb-4">
-              <RotatingMandala className="absolute w-24 sm:w-28 opacity-60 text-gold mix-blend-multiply" />
+            {/* Sacred Ganesha Emblem with Dual Rotating Mandalas & Gold Halo */}
+            <div className="relative flex justify-center items-center mb-2 sm:mb-3">
+              <RotatingMandala className="absolute w-28 sm:w-36 md:w-40 opacity-30 text-gold mix-blend-multiply pointer-events-none" />
+              <RotatingMandala className="absolute w-20 sm:w-26 md:w-30 opacity-20 text-gold mix-blend-multiply -rotate-180 pointer-events-none" />
+              <div className="absolute w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-radial from-gold/35 via-gold/10 to-transparent blur-md pointer-events-none" />
+              
               <motion.img
                 src={ganesha}
                 alt="Lord Ganesha"
-                className="w-16 sm:w-20 md:w-24 relative z-20 drop-shadow-[0_6px_20px_rgba(122,31,43,0.25)]"
+                className="w-16 sm:w-20 md:w-24 relative z-20 drop-shadow-[0_8px_24px_rgba(122,31,43,0.35)]"
                 initial={{ scale: 0.6, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 3, ease: [0.22, 1, 0.36, 1] }}
               />
             </div>
+
+            {/* Sacred Motto */}
             <motion.p
-              className="label text-[11px] sm:text-[10px] md:text-[11px] text-gold animate-pulse-gold mb-3 sm:mb-4"
+              className="label text-[10px] sm:text-[11.5px] text-gold tracking-[0.35em] uppercase font-bold animate-pulse-gold mb-2 sm:mb-3 drop-shadow-sm"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.3, duration: 1 }}
             >
               ॥ Shri Ganeshaya Namah ॥
             </motion.p>
+
+            {/* Event Tagline */}
             <motion.p
-              className="display italic text-maroon text-sm sm:text-sm md:text-base max-w-[260px] sm:max-w-xs md:max-w-md leading-snug mb-3 sm:mb-5 px-4"
+              className="display italic text-maroon-deep text-sm sm:text-base md:text-lg max-w-[280px] sm:max-w-md leading-relaxed mb-3 sm:mb-4 px-2 font-medium"
               initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.5, duration: 1 }}
             >
               {invitation.welcome}
             </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.7, duration: 1.2 }}
-              className="script text-maroon-deep text-4xl sm:text-5xl md:text-7xl leading-none w-full text-center flex flex-col items-center justify-center"
-            >
-              <span>{invitation.groom}</span>
-              <span className="block script text-2xl sm:text-3xl md:text-4xl text-gold my-1 sm:my-2">&</span>
-              <span>{invitation.bride}</span>
-            </motion.h1>
 
+            {/* Couple Names - Royal Script Typography */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 3.7, duration: 1.2 }}
+              className="flex flex-col items-center justify-center w-full my-1 sm:my-2"
+            >
+              <h1 
+                className="script text-maroon text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight whitespace-nowrap"
+                style={{ textShadow: "0 6px 24px rgba(201,162,39,0.4)" }}
+              >
+                {invitation.groom} <span className="text-gold script text-3xl sm:text-5xl md:text-6xl my-1 sm:my-2">&</span> {invitation.bride}
+              </h1>
+            </motion.div>
+
+            {/* Event Details & CTA Button */}
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4.1, duration: 1 }}
-              className="mt-4 sm:mt-6 md:mt-3 flex flex-col items-center gap-1 sm:gap-2 w-full"
+              className="mt-3 sm:mt-5 flex flex-col items-center gap-2 sm:gap-3 w-full"
             >
-              <AnimatedDivider className="w-48 sm:w-64" />
-              <p className="display text-maroon text-sm sm:text-base md:text-xl">Sunday · 21<sup>st</sup> September 2026</p>
+              <AnimatedDivider className="w-44 sm:w-60 md:w-72" />
+              
+              <div className="flex items-center gap-2 text-maroon font-medium mt-1">
+                <span className="text-gold text-xs animate-spin-slow">❋</span>
+                <p className="display text-maroon-deep text-sm sm:text-lg md:text-2xl font-semibold tracking-wide">
+                  Sunday · 21<sup>st</sup> September 2026
+                </p>
+                <span className="text-gold text-xs animate-spin-slow">❋</span>
+              </div>
+              <p className="label text-[9px] sm:text-[11px] text-gold font-bold tracking-[0.25em] uppercase">
+                ✦ Heritage Palace • Jaipur ✦
+              </p>
+
+              {/* Ultra-Premium Action CTA Button */}
               <a
                 href="/events"
                 onClick={handleOpenInvitation}
-                className="mt-2 group relative px-6 py-2 bg-gradient-to-r from-maroon via-maroon-deep to-maroon text-cream label text-[10px] rounded-full shadow-[0_10px_30px_-10px_rgba(122,31,43,0.6)] hover:shadow-[0_10px_40px_-5px_rgba(201,162,39,0.5)] transition-all hover:scale-105 overflow-hidden cursor-pointer"
+                className="mt-3 group relative px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[10.5px] sm:text-xs font-bold tracking-[0.25em] uppercase rounded-full shadow-[0_10px_35px_-5px_rgba(122,31,43,0.7)] hover:shadow-[0_15px_45px_rgba(212,175,55,0.6)] transition-all hover:scale-105 active:scale-95 overflow-hidden border border-gold/60 cursor-pointer"
               >
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/30 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
-                <span className="absolute inset-0 rounded-full ring-1 ring-gold/60 ring-offset-2 ring-offset-cream" />
-                <span className="relative z-10 font-bold tracking-widest drop-shadow-md">Open Invitation →</span>
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
+                <span className="absolute inset-0 rounded-full ring-2 ring-gold/70 ring-offset-2 ring-offset-cream pointer-events-none" />
+                <span className="relative z-10 flex items-center gap-2.5 drop-shadow-md">
+                  <span>💌</span>
+                  <span>ENTER INVITATION</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </span>
               </a>
             </motion.div>
           </motion.div>

@@ -66,8 +66,8 @@ function RsvpPage() {
 
             {state === "done" && (
               <motion.div key="done" initial={{ opacity: 0, scale: 0.9, filter: "blur(8px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} transition={{ duration: 1, ease: "easeOut" }} className="py-12">
-                <p className="script text-7xl md:text-8xl lg:text-[7rem] leading-none text-maroon-deep drop-shadow-md mb-6">Thank you ✿</p>
-                <p className="display italic text-2xl md:text-4xl text-maroon drop-shadow-sm">We can't wait to celebrate with you!</p>
+                <p className="script text-4xl sm:text-7xl md:text-8xl lg:text-[7rem] leading-none text-maroon-deep drop-shadow-md mb-6 whitespace-nowrap">Thank you ✿</p>
+                <p className="display italic text-lg sm:text-2xl md:text-4xl text-maroon drop-shadow-sm whitespace-nowrap">We can't wait to celebrate with you!</p>
                 <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.6 }} className="mt-10">
                   <span className="text-5xl filter drop-shadow-[0_0_15px_rgba(212,175,55,0.8)]">✨</span>
                 </motion.div>

@@ -1,120 +1,257 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import { invitation } from "@/lib/invitation-data";
 import { PageShell } from "@/components/invitation/PageShell";
-import { RotatingMandala } from "@/components/invitation/AnimatedDecorations";
+import { RotatingMandala, AnimatedDivider } from "@/components/invitation/AnimatedDecorations";
 
 export const Route = createFileRoute("/events")({ component: EventsPage });
 
-// Gold Filigree Divider with Star Motifs
-const HeaderFiligree = () => (
-  <motion.svg 
-    viewBox="0 0 200 30" 
-    className="w-48 md:w-56 mx-auto text-gold mt-2 md:mt-3 drop-shadow-md"
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 1, delay: 0.3 }}
-  >
-    <path d="M10 15 Q50 15, 100 5 T190 15 M10 15 Q50 15, 100 25 T190 15" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <path d="M50 15 L53 10 L56 15 L61 18 L56 21 L53 26 L50 21 L45 18 Z" fill="currentColor" transform="translate(-50, -15) scale(0.6) translate(50, 15)" />
-    <path d="M150 15 L153 10 L156 15 L161 18 L156 21 L153 26 L150 21 L145 18 Z" fill="currentColor" transform="translate(-150, -15) scale(0.6) translate(150, 15)" />
-    <circle cx="100" cy="15" r="3" fill="currentColor" />
-  </motion.svg>
-);
+// Helper to generate Google Calendar links
+const createGoogleCalendarLink = (event: typeof invitation.events[0]) => {
+  const title = encodeURIComponent(`${invitation.groom} & ${invitation.bride} - ${event.name}`);
+  const details = encodeURIComponent(`${event.note}\nDress Code: ${event.dress}`);
+  const location = encodeURIComponent(event.venue);
+  const dates = event.time.includes("10:30") 
+    ? "20260921T050000Z/20260921T083000Z" 
+    : "20260921T133000Z/20260921T173000Z";
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
+};
 
-const CardDivider = () => (
-  <div className="flex items-center justify-center w-full my-4 md:my-3">
-    <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-    <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-3 md:h-3 mx-3 md:mx-2 text-gold animate-[pulse_3s_infinite]">
-      <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="currentColor" opacity="0.8" />
-    </svg>
-    <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+// Custom SVG Emblem for Ceremony 1 (Ring / Kalash motif)
+const RingCeremonyEmblem = () => (
+  <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-gold/30 via-gold/10 to-transparent p-0.5 shadow-sm">
+    <div className="w-full h-full rounded-full bg-[#FFFDF9] flex items-center justify-center border border-gold/40">
+      <svg viewBox="0 0 48 48" className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 text-gold">
+        <circle cx="19" cy="26" r="9" fill="none" stroke="currentColor" strokeWidth="2.2" />
+        <circle cx="29" cy="26" r="9" fill="none" stroke="currentColor" strokeWidth="2.2" />
+        <path d="M19 13 L22 17 L16 17 Z" fill="#FDF5D3" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M29 13 L32 17 L26 17 Z" fill="#FDF5D3" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="19" cy="10" r="1.5" fill="currentColor" />
+        <circle cx="29" cy="10" r="1.5" fill="currentColor" />
+      </svg>
+    </div>
   </div>
 );
 
-// Extracted Card Component for reuse in Mobile & Desktop views
-const EventCard = ({ e, i, isMobile = false }: { e: typeof invitation.events[0]; i: number, isMobile?: boolean }) => {
+// Custom SVG Emblem for Ceremony 2 (Sangeet / Music motif)
+const SangeetEmblem = () => (
+  <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-gold/30 via-gold/10 to-transparent p-0.5 shadow-sm">
+    <div className="w-full h-full rounded-full bg-[#FFFDF9] flex items-center justify-center border border-gold/40">
+      <svg viewBox="0 0 48 48" className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 text-gold">
+        <path d="M12 28 C12 36 20 40 24 40 C28 40 36 36 36 28 C36 20 28 16 24 16 C20 16 12 20 12 28 Z" fill="none" stroke="currentColor" strokeWidth="2" />
+        <ellipse cx="24" cy="20" rx="10" ry="4" fill="#FDF5D3" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M18 22 L18 36 M30 22 L30 36" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 2" />
+        <path d="M28 8 L34 6 L34 14 M28 8 L28 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+        <circle cx="26" cy="16" r="2.5" fill="currentColor" />
+        <circle cx="32" cy="14" r="2.5" fill="currentColor" />
+      </svg>
+    </div>
+  </div>
+);
+
+// Extracted Card Component (Desktop sleek height, Mobile compact & balanced)
+const EventCard = ({ e, i }: { e: typeof invitation.events[0]; i: number }) => {
+  const navigate = useNavigate();
+
   return (
     <motion.article
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      initial={{ opacity: 0, y: 25, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -30, scale: 0.95 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative bg-gradient-to-br from-[#E2B75A] via-[#FDF5D3] to-[#B0852A] rounded-t-[70px] md:rounded-t-[80px] rounded-b-xl p-1.5 shadow-[0_20px_50px_rgba(201,162,39,0.35)] group w-full ${isMobile ? 'max-w-[380px] mx-auto' : ''}`}
+      transition={{ duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+      className="relative bg-gradient-to-br from-[#E2B75A] via-[#FDF5D3] to-[#B0852A] rounded-t-[48px] sm:rounded-t-[60px] md:rounded-t-[70px] rounded-b-xl p-[2px] md:p-[3px] shadow-[0_14px_38px_rgba(122,31,43,0.16)] md:shadow-[0_18px_45px_rgba(122,31,43,0.18)] hover:shadow-[0_22px_55px_rgba(201,162,39,0.38)] transition-all duration-300 group w-full flex flex-col h-full hover:-translate-y-1"
     >
-      <div className="h-full">
-        {/* Thick Gold Foil Outer Border */}
-        <div className="relative rounded-t-[70px] md:rounded-t-[80px] rounded-b-lg h-full overflow-hidden">
-          
-          {/* Animated Spinning Border Container */}
-          <div className="absolute inset-0 rounded-t-[70px] md:rounded-t-[80px] rounded-b-lg overflow-hidden z-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 bg-[conic-gradient(from_var(--border-angle),#D4AF37_0%,transparent_15%,transparent_85%,#D4AF37_100%)] animate-spin-border opacity-80" />
-          </div>
+      {/* Outer Glow Border Effect */}
+      <div className="relative rounded-t-[46px] sm:rounded-t-[58px] md:rounded-t-[67px] rounded-b-[10px] md:rounded-b-[13px] h-full overflow-hidden flex flex-col justify-between">
+        
+        {/* Animated Spinning Border Conic Layer */}
+        <div className="absolute inset-0 rounded-t-[46px] sm:rounded-t-[58px] md:rounded-t-[67px] rounded-b-[10px] md:rounded-b-[13px] overflow-hidden z-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 w-[220%] h-[220%] -translate-x-1/2 -translate-y-1/2 bg-[conic-gradient(from_var(--border-angle),#D4AF37_0%,transparent_18%,transparent_82%,#D4AF37_100%)] animate-spin-border opacity-85" />
+        </div>
 
-          <div className="absolute inset-[2px] rounded-t-[68px] md:rounded-t-[78px] rounded-b-[7px] bg-[#FDFBF7] z-0" />
+        {/* Solid Card Background Base */}
+        <div className="absolute inset-[1.5px] md:inset-[2px] rounded-t-[44px] sm:rounded-t-[56px] md:rounded-t-[65px] rounded-b-[8px] md:rounded-b-[11px] bg-gradient-to-b from-[#FFFDFB] via-[#FAF6EE] to-[#F7F0E3] z-0" />
+        
+        {/* Fine Micro Pattern Overlay */}
+        <div className="absolute inset-1 md:inset-1.5 rounded-t-[42px] sm:rounded-t-[54px] md:rounded-t-[62px] rounded-b-md md:rounded-b-lg bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CgkJPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0iI2NkYTM0ZiIgZmlsbC1vcGFjaXR5PSIwLjI1Ii8+Cgk8L3N2Zz4=')] opacity-35 pointer-events-none z-10" />
+        
+        {/* Card Content Wrapper */}
+        <div className="relative z-20 h-full px-2.5 pt-4 pb-3.5 sm:px-4 sm:pt-4 sm:pb-4 md:px-5 md:pt-5 md:pb-5 flex flex-col justify-between items-center text-center rounded-t-[42px] sm:rounded-t-[54px] md:rounded-t-[62px] rounded-b-md m-0.5 overflow-hidden">
           
-          {/* Subtle Inner Pattern Background */}
-          <div className="absolute inset-1.5 rounded-t-[60px] md:rounded-t-[68px] rounded-b-md bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CgkJPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0iI2NkYTM0ZiIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KCTwvc3ZnPg==')] opacity-[0.35] pointer-events-none z-10" />
-          
-          {/* Inner Card Content */}
-          <div className="relative z-20 h-full px-4 pt-5 pb-4 md:px-5 md:pt-6 md:pb-5 flex flex-col items-center text-center rounded-t-[60px] md:rounded-t-[68px] rounded-b-md m-0.5 overflow-hidden">
+          {/* Top Content Block */}
+          <div className="w-full flex flex-col items-center">
+            {/* Animated Light Reflection */}
+            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
             
-            {/* Animated Shine Effect */}
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-12 border-[1px] border-[#D4AF37]/20 rounded-b-full pointer-events-none" />
-            
-            {/* Animated Corner Mandalas */}
-            <RotatingMandala className="absolute top-2 left-2 w-6 h-6 opacity-[0.25]" />
-            <RotatingMandala className="absolute top-2 right-2 w-6 h-6 opacity-[0.25]" />
+            {/* Top Arch Filigree Accent (Desktop only) */}
+            <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-16 h-6 border-b-[1.5px] border-x-[1.5px] border-gold/30 rounded-b-full pointer-events-none bg-gold/5" />
 
-            <div className="relative z-10 flex flex-col items-center justify-center h-full w-full select-none mt-1">
-              
-              <div className="flex items-center space-x-2 mb-1.5">
-                 <div className="w-4 md:w-6 h-[1px] bg-gold/60" />
-                 <p className="label text-[9px] sm:text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gold font-bold drop-shadow-sm">
-                   Ceremony {String(i + 1).padStart(2, "0")}
-                 </p>
-                 <div className="w-4 md:w-6 h-[1px] bg-gold/60" />
-              </div>
-              
-              <h3 className="display text-lg sm:text-xl md:text-3xl text-maroon-deep mb-1 px-1 md:px-2 leading-snug drop-shadow-md">
+            {/* Corner Mandalas */}
+            <RotatingMandala className="absolute top-2 left-2 md:top-2.5 md:left-2.5 w-5 h-5 md:w-6 md:h-6 opacity-25 text-gold" />
+            <RotatingMandala className="absolute top-2 right-2 md:top-2.5 md:right-2.5 w-5 h-5 md:w-6 md:h-6 opacity-25 text-gold" />
+
+            {/* Header Emblem */}
+            <div className="relative z-10 mb-1 mt-0.5 md:mb-1.5 md:mt-0.5">
+              {i === 0 ? <RingCeremonyEmblem /> : <SangeetEmblem />}
+            </div>
+
+            {/* Ceremony Tag */}
+            <div className="flex items-center space-x-1 md:space-x-2 mb-0.5 md:mb-1 z-10">
+              <div className="w-3 md:w-4 h-[1px] bg-gradient-to-r from-transparent to-gold" />
+              <span className="label text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-wider md:tracking-[0.3em] text-gold font-bold drop-shadow-sm whitespace-nowrap">
+                Ceremony {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="w-3 md:w-4 h-[1px] bg-gradient-to-l from-transparent to-gold" />
+            </div>
+
+            {/* Event Title (Fixed min-height for uniform alignment across both cards) */}
+            <div className="min-h-[42px] sm:min-h-[44px] md:min-h-[48px] flex items-center justify-center w-full px-1">
+              <h3 className="display text-sm sm:text-base md:text-2xl text-maroon-deep font-semibold leading-tight md:leading-snug drop-shadow-sm">
                 {e.name}
               </h3>
+            </div>
+
+            <AnimatedDivider className="w-24 sm:w-32 md:w-36 my-1 md:my-1.5" />
+
+            {/* Event Note (Full on desktop, hidden on mobile for clean card height) */}
+            {e.note && (
+              <p className="hidden md:block display italic text-xs md:text-sm text-maroon/80 max-w-xs mb-2 leading-snug px-2">
+                "{e.note}"
+              </p>
+            )}
+
+            {/* Event Metadata (SVG Icons, NO emojis) */}
+            <div className="w-full my-1 md:my-1.5">
               
-              <div className="flex items-center justify-center w-full my-2">
-                <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-                <svg viewBox="0 0 24 24" className="w-3 h-3 mx-2 text-gold animate-[pulse_3s_infinite]">
-                  <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="currentColor" opacity="0.8" />
-                </svg>
-                <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-              </div>
-              
-              <div className="space-y-1.5 sm:space-y-2 md:space-y-3 w-full flex flex-col items-center mt-1">
-                <div className="flex flex-col items-center">
-                  <p className="label text-[9px] md:text-[10px] text-gold/80 uppercase tracking-[0.3em] mb-0.5">Date</p>
-                  <p className="display text-xs sm:text-sm md:text-base text-[#3A2218] font-medium leading-none">{e.date}</p>
+              {/* Mobile Metadata Layout (< md) - Clean SVGs */}
+              <div className="md:hidden flex flex-col gap-1.5 p-2 rounded-xl bg-cream/80 border border-gold/35 text-[8.5px] text-left shadow-inner w-full min-h-[76px] justify-center">
+                <div className="grid grid-cols-2 gap-1 pb-1 border-b border-gold/20">
+                  <div className="flex items-center space-x-1 min-w-0">
+                    <svg viewBox="0 0 24 24" className="w-3 h-3 text-gold fill-none stroke-currentColor stroke-[2.2] shrink-0">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    <span className="text-maroon-deep font-semibold truncate">21 Sep 2026</span>
+                  </div>
+
+                  <div className="flex items-center space-x-1 min-w-0">
+                    <svg viewBox="0 0 24 24" className="w-3 h-3 text-gold fill-none stroke-currentColor stroke-[2.2] shrink-0">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span className="text-maroon-deep font-semibold truncate">{e.time}</span>
+                  </div>
                 </div>
-                
-                <div className="flex flex-col items-center">
-                  <p className="label text-[9px] md:text-[10px] text-gold/80 uppercase tracking-[0.3em] mb-0.5">Time</p>
-                  <p className="text-[11px] sm:text-xs md:text-sm text-maroon-deep/90 font-semibold leading-none">{e.time}</p>
+
+                <div className="flex items-center space-x-1 min-w-0">
+                  <svg viewBox="0 0 24 24" className="w-3 h-3 text-maroon fill-none stroke-currentColor stroke-[2.2] shrink-0">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span className="text-[#3A2218] font-bold truncate leading-tight">{e.venue}</span>
                 </div>
-                
-                <div className="flex flex-col items-center pt-0.5">
-                  <p className="label text-[9px] md:text-[10px] text-gold/80 uppercase tracking-[0.3em] mb-0.5">Venue</p>
-                  <p className="text-[11px] sm:text-xs md:text-sm text-[#3A2218] font-bold px-1 md:px-4 leading-tight">{e.venue}</p>
-                </div>
-                
+
                 {e.dress && (
-                  <div className="mt-3 md:mt-4 inline-block border-[1.5px] border-gold/50 rounded-full px-3 sm:px-4 md:px-5 py-1 sm:py-1.5 md:py-2 bg-gradient-to-r from-gold/5 via-gold/10 to-gold/5 shadow-[0_2px_8px_rgba(201,162,39,0.15)] transition-shadow duration-300">
-                    <p className="text-[10px] sm:text-[11px] md:text-xs text-maroon-deep font-semibold"><span className="label text-gold mr-1.5 md:mr-2 uppercase tracking-widest font-bold">Attire:</span>{e.dress}</p>
+                  <div className="flex items-center space-x-1 min-w-0 pt-0.5 border-t border-gold/20">
+                    <svg viewBox="0 0 24 24" className="w-3 h-3 text-gold fill-currentColor shrink-0">
+                      <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+                    </svg>
+                    <span className="text-gold font-bold text-[7.5px] uppercase tracking-wider">Attire:</span>
+                    <span className="text-maroon-deep font-semibold truncate">{e.dress}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Desktop Metadata Layout (>= md) */}
+              <div className="hidden md:block space-y-2">
+                <div className="flex flex-row items-center justify-between gap-2 p-2 rounded-xl bg-cream/70 border border-gold/30 shadow-inner">
+                  <div className="flex items-center space-x-2 text-left">
+                    <div className="p-1.5 rounded-lg bg-gold/20 border border-gold/40 flex items-center justify-center shrink-0">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-[#9E731F] stroke-[2.2]">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="label text-[7.5px] text-gold uppercase tracking-widest font-bold">Date</p>
+                      <p className="text-xs font-semibold text-maroon-deep">{e.date}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-2 text-left border-l border-gold/20 pl-2.5">
+                    <div className="p-1.5 rounded-lg bg-gold/20 border border-gold/40 flex items-center justify-center shrink-0">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-[#9E731F] stroke-[2.2]">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="label text-[7.5px] text-gold uppercase tracking-widest font-bold">Time</p>
+                      <p className="text-xs font-semibold text-maroon-deep">{e.time}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2.5 p-2 rounded-xl bg-cream/70 border border-gold/30 shadow-inner text-left">
+                  <div className="p-1.5 rounded-lg bg-maroon/15 border border-maroon/30 flex items-center justify-center shrink-0">
+                    <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-[#7A1F2B] stroke-[2.2]">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </div>
+                  <div className="overflow-hidden">
+                    <p className="label text-[7.5px] text-gold uppercase tracking-widest font-bold">Venue</p>
+                    <p className="text-xs font-bold text-[#3A2218] truncate">{e.venue}</p>
+                  </div>
+                </div>
+
+                {e.dress && (
+                  <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-gold/10 via-gold/20 to-gold/10 border border-gold/40 text-maroon-deep shadow-sm">
+                    <svg viewBox="0 0 24 24" className="w-3 h-3 fill-[#9E731F]">
+                      <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+                    </svg>
+                    <span className="label text-[8px] text-gold uppercase tracking-wider font-bold">Attire:</span>
+                    <span className="text-[11px] font-semibold text-maroon-deep">{e.dress}</span>
                   </div>
                 )}
               </div>
 
             </div>
           </div>
+
+          {/* Bottom Action Buttons - Sleek Compact Button Size */}
+          <div className="mt-1 md:mt-3 pt-1 md:pt-2 border-t border-gold/20 w-[90%] sm:w-[94%] md:w-full flex flex-row items-center justify-center gap-1 sm:gap-2 md:gap-3 z-30">
+            <a
+              href={createGoogleCalendarLink(e)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 max-w-[102px] sm:max-w-[125px] md:max-w-none h-[30px] sm:h-[35px] md:h-[38px] inline-flex items-center justify-center text-center gap-1 px-1.5 py-1 sm:px-2.5 sm:py-1.5 md:px-3.5 md:py-2 bg-gradient-to-r from-maroon to-maroon-deep text-cream text-[8px] sm:text-[9px] md:text-[10.5px] font-bold rounded-md md:rounded-lg shadow-sm hover:shadow transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap"
+            >
+              <svg viewBox="0 0 24 24" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 fill-none stroke-currentColor stroke-[2.2] shrink-0">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              <span className="truncate">Add to Calendar</span>
+            </a>
+
+            <button
+              onClick={() => navigate({ to: "/venue" })}
+              className="flex-1 max-w-[102px] sm:max-w-[125px] md:max-w-none h-[30px] sm:h-[35px] md:h-[38px] inline-flex items-center justify-center text-center gap-1 px-1.5 py-1 sm:px-2.5 sm:py-1.5 md:px-3.5 md:py-2 bg-gold/15 hover:bg-gold/25 border border-gold/40 text-maroon-deep text-[8px] sm:text-[9px] md:text-[10.5px] font-bold rounded-md md:rounded-lg transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap"
+            >
+              <svg viewBox="0 0 24 24" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                <line x1="8" y1="2" x2="8" y2="18" />
+                <line x1="16" y1="6" x2="16" y2="22" />
+              </svg>
+              <span className="truncate">View Venue</span>
+            </button>
+          </div>
+
         </div>
       </div>
     </motion.article>
@@ -122,48 +259,44 @@ const EventCard = ({ e, i, isMobile = false }: { e: typeof invitation.events[0];
 };
 
 function EventsPage() {
-  const [activeEvent, setActiveEvent] = useState(0);
-
-  // Auto-slide on mobile just for fun luxury feel
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (window.innerWidth < 768) {
-        setActiveEvent(prev => (prev + 1) % invitation.events.length);
-      }
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <PageShell>
-      {/* 
-        Fully responsive height design. Uses scale trick ONLY if it natively overflows, but intrinsic sizes are reduced.
-      */}
-      <section className="w-full h-full flex flex-col items-center justify-center px-0 sm:px-2 md:px-4 origin-center scale-100 mt-[7vh] md:mt-0 select-none">
-        <div className="max-w-6xl w-full mx-auto flex flex-col items-center select-none">
+      <section className="w-full min-h-[82vh] flex flex-col items-center justify-center px-1.5 sm:px-4 py-4 sm:py-6 md:py-10 select-none">
+        <div className="max-w-5xl w-full mx-auto flex flex-col items-center">
           
           {/* Header Section */}
-          <div className="text-center mb-5 md:mb-5 w-full flex flex-col items-center">
+          <div className="text-center mb-2 sm:mb-4 md:mb-8 w-full flex flex-col items-center">
             <motion.p 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="label text-[11px] md:text-[10px] text-gold uppercase tracking-[0.5em] mb-1 drop-shadow-sm font-bold"
+              className="label text-[10px] md:text-[12px] text-gold uppercase tracking-[0.4em] mb-1 drop-shadow-sm font-bold"
             >
-              Shubh Muhurat
+              ॥ Shubh Muhurat ॥
             </motion.p>
+
             <motion.h2 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.1 }}
-              className="script text-5xl sm:text-6xl md:text-6xl lg:text-7xl text-maroon drop-shadow-lg leading-tight whitespace-nowrap"
-              style={{ textShadow: "0 4px 15px rgba(201,162,39,0.4)" }}
+              className="script text-4xl sm:text-5xl md:text-7xl text-maroon drop-shadow-lg leading-tight"
+              style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
             >
               Our Celebrations
             </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="display italic text-maroon-deep/80 text-xs sm:text-sm md:text-base mt-0.5 max-w-md"
+            >
+              Join us in honoring sacred traditions & joyous festivities
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-2 gap-1 sm:gap-6 md:gap-8 lg:gap-10 mt-1 w-full max-w-5xl px-0.5 sm:px-2 lg:px-4">
+          {/* Event Cards Row Grid (2 columns on mobile & desktop with items-stretch for equal height) */}
+          <div className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-8 lg:gap-10 w-full max-w-5xl px-0.5 sm:px-4 items-stretch">
             {invitation.events.map((e, i) => (
               <EventCard key={e.name} e={e} i={i} />
             ))}
@@ -174,3 +307,5 @@ function EventsPage() {
     </PageShell>
   );
 }
+
+
