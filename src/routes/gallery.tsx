@@ -84,18 +84,18 @@ function GalleryPage() {
           
           {/* HEADER SECTION */}
           <div className="text-center w-full shrink-0 flex flex-col items-center mb-2 sm:mb-4">
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
-              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+            <div className="flex items-center justify-center space-x-1 sm:space-x-3 mt-1 sm:mt-2 w-full flex-nowrap">
+              <TitleFlourish className="rotate-180 w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
               <motion.h2
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.1 }}
-                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                className="script text-2xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
                 style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
               >
                 Our Story
               </motion.h2>
-              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+              <TitleFlourish className="w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
             </div>
           </div>
 

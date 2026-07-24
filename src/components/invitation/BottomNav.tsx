@@ -1,18 +1,40 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import {
+  Sparkles,
+  PartyPopper,
+  Crown,
+  Flower2,
+  Hourglass,
+  Mail,
+  Scroll,
+  Castle,
+  Heart,
+  Menu,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  type LucideIcon,
+} from "lucide-react";
 
-export const pages = [
-  { path: "/", label: "Welcome", icon: "✨" },
-  { path: "/events", label: "Events", icon: "🎉" },
-  { path: "/families", label: "Families", icon: "👑" },
-  { path: "/gallery", label: "Our Story", icon: "🌸" },
-  { path: "/countdown", label: "Countdown", icon: "⏳" },
-  { path: "/rsvp", label: "RSVP", icon: "💌" },
-  { path: "/blessings", label: "Blessings", icon: "📜" },
-  { path: "/venue", label: "Venue", icon: "🏰" },
-  { path: "/closing", label: "Thanks", icon: "💖" },
-] as const;
+export interface NavPage {
+  path: string;
+  label: string;
+  Icon: LucideIcon;
+}
+
+export const pages: NavPage[] = [
+  { path: "/", label: "Welcome", Icon: Sparkles },
+  { path: "/events", label: "Events", Icon: PartyPopper },
+  { path: "/families", label: "Families", Icon: Crown },
+  { path: "/gallery", label: "Our Story", Icon: Flower2 },
+  { path: "/countdown", label: "Countdown", Icon: Hourglass },
+  { path: "/rsvp", label: "RSVP", Icon: Mail },
+  { path: "/blessings", label: "Blessings", Icon: Scroll },
+  { path: "/venue", label: "Venue", Icon: Castle },
+  { path: "/closing", label: "Thanks", Icon: Heart },
+];
 
 const MotionLink = motion(Link);
 
@@ -38,19 +60,24 @@ export function BottomNav() {
           >
             <div className="bg-[#2D0B10]/95 backdrop-blur-md border-2 border-gold/70 rounded-2xl p-3 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-gold/30">
-                <span className="label text-xs text-gold uppercase font-bold tracking-widest">✦ Direct Jump ✦</span>
+                <div className="flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
+                  <span className="label text-xs text-gold uppercase font-bold tracking-widest">Direct Jump</span>
+                </div>
                 <motion.button 
                   onClick={() => setShowQuickMenu(false)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="text-gold/70 hover:text-gold text-xs px-2 py-0.5 rounded-full border border-gold/30"
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.92 }}
+                  className="text-gold/80 hover:text-gold text-xs px-2 py-0.5 rounded-full border border-gold/30 flex items-center gap-1 cursor-pointer"
                 >
-                  ✕ Close
+                  <X className="w-3 h-3" />
+                  <span>Close</span>
                 </motion.button>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 {pages.map((p) => {
                   const isActive = p.path === pathname;
+                  const Icon = p.Icon;
                   return (
                     <MotionLink
                       key={p.path}
@@ -64,7 +91,7 @@ export function BottomNav() {
                           : "bg-maroon/40 hover:bg-maroon/70 text-cream/90 border-gold/25 hover:border-gold/60"
                       }`}
                     >
-                      <span className="text-base mb-0.5">{p.icon}</span>
+                      <Icon className={`w-4 h-4 mb-1 ${isActive ? "text-maroon-deep" : "text-gold"}`} />
                       <span className="label text-[10px] tracking-wider truncate w-full">{p.label}</span>
                     </MotionLink>
                   );
@@ -99,7 +126,7 @@ export function BottomNav() {
                   whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-maroon/60 hover:bg-maroon text-cream border border-gold/40 hover:border-gold transition-all group cursor-pointer shadow-xs shrink-0"
                 >
-                  <span className="text-gold text-xs group-hover:-translate-x-0.5 transition-transform">←</span>
+                  <ChevronLeft className="w-3.5 h-3.5 text-gold group-hover:-translate-x-0.5 transition-transform" />
                   <span className="label text-[10px] sm:text-xs font-bold tracking-wider text-cream/90">{prev.label}</span>
                 </MotionLink>
               ) : (
@@ -116,7 +143,7 @@ export function BottomNav() {
                   title="Open Quick Navigation Menu"
                   className="flex items-center justify-center w-7 h-7 rounded-full bg-gold/20 hover:bg-gold/35 text-gold border border-gold/50 transition-all cursor-pointer shrink-0 shadow-xs"
                 >
-                  <span className="text-xs font-bold">☰</span>
+                  <Menu className="w-3.5 h-3.5 text-gold" />
                 </motion.button>
 
                 {/* Dots indicator */}
@@ -158,7 +185,7 @@ export function BottomNav() {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-gold via-amber-300 to-gold text-maroon-deep font-bold border border-gold hover:brightness-110 transition-all group cursor-pointer shadow-[0_4px_12px_rgba(212,175,55,0.4)] shrink-0"
                 >
                   <span className="label text-[10px] sm:text-xs font-bold tracking-wider text-maroon-deep">{next.label}</span>
-                  <span className="text-maroon-deep text-xs group-hover:translate-x-0.5 transition-transform">→</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-maroon-deep group-hover:translate-x-0.5 transition-transform" />
                 </MotionLink>
               ) : (
                 <div className="w-16 sm:w-20" />

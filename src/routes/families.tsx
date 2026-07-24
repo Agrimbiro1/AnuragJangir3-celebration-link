@@ -82,12 +82,12 @@ const CirclePortrait = ({ name, relation, image }: { name: string; relation: str
 // In-Card Mini Portrait Avatar (Card Front)
 const MiniCardAvatar = ({ name, relation }: { name: string; relation: string }) => (
   <div className="flex flex-col items-center group/avatar">
-    <div className="w-14 h-[4.25rem] sm:w-20 sm:h-24 md:w-22 md:h-28 rounded-t-full rounded-b-sm border-2 border-gold p-0.5 bg-maroon-deep shadow-md relative overflow-hidden">
-      <div className="absolute inset-0 border border-gold/40 rounded-t-full rounded-b-xs m-0.5 z-10 pointer-events-none" />
-      <img src={getPortraitForRelation(relation)} alt={name} className="w-full h-full object-cover rounded-t-full filter sepia-[0.25] brightness-95 group-hover/avatar:brightness-105 group-hover/avatar:scale-110 transition-all duration-500" />
+    <div className="w-14 h-[4.25rem] sm:w-20 sm:h-24 md:w-22 md:h-28 rounded-t-full rounded-b-sm border-2 border-gold/90 p-0.5 bg-gradient-to-b from-maroon-deep to-[#4A0E17] shadow-[0_4px_14px_rgba(122,31,43,0.3)] hover:shadow-[0_0_15px_rgba(212,175,55,0.5)] transition-all duration-300 relative overflow-hidden">
+      <div className="absolute inset-0 border border-gold/50 rounded-t-full rounded-b-xs m-0.5 z-10 pointer-events-none" />
+      <img src={getPortraitForRelation(relation)} alt={name} className="w-full h-full object-cover rounded-t-full filter sepia-[0.2] brightness-95 group-hover/avatar:brightness-105 group-hover/avatar:scale-110 transition-all duration-500" />
     </div>
-    <span className="label text-[9px] sm:text-[10px] md:text-[11px] text-maroon-deep font-bold mt-1.5 tracking-tight truncate max-w-[80px] text-center">{name.split(" ")[0]}</span>
-    <span className="label text-[7.5px] sm:text-[8.5px] text-gold uppercase tracking-wider font-semibold">{relation}</span>
+    <span className="label text-[9px] sm:text-[10px] md:text-[11px] text-maroon-deep font-extrabold mt-1.5 tracking-tight truncate max-w-[80px] text-center drop-shadow-xs">{name.split(" ")[0]}</span>
+    <span className="label text-[7.5px] sm:text-[8.5px] text-gold uppercase tracking-wider font-bold">{relation}</span>
   </div>
 );
 
@@ -100,7 +100,7 @@ const ModalDecoBackground = () => (
 
 // Ornate Corner Filigree Ornament
 const CornerFiligree = ({ className }: { className: string }) => (
-  <svg viewBox="0 0 36 36" className={`w-5 h-5 sm:w-6 sm:h-6 text-gold/60 pointer-events-none z-20 ${className}`}>
+  <svg viewBox="0 0 36 36" className={`w-5 h-5 sm:w-6 sm:h-6 text-gold/70 pointer-events-none z-20 ${className}`}>
     <path d="M 2 2 L 18 2 C 18 10, 10 18, 2 18 Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
     <path d="M 2 2 L 10 2 C 10 6, 6 10, 2 10 Z" fill="none" stroke="currentColor" strokeWidth="0.8" opacity="0.7" />
     <circle cx="5" cy="5" r="1.2" fill="currentColor" />
@@ -113,27 +113,27 @@ const FamilyCard = ({ side, data, onOpen, delay }: { side: string; data: typeof 
       initial={{ opacity: 0, y: 30, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="relative p-[2px] md:p-[3px] bg-gradient-to-br from-[#E2B75A] via-[#FDF5D3] to-[#B0852A] rounded-t-[56px] sm:rounded-t-[64px] md:rounded-t-[72px] rounded-b-2xl shadow-[0_15px_35px_rgba(122,31,43,0.16)] hover:shadow-[0_20px_45px_rgba(201,162,39,0.35)] transition-all duration-300 group h-full w-full flex flex-col hover:-translate-y-1"
+      className="relative p-[2px] md:p-[3px] bg-gradient-to-br from-[#E2B75A] via-[#FDF5D3] to-[#B0852A] rounded-t-[56px] sm:rounded-t-[64px] md:rounded-t-[72px] rounded-b-2xl shadow-[0_15px_35px_rgba(122,31,43,0.16)] hover:shadow-[0_22px_50px_rgba(201,162,39,0.42)] transition-all duration-300 group h-full w-full flex flex-col hover:-translate-y-1"
     >
       <div className="relative rounded-t-[54px] sm:rounded-t-[62px] md:rounded-t-[69px] rounded-b-[14px] h-full overflow-hidden flex flex-col justify-between">
         
         {/* Animated Spinning Border Container */}
         <div className="absolute inset-0 rounded-t-[54px] sm:rounded-t-[62px] md:rounded-t-[69px] rounded-b-[14px] overflow-hidden z-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 w-[220%] h-[220%] -translate-x-1/2 -translate-y-1/2 bg-[conic-gradient(from_var(--border-angle),#D4AF37_0%,transparent_16%,transparent_84%,#D4AF37_100%)] animate-spin-border opacity-85" />
+          <div className="absolute top-1/2 left-1/2 w-[220%] h-[220%] -translate-x-1/2 -translate-y-1/2 bg-[conic-gradient(from_var(--border-angle),#D4AF37_0%,#FFF7C2_15%,transparent_35%,transparent_65%,#D4AF37_85%,#FFF7C2_100%)] animate-spin-border opacity-90" />
         </div>
 
         {/* Solid Card Background Base - Clean Ivory Silk Parchment with Soft Radial Gold Glow */}
-        <div className="absolute inset-[1.5px] md:inset-[2px] rounded-t-[52px] sm:rounded-t-[60px] md:rounded-t-[67px] rounded-b-[12px] bg-gradient-to-b from-[#FFFDF9] via-[#FAF5EA] to-[#F3EAD8] z-0" />
-        <div className="absolute inset-0 rounded-t-[52px] sm:rounded-t-[60px] md:rounded-t-[67px] rounded-b-[12px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/20 via-transparent to-transparent pointer-events-none z-0" />
+        <div className="absolute inset-[1.5px] md:inset-[2px] rounded-t-[52px] sm:rounded-t-[60px] md:rounded-t-[67px] rounded-b-[12px] bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E2] to-[#F5E8CE] z-0" />
+        <div className="absolute inset-0 rounded-t-[52px] sm:rounded-t-[60px] md:rounded-t-[67px] rounded-b-[12px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/25 via-transparent to-transparent pointer-events-none z-0" />
         
         {/* Inner Dashed Gold Line Frame Decoration */}
-        <div className="absolute inset-2 sm:inset-2.5 rounded-t-[46px] sm:rounded-t-[54px] md:rounded-t-[60px] rounded-b-lg border border-gold/40 border-dashed pointer-events-none z-10 opacity-70" />
+        <div className="absolute inset-2 sm:inset-2.5 rounded-t-[46px] sm:rounded-t-[54px] md:rounded-t-[60px] rounded-b-lg border border-gold/45 border-dashed pointer-events-none z-10 opacity-75" />
         
         <div className="relative z-20 p-3 pt-4 sm:p-5 sm:pt-6 md:p-6 text-center h-full flex flex-col justify-between rounded-t-[50px] sm:rounded-t-[58px] md:rounded-t-[65px] rounded-b-lg m-[2px] overflow-hidden">
           
           {/* Animated Light Reflection */}
           <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-6 border-b-[1.5px] border-x-[1.5px] border-gold/30 rounded-b-full pointer-events-none bg-gold/5" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-6 border-b-[1.5px] border-x-[1.5px] border-gold/40 rounded-b-full pointer-events-none bg-gold/10" />
           
           {/* Corner Filigree Ornaments */}
           <CornerFiligree className="absolute top-2 left-2" />
@@ -143,10 +143,10 @@ const FamilyCard = ({ side, data, onOpen, delay }: { side: string; data: typeof 
 
           {/* Top Info Block */}
           <div className="relative z-10 flex flex-col items-center">
-            <span className="label text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-gold font-bold drop-shadow-sm">
+            <span className="label text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-maroon-deep font-extrabold px-3 py-0.5 rounded-full bg-gradient-to-r from-gold/15 via-gold/30 to-gold/15 border border-gold/45 shadow-2xs">
               {side}
             </span>
-            <h3 className="script text-3xl sm:text-4xl md:text-5xl text-maroon mt-0.5 sm:mt-1 drop-shadow-sm">
+            <h3 className="script text-3xl sm:text-4xl md:text-5xl text-maroon mt-1 sm:mt-1.5 font-bold drop-shadow-xs">
               {data.surname}
             </h3>
             
@@ -159,18 +159,18 @@ const FamilyCard = ({ side, data, onOpen, delay }: { side: string; data: typeof 
               ))}
             </div>
 
-            <p className="display italic text-xs sm:text-sm text-maroon-deep/90 my-2 px-1 font-medium leading-relaxed max-w-xs">
+            <p className="display italic text-xs sm:text-sm text-maroon-deep/90 mt-2 mb-0.5 sm:mb-1 px-1 font-medium leading-relaxed max-w-xs">
               "{data.note}"
             </p>
           </div>
 
           {/* Action Buttons Row */}
-          <div className="mt-2.5 pt-2 border-t border-gold/20 w-full flex flex-row items-center justify-center gap-1.5 sm:gap-2.5 z-30">
+          <div className="mt-1 sm:mt-1.5 pt-1.5 border-t border-gold/25 w-full flex flex-row items-center justify-center gap-1.5 sm:gap-2.5 z-30">
             <button
               onClick={onOpen}
-              className="w-full h-[34px] sm:h-[38px] md:h-[42px] inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 bg-gradient-to-r from-maroon via-maroon-deep to-maroon text-cream label text-[8.5px] sm:text-[10px] md:text-[11px] font-bold rounded-lg shadow-sm hover:shadow transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap border border-gold/30"
+              className="w-full h-[34px] sm:h-[38px] md:h-[42px] inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-amber-100 label text-[8.5px] sm:text-[10px] md:text-[11px] font-extrabold rounded-lg shadow-sm hover:shadow-[0_4px_16px_rgba(212,175,55,0.45)] transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap border border-gold/50"
             >
-              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-none stroke-currentColor stroke-[2.2] shrink-0">
+              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -192,33 +192,24 @@ function FamiliesPage() {
 
   return (
     <PageShell>
-      <section className="w-full min-h-[82vh] flex flex-col items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 mt-[24vh] sm:mt-12 md:mt-16 pt-4 sm:pt-6 select-none">
+      <section className="w-full min-h-[82vh] flex flex-col items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 mt-[28vh] sm:mt-16 md:mt-20 pt-4 sm:pt-6 select-none">
         <div className="max-w-5xl w-full mx-auto flex flex-col items-center">
           
           {/* Header Section */}
           <div className="text-center mb-3 sm:mb-5 md:mb-8 w-full flex flex-col items-center">
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
-              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+            <div className="flex items-center justify-center space-x-1 sm:space-x-2 mt-1 sm:mt-2 w-full flex-nowrap">
+              <TitleFlourish className="rotate-180 w-7 xs:w-9 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
               <motion.h2 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.1 }}
-                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                className="script text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
                 style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
               >
                 Two Families, One Union
               </motion.h2>
-              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+              <TitleFlourish className="w-7 xs:w-9 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
             </div>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="display italic text-maroon-deep/80 text-xs sm:text-sm md:text-base mt-1 max-w-md"
-            >
-              United in heritage, bound by love & divine blessings
-            </motion.p>
 
             {/* Mobile Segmented Tab Control (< md) */}
             <div className="md:hidden flex items-center justify-center mt-3 p-1 rounded-full bg-gold/15 border border-gold/30 shadow-inner w-full max-w-[280px]">

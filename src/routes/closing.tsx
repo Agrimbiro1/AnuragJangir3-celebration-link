@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import confetti from "canvas-confetti";
 import cows from "@/assets/pichwai-cows.png";
 import { invitation } from "@/lib/invitation-data";
 import { PageShell } from "@/components/invitation/PageShell";
 import { RotatingMandala } from "@/components/invitation/AnimatedDecorations";
+import { useGuestName } from "@/hooks/useGuestName";
+import { Heart, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/closing")({ component: ClosingPage });
 
@@ -136,31 +139,40 @@ const CoupleRingsIcon = ({ className = "w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-2
 );
 
 function ClosingPage() {
-  const [copied, setCopied] = useState(false);
+  const [blessingsSent, setBlessingsSent] = useState(false);
+  const guestName = useGuestName("Warm Guest");
 
-  const handleShare = async () => {
-    const shareData = {
-      title: `${invitation.groom} & ${invitation.bride}'s Engagement Invitation`,
-      text: `You are cordially invited to celebrate the engagement of ${invitation.groom} & ${invitation.bride}!`,
-      url: window.location.href,
+  const handleFlowerShower = () => {
+    setBlessingsSent(true);
+    setTimeout(() => setBlessingsSent(false), 3000);
+
+    // Rose & Gold Flower Shower Confetti
+    const count = 70;
+    const defaults = {
+      origin: { y: 0.7 },
+      colors: ["#D4AF37", "#FDF5D3", "#E60067", "#FFB7C5", "#7A1F2B"],
     };
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch {
-        // User cancelled
-      }
-    } else {
-      await navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+
+    function fire(particleRatio: number, opts: confetti.Options) {
+      confetti({
+        ...defaults,
+        ...opts,
+        particleCount: Math.floor(count * particleRatio),
+      });
     }
+
+    fire(0.25, { spread: 30, startVelocity: 55, scalar: 0.9 });
+    fire(0.2, { spread: 65 });
+    fire(0.35, { spread: 100, decay: 0.91, scalar: 1.1 });
+    fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
   };
 
   return (
     <PageShell>
-      <section className="w-full min-h-[85vh] flex flex-col items-center justify-start sm:justify-center px-3 sm:px-6 py-4 sm:py-8 mt-[22vh] sm:mt-[22vh] md:mt-24 select-none">
-        <div className="max-w-3xl w-full mx-auto flex flex-col items-center text-center space-y-3 sm:space-y-5">
+      <div className="w-full h-full flex flex-col items-center justify-start xs:justify-center px-3 xs:px-4 sm:px-6 py-2 sm:py-6 overflow-y-auto scrollbar-none select-none">
+        
+        {/* Strictly Containerless Content Section */}
+        <div className="w-full max-w-xl mx-auto flex flex-col items-center text-center my-auto space-y-2.5 xs:space-y-3 sm:space-y-5 mt-16 xs:mt-24 sm:mt-0">
 
           {/* Central Animated Floating Couple Rings & Mandala Halo */}
           <motion.div
@@ -170,122 +182,154 @@ function ClosingPage() {
             className="relative flex items-center justify-center my-1 sm:my-2"
           >
             {/* Dual Rotating Mandalas */}
-            <RotatingMandala className="absolute w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 text-gold/30 pointer-events-none" />
-            <RotatingMandala className="absolute w-14 h-14 sm:w-20 sm:h-20 text-gold/20 pointer-events-none -rotate-180" />
+            <RotatingMandala className="absolute w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 text-gold/35 pointer-events-none" />
+            <RotatingMandala className="absolute w-14 h-14 xs:w-16 xs:h-16 sm:w-22 sm:h-22 text-gold/20 pointer-events-none -rotate-180" />
             
             {/* Soft Ambient Radial Glow Halo */}
-            <div className="absolute w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-radial from-gold/30 via-gold/10 to-transparent blur-md pointer-events-none" />
+            <div className="absolute w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28 rounded-full bg-radial from-gold/30 via-gold/10 to-transparent blur-md pointer-events-none" />
 
             {/* Couple Engagement Rings Icon */}
-            <CoupleRingsIcon className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 relative z-10 drop-shadow-[0_4px_14px_rgba(201,162,39,0.5)]" />
+            <CoupleRingsIcon className="w-10 h-10 xs:w-12 xs:h-12 sm:w-16 sm:h-16 relative z-10 drop-shadow-[0_4px_16px_rgba(201,162,39,0.7)]" />
           </motion.div>
 
-          {/* Floating Gratitude Heading */}
+          {/* Guest Personalization Pill */}
+          {guestName && (
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-gold/20 via-amber-200/30 to-gold/20 border border-gold/60 shadow-xs max-w-full"
+            >
+              <Sparkles className="w-3 h-3 text-gold animate-pulse shrink-0" />
+              <span className="label text-[8.5px] xs:text-[9.5px] sm:text-[10.5px] text-maroon-deep uppercase tracking-widest font-extrabold truncate">
+                With Love To Dear {guestName}
+              </span>
+              <Sparkles className="w-3 h-3 text-gold animate-pulse shrink-0" />
+            </motion.div>
+          )}
+
+          {/* Containerless Heading with Calligraphic Flourishes */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3 }}
-            className="flex flex-col items-center max-w-xl px-2"
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="flex flex-col items-center px-1 w-full"
           >
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
-              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+            <div className="flex items-center justify-center space-x-1 sm:space-x-3 w-full flex-nowrap">
+              <TitleFlourish className="rotate-180 w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
               <h2 
-                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
-                style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
+                className="script text-2xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                style={{ textShadow: "0 4px 18px rgba(201,162,39,0.35)" }}
               >
                 With Grateful Hearts
               </h2>
-              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+              <TitleFlourish className="w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
             </div>
 
             {/* Closing Quote */}
-            <p className="display italic text-sm sm:text-xl md:text-2xl text-maroon-deep leading-relaxed font-medium mt-1">
+            <p className="display italic text-xs xs:text-sm sm:text-xl md:text-2xl text-maroon-deep leading-relaxed font-semibold mt-1 max-w-md">
               "{invitation.closing}"
             </p>
           </motion.div>
 
-          {/* Animated Gold Ornament Divider */}
+          {/* Containerless Gold Filigree Divider */}
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.9, delay: 0.45 }}
-            className="flex items-center gap-2 sm:gap-3 w-full max-w-xs sm:max-w-sm"
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="flex items-center gap-2 w-full max-w-xs mx-auto my-1"
           >
-            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-gold/60 to-gold/30" />
-            <span className="text-gold text-xs sm:text-sm">✦</span>
-            <span className="label text-[8px] sm:text-[9px] text-gold/70 uppercase tracking-[0.35em] font-bold">Two Souls, One Journey</span>
-            <span className="text-gold text-xs sm:text-sm">✦</span>
-            <span className="flex-1 h-px bg-gradient-to-l from-transparent via-gold/60 to-gold/30" />
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
+            <span className="text-gold text-xs sm:text-sm animate-spin-slow">✦</span>
+            <span className="label text-[8px] xs:text-[9px] sm:text-[10px] text-gold uppercase tracking-[0.3em] font-extrabold whitespace-nowrap">
+              Two Souls, One Journey
+            </span>
+            <span className="text-gold text-xs sm:text-sm animate-spin-slow">✦</span>
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
           </motion.div>
 
-          {/* Royal Couple Monogram & Signature */}
+          {/* Couple Names & Signature (Containerless Floating Text) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="flex flex-col items-center max-w-full"
+            transition={{ duration: 0.9, delay: 0.5 }}
+            className="flex flex-col items-center"
           >
-            <span className="label text-[8.5px] sm:text-[10px] text-gold uppercase tracking-[0.35em] font-bold">
-              With Warm Regards
+            <span className="label text-[8.5px] xs:text-[9.5px] sm:text-[11px] text-gold uppercase tracking-[0.35em] font-bold">
+              With Warm Regards & Gratitude
             </span>
+            
             <h3 
-              className="script text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-maroon drop-shadow-xl mt-1 leading-none whitespace-nowrap"
-              style={{ textShadow: "0 6px 24px rgba(201,162,39,0.4)" }}
+              className="script text-3.5xl xs:text-4.5xl sm:text-6xl md:text-7xl lg:text-8xl text-maroon drop-shadow-xl mt-0.5 leading-none"
+              style={{ textShadow: "0 6px 24px rgba(201,162,39,0.45)" }}
             >
-              {invitation.groom} <span className="text-gold script text-2xl xs:text-3xl sm:text-5xl md:text-6xl">&</span> {invitation.bride}
+              {invitation.groom} <span className="text-gold script text-2.5xl xs:text-3.5xl sm:text-5xl">&</span> {invitation.bride}
             </h3>
 
-            {/* Event Badge Pill */}
-            <div className="mt-3 sm:mt-4 px-4 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-gold/15 via-gold/25 to-gold/15 border border-gold/40 shadow-xs max-w-full overflow-hidden">
-              <p className="label text-[7.5px] xs:text-[8.5px] sm:text-[10px] text-gold uppercase tracking-wider font-bold whitespace-nowrap">
+            {/* Event Date Badge Pill */}
+            <div className="mt-2 sm:mt-3 px-4 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-gold/15 via-gold/30 to-gold/15 border border-gold/50 shadow-xs inline-block max-w-full">
+              <p className="label text-[7.5px] xs:text-[8.5px] sm:text-[10px] text-maroon font-bold uppercase tracking-wider">
                 ✦ 21 September 2026 • Heritage Palace, Jaipur ✦
               </p>
             </div>
 
-            <p className="label text-[7.5px] xs:text-[8.5px] sm:text-[11px] text-gold/90 mt-2 uppercase tracking-[0.15em] sm:tracking-[0.25em] font-semibold whitespace-nowrap">
+            <p className="label text-[8px] xs:text-[9px] sm:text-[11px] text-gold/90 mt-2 uppercase tracking-[0.2em] font-extrabold">
               Thank You For Being Part Of Our Story
             </p>
           </motion.div>
 
-          {/* Floating Blessing Stanza */}
+          {/* Flower Shower / Blessing Button Only */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.65 }}
-            className="flex flex-col items-center gap-1 max-w-sm sm:max-w-md px-3"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex justify-center w-full max-w-xs mt-2"
           >
-            <div className="flex items-center gap-2 w-full justify-center opacity-70">
-              <span className="flex-1 h-px bg-gradient-to-r from-transparent to-gold/40" />
-              <span className="text-gold/60 text-[10px]">❋</span>
-              <span className="flex-1 h-px bg-gradient-to-l from-transparent to-gold/40" />
-            </div>
-            <p className="display italic text-[10px] sm:text-xs text-maroon-deep/70 leading-relaxed font-medium text-center">
+            <motion.button
+              onClick={handleFlowerShower}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative group px-6 py-2.5 rounded-full bg-gradient-to-r from-maroon via-maroon-deep to-maroon text-cream border border-gold/60 shadow-[0_6px_20px_rgba(122,31,43,0.35)] transition-all cursor-pointer overflow-hidden min-w-[210px]"
+            >
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/30 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
+              <span className="relative z-10 label text-[10px] xs:text-xs font-bold tracking-[0.18em] flex items-center justify-center gap-2">
+                <Heart className={`w-4 h-4 text-rose-300 transition-transform duration-300 ${blessingsSent ? "scale-110 text-rose-400" : ""}`} fill="#F43F5E" />
+                <span>{blessingsSent ? "SHOWERING PETALS!" : "SHOWER PETALS"}</span>
+              </span>
+            </motion.button>
+          </motion.div>
+
+          {/* Floating Blessing Stanza (Containerless) */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="flex flex-col items-center gap-1 mt-2 px-2"
+          >
+            <p className="display italic text-[11px] xs:text-xs sm:text-sm text-maroon-deep/80 leading-relaxed font-medium text-center">
               May the blessings of our elders, the joy of our families,<br className="hidden sm:block"/>
               and the grace of the divine light your path always.
             </p>
-            <div className="flex gap-2 mt-1 text-[9px] sm:text-xs text-gold/50">
-              <span>🪷</span>
-              <span>🕯️</span>
-              <span>🪷</span>
-            </div>
           </motion.div>
 
           {/* Bottom Pichwai Cows Art Motif */}
           <motion.img 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 0.9 }} 
-            transition={{ delay: 0.9, duration: 1.5 }}
+            transition={{ delay: 0.85, duration: 1.2 }}
             src={cows} 
             alt="Pichwai Art" 
             aria-hidden 
-            className="mt-2 sm:mt-4 w-full max-w-[220px] sm:max-w-md max-h-14 sm:max-h-20 object-contain drop-shadow-md pointer-events-none" 
+            className="mt-2 mx-auto w-full max-w-[180px] xs:max-w-[220px] sm:max-w-xs max-h-12 sm:max-h-16 object-contain drop-shadow-md pointer-events-none" 
             loading="lazy" 
           />
 
         </div>
-      </section>
+      </div>
     </PageShell>
   );
 }
+
+
 
 

@@ -6,6 +6,7 @@ import { invitation } from "@/lib/invitation-data";
 import { PageShell } from "@/components/invitation/PageShell";
 import { AnimatedDivider } from "@/components/invitation/AnimatedDecorations";
 import { useGuestName } from "@/hooks/useGuestName";
+import { Sparkles, Scroll } from "lucide-react";
 
 export const Route = createFileRoute("/blessings")({ component: BlessingsPage });
 
@@ -43,9 +44,9 @@ const AnimatedLotus = ({ className = "" }: { className?: string }) => (
 );
 
 const QUICK_BLESSINGS = [
-  "✨ Wishing eternal love & harmony!",
-  "🪔 May God bless your union!",
-  "🌸 A lifetime of endless joy!",
+  "Wishing eternal love & harmony!",
+  "May God bless your union!",
+  "A lifetime of endless joy!",
 ];
 
 function BlessingsPage() {
@@ -111,24 +112,24 @@ function BlessingsPage() {
 
   return (
     <PageShell>
-      <section className="relative w-full h-full flex flex-col items-center justify-center px-2 sm:px-4 origin-center scale-[0.89] sm:scale-[0.90] md:scale-[0.88] lg:scale-[0.92] mt-[14vh] sm:mt-[6vh] md:mt-[-3vh]">
+      <section className="relative w-full h-full flex flex-col items-center justify-center px-2 sm:px-4 origin-center scale-[0.89] sm:scale-[0.90] md:scale-[0.88] lg:scale-[0.92] mt-[18vh] sm:mt-[10vh] md:mt-[4vh]">
         <div className="max-w-5xl w-full mx-auto flex flex-col min-h-0 h-full relative z-10">
           {/* Header */}
-          <div className="text-center shrink-0 mb-2">
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
-              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+          <div className="text-center shrink-0 mb-0.5 sm:mb-1">
+            <div className="flex items-center justify-center space-x-1 sm:space-x-2 mt-0.5 sm:mt-1 w-full flex-nowrap">
+              <TitleFlourish className="rotate-180 w-7 xs:w-9 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
               <motion.h2 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.1 }}
-                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                className="script text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
                 style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
               >
                 Shower Your Blessings
               </motion.h2>
-              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+              <TitleFlourish className="w-7 xs:w-9 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
             </div>
-            <AnimatedDivider />
+            <AnimatedDivider className="my-1 sm:my-1.5" />
           </div>
 
           {/* Wrapper for Golden Glowing Outer Aura */}
@@ -222,7 +223,11 @@ function BlessingsPage() {
                         {/* Shimmer Light Beam */}
                         <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
                         <span className="absolute inset-0 rounded-full ring-2 ring-gold/50 ring-offset-1 ring-offset-cream pointer-events-none" />
-                        <span className="relative z-10 drop-shadow-md">✨ SEND BLESSINGS ✨</span>
+                        <span className="relative z-10 drop-shadow-md flex items-center justify-center gap-2">
+                          <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
+                          <span>SEND BLESSINGS</span>
+                          <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
+                        </span>
                       </motion.button>
 
                       {/* Mobile view trigger button */}
@@ -234,7 +239,8 @@ function BlessingsPage() {
                         className="relative group w-full py-2 sm:py-2.5 bg-gold/15 hover:bg-gold/25 text-maroon-deep label text-[10.5px] sm:text-xs font-bold tracking-[0.18em] uppercase rounded-full shadow-xs transition-all border border-gold/50 flex items-center justify-center gap-2 cursor-pointer md:hidden overflow-hidden"
                       >
                         <span className="relative z-10 flex items-center gap-1.5">
-                          <span>📜 VIEW ALL BLESSINGS</span>
+                          <Scroll className="w-3.5 h-3.5 text-maroon-deep" />
+                          <span>VIEW ALL BLESSINGS</span>
                           <span className="bg-maroon text-cream rounded-full px-2 py-0.5 text-[9.5px] font-bold">
                             {items.length}
                           </span>

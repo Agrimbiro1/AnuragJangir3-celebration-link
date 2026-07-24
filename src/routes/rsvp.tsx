@@ -5,6 +5,7 @@ import confetti from "canvas-confetti";
 import elephant from "@/assets/elephant.png";
 import { PageShell } from "@/components/invitation/PageShell";
 import { useGuestName } from "@/hooks/useGuestName";
+import { Sparkles, Crown } from "lucide-react";
 
 export const Route = createFileRoute("/rsvp")({ component: RsvpPage });
 
@@ -86,15 +87,15 @@ function RsvpPage() {
             transition={{ duration: 0.8 }}
             className="relative z-10 w-full"
           >
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3">
-              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+            <div className="flex items-center justify-center space-x-1 sm:space-x-3 w-full flex-nowrap">
+              <TitleFlourish className="rotate-180 w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
               <h2 
-                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                className="script text-2xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
                 style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
               >
                 Will You Join Us?
               </h2>
-              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+              <TitleFlourish className="w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
             </div>
 
             {/* Decorative Divider */}
@@ -133,7 +134,9 @@ function RsvpPage() {
                   >
                     <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/50 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
                     <span className="relative z-10 font-bold tracking-[0.2em] drop-shadow-md flex items-center justify-center gap-2">
-                      <span>✨</span> JOYFULLY ACCEPT <span>✨</span>
+                      <Sparkles className="w-4 h-4 text-gold animate-pulse" />
+                      <span>JOYFULLY ACCEPT</span>
+                      <Sparkles className="w-4 h-4 text-gold animate-pulse" />
                     </span>
                   </button>
                 </div>
@@ -151,7 +154,7 @@ function RsvpPage() {
                 {/* Royal Stamp Seal Badge (Containerless) */}
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-gold via-amber-300 to-gold p-0.5 shadow-[0_0_25px_rgba(212,175,55,0.7)] flex items-center justify-center mb-4 sm:mb-5 animate-pulse">
                   <div className="w-full h-full rounded-full bg-maroon flex items-center justify-center border border-gold/70">
-                    <span className="text-2xl sm:text-3xl text-gold">👑</span>
+                    <Crown className="w-8 h-8 text-gold" />
                   </div>
                 </div>
 

@@ -217,7 +217,7 @@ export const PremiumBackground = ({ withPetals = true }: { withPetals?: boolean 
 
 export const AnimatedDivider = ({ className }: { className?: string }) => {
   return (
-    <div className={`flex items-center justify-center w-full my-4 ${className}`}>
+    <div className={`flex items-center justify-center w-full ${className ?? "my-4"}`}>
       <motion.div 
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}

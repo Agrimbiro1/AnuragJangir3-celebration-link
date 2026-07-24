@@ -16,6 +16,7 @@ import { RotatingMandala, AnimatedDivider } from "@/components/invitation/Animat
 import { ThreeBackground } from "@/components/invitation/ThreeBackground";
 import { AnimatedMandalaBackground } from "@/components/invitation/AnimatedMandalaBackground";
 import { useGuestName } from "@/hooks/useGuestName";
+import { Sparkles, Mail, ChevronRight } from "lucide-react";
 
 
 
@@ -50,7 +51,9 @@ function Welcome() {
 
   return (
     <>
-      {showIntro && <OpeningAnimation onComplete={() => setShowIntro(false)} />}
+      <AnimatePresence>
+        {showIntro && <OpeningAnimation key="intro" onComplete={() => setShowIntro(false)} />}
+      </AnimatePresence>
 
       <PageShell showGarland={false} showCorners={false} showBottomNav={false} showArch={false}>
         <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-hidden">
@@ -100,7 +103,7 @@ function Welcome() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="relative z-20 w-full flex flex-col items-center text-center mx-auto origin-center scale-[0.85] sm:scale-[0.90] md:scale-100 mt-[10vh] sm:mt-14 md:mt-8 px-4 select-none"
           >
             {/* Sacred Ganesha Emblem with Dual Rotating Mandalas & Gold Halo */}
@@ -115,14 +118,14 @@ function Welcome() {
                 className="w-16 sm:w-20 md:w-24 relative z-20 drop-shadow-[0_8px_24px_rgba(122,31,43,0.35)]"
                 initial={{ scale: 0.6, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 3, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               />
             </div>
 
             {/* Sacred Motto */}
             <motion.p
               className="label text-[10px] sm:text-[11.5px] text-gold tracking-[0.35em] uppercase font-bold animate-pulse-gold mb-1.5 sm:mb-2 drop-shadow-sm"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.3, duration: 1 }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25, duration: 0.8 }}
             >
               ॥ Shri Ganeshaya Namah ॥
             </motion.p>
@@ -131,54 +134,63 @@ function Welcome() {
             <motion.div
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 3.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="relative my-1.5 sm:my-2 px-5 sm:px-6 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-gold/15 via-amber-100/40 to-gold/15 border border-gold/45 shadow-[0_4px_20px_-4px_rgba(212,175,55,0.25)] backdrop-blur-xs flex items-center gap-2"
             >
-              <span className="text-gold text-xs sm:text-sm animate-pulse">🌸</span>
-              <h3 className="script text-2xl sm:text-3xl md:text-4xl text-maroon font-bold drop-shadow-xs tracking-wide">
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gold animate-pulse" />
+              <h3 className="script text-xl sm:text-2xl md:text-3xl text-maroon font-bold drop-shadow-xs tracking-wide">
                 Dear {guestName}
               </h3>
-              <span className="text-gold text-xs sm:text-sm animate-pulse">🌸</span>
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gold animate-pulse" />
             </motion.div>
 
             {/* Event Tagline */}
             <motion.p
-              className="display italic text-maroon-deep text-sm sm:text-base md:text-lg max-w-[280px] sm:max-w-md leading-relaxed mb-3 sm:mb-4 px-2 font-medium"
-              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.5, duration: 1 }}
+              className="display italic text-maroon-deep text-xs sm:text-sm md:text-base max-w-[280px] sm:max-w-md leading-relaxed mb-2.5 sm:mb-3 px-2 font-medium"
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.8 }}
             >
               {invitation.welcome}
             </motion.p>
 
             {/* Couple Names - Royal Script Typography */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 3.7, duration: 1.2 }}
-              className="flex flex-col items-center justify-center w-full my-1 sm:my-2"
+              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 0.9 }}
+              className="relative flex flex-col items-center justify-center w-full my-1 sm:my-2 py-1"
             >
+              {/* Soft Golden Ambient Radiance behind names */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-20 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.25)_0%,_transparent_75%)] pointer-events-none blur-xl" />
+
               <h1 
-                className="script text-maroon text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight whitespace-nowrap"
-                style={{ textShadow: "0 6px 24px rgba(201,162,39,0.4)" }}
+                className="script text-transparent bg-clip-text bg-gradient-to-r from-[#5B121A] via-maroon via-[#7A1F2B] to-[#5B121A] text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight whitespace-nowrap relative z-10 font-bold drop-shadow-[0_4px_18px_rgba(212,175,55,0.4)]"
               >
-                {invitation.groom} <span className="text-gold script text-3xl sm:text-5xl md:text-6xl my-1 sm:my-2">&</span> {invitation.bride}
+                {invitation.groom}{" "}
+                <span className="script text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF5D6] to-[#D4AF37] text-2xl sm:text-4xl md:text-5xl my-1 sm:my-2 px-1 font-normal drop-shadow-[0_2px_10px_rgba(212,175,55,0.5)] animate-pulse-gold">
+                  &
+                </span>{" "}
+                {invitation.bride}
               </h1>
             </motion.div>
 
             {/* Event Details & CTA Button */}
             <motion.div
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4.1, duration: 1 }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }}
               className="mt-3 sm:mt-5 flex flex-col items-center gap-2 sm:gap-3 w-full"
             >
               <AnimatedDivider className="w-44 sm:w-60 md:w-72" />
               
-              <div className="flex items-center gap-2 text-maroon font-medium mt-1">
-                <span className="text-gold text-xs animate-spin-slow">❋</span>
-                <p className="display text-maroon-deep text-sm sm:text-lg md:text-2xl font-semibold tracking-wide">
-                  Sunday · 21<sup>st</sup> September 2026
+              {/* Translucent Glass Blur Pill Container for Event Date & Venue */}
+              <div className="my-1.5 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#1A0508]/35 backdrop-blur-md border border-gold/50 shadow-[0_4px_25px_rgba(0,0,0,0.3)] flex flex-col items-center gap-1">
+                <div className="flex items-center gap-2 font-medium">
+                  <span className="text-gold text-xs animate-spin-slow">❋</span>
+                  <p className="display text-[#FDF5D3] text-sm sm:text-lg md:text-2xl font-bold tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                    Sunday · 21<sup>st</sup> September 2026
+                  </p>
+                  <span className="text-gold text-xs animate-spin-slow">❋</span>
+                </div>
+                <p className="label text-[9.5px] sm:text-[11.5px] text-[#E2B75A] font-bold tracking-[0.25em] uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  ✦ Heritage Palace • Jaipur ✦
                 </p>
-                <span className="text-gold text-xs animate-spin-slow">❋</span>
               </div>
-              <p className="label text-[9px] sm:text-[11px] text-gold font-bold tracking-[0.25em] uppercase">
-                ✦ Heritage Palace • Jaipur ✦
-              </p>
 
               {/* Ultra-Premium Action CTA Button */}
               <motion.a
@@ -191,9 +203,9 @@ function Welcome() {
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
                 <span className="absolute inset-0 rounded-full ring-2 ring-gold/70 ring-offset-2 ring-offset-cream pointer-events-none" />
                 <span className="relative z-10 flex items-center gap-2.5 drop-shadow-md">
-                  <span>💌</span>
+                  <Mail className="w-4 h-4 text-gold" />
                   <span>ENTER INVITATION</span>
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <ChevronRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-transform" />
                 </span>
               </motion.a>
             </motion.div>

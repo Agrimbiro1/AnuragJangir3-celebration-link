@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles } from "lucide-react";
 import cows from "@/assets/pichwai-cows.png";
 import { invitation } from "@/lib/invitation-data";
 import { PageShell } from "@/components/invitation/PageShell";
@@ -62,18 +63,18 @@ function CountdownPage() {
         <div className="max-w-4xl w-full mx-auto text-center relative z-10 px-2 sm:px-4 flex flex-col items-center">
           
           {/* Couple Banner Title */}
-          <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
-            <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+          <div className="flex items-center justify-center space-x-1 sm:space-x-3 mt-1 sm:mt-2 w-full flex-nowrap">
+            <TitleFlourish className="rotate-180 w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
             <motion.h2 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.1 }}
-              className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+              className="script text-2xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
               style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
             >
               Until We Say Yes
             </motion.h2>
-            <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+            <TitleFlourish className="w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
           </div>
 
           {/* Event Date Badge */}
@@ -133,8 +134,9 @@ function CountdownPage() {
                 <RotatingMandala className="absolute top-3 right-3 w-4 h-4 opacity-30 text-gold" />
 
                 {done ? (
-                  <p className="script text-3xl sm:text-4xl md:text-5xl text-maroon relative z-10 my-4 md:my-8 drop-shadow-md">
-                    Today is the Joyous Day! 🌸
+                  <p className="script text-3xl sm:text-4xl md:text-5xl text-maroon relative z-10 my-4 md:my-8 drop-shadow-md flex items-center justify-center gap-2">
+                    <span>Today is the Joyous Day!</span>
+                    <Sparkles className="w-5 h-5 text-gold inline" />
                   </p>
                 ) : (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 relative z-10 w-full py-1 sm:py-2">

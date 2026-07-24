@@ -190,18 +190,18 @@ function VenuePage() {
           
           {/* Header Section */}
           <div className="text-center mb-2 sm:mb-4 md:mb-5 w-full flex flex-col items-center">
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
-              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+            <div className="flex items-center justify-center space-x-1 sm:space-x-2 mt-1 sm:mt-2 w-full flex-nowrap">
+              <TitleFlourish className="rotate-180 w-6 xs:w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
               <motion.h2 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.1 }}
-                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                className="script text-xl xs:text-2xl sm:text-4xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
                 style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
               >
                 Find Your Way to Celebration
               </motion.h2>
-              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+              <TitleFlourish className="w-6 xs:w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
             </div>
 
             {/* 3D Segmented View Mode Controller */}
@@ -347,8 +347,11 @@ function VenuePage() {
                                   <p className="display text-[10.5px] sm:text-sm text-maroon-deep font-bold truncate w-full mt-0.5">
                                     {host.name}
                                   </p>
-                                  <p className="hidden sm:block label text-[9px] sm:text-[10px] text-maroon-deep/80 font-semibold mt-0.5">
-                                    📞 {host.phone}
+                                  <p className="hidden sm:flex items-center label text-[9px] sm:text-[10px] text-maroon-deep/80 font-semibold mt-0.5">
+                                    <svg viewBox="0 0 24 24" className="w-3 h-3 text-gold fill-none stroke-currentColor stroke-[2] inline mr-1 shrink-0">
+                                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                    </svg>
+                                    <span>{host.phone}</span>
                                   </p>
                                 </div>
 
