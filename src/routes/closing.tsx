@@ -169,7 +169,7 @@ function ClosingPage() {
 
   return (
     <PageShell>
-      <div className="w-full h-[100dvh] flex flex-col justify-between items-center px-4 pt-[clamp(3.25rem,6dvh,4.75rem)] pb-[clamp(5.5rem,12dvh,7.5rem)] overflow-hidden select-none">
+      <div className="w-full h-[100dvh] flex flex-col justify-between items-center px-4 pt-[clamp(3rem,5dvh,4.25rem)] md:pt-0 lg:pt-0 pb-[clamp(5.5rem,12dvh,7.5rem)] overflow-hidden select-none">
         
         {/* Fluid Responsive Containerless Content Section with Generous Line Gaps */}
         <div className="w-full max-w-xl mx-auto flex-1 flex flex-col justify-between items-center text-center gap-[clamp(0.5rem,1.5dvh,1.5rem)]">
@@ -255,10 +255,10 @@ function ClosingPage() {
             </span>
             
             <h3 
-              className="script text-[clamp(2.2rem,3.8vw+3.2dvh,4.85rem)] text-maroon drop-shadow-xl leading-none my-[clamp(0.2rem,0.5dvh,0.5rem)]"
+              className="script text-[clamp(2.2rem,3vw+2.5dvh,3.85rem)] text-maroon drop-shadow-xl leading-none my-[clamp(0.2rem,0.5dvh,0.5rem)]"
               style={{ textShadow: "0 6px 24px rgba(201,162,39,0.45)" }}
             >
-              {invitation.groom} <span className="text-gold script text-[clamp(1.65rem,2.8vw+2.2dvh,3.75rem)]">&</span> {invitation.bride}
+              {invitation.groom} <span className="text-gold script text-[clamp(1.65rem,2vw+2dvh,3rem)]">&</span> {invitation.bride}
             </h3>
 
             {/* Event Date Badge Pill */}
