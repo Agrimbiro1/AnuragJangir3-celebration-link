@@ -58,37 +58,23 @@ function CountdownPage() {
 
   return (
     <PageShell>
-      <section className="w-full min-h-[84vh] flex flex-col items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 mt-4 sm:mt-8 md:mt-12 select-none">
+      <section className="w-full min-h-[84vh] flex flex-col items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 mt-[28vh] sm:mt-10 md:mt-14 select-none">
         <div className="max-w-4xl w-full mx-auto text-center relative z-10 px-2 sm:px-4 flex flex-col items-center">
           
-          {/* Header Invocation Tag */}
-          <motion.p 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="label text-[10px] md:text-[12px] text-gold uppercase tracking-[0.4em] mb-1 font-bold drop-shadow-sm"
-          >
-            ॥ Shubh Subharambh ॥
-          </motion.p>
-          
           {/* Couple Banner Title */}
-          <div className="flex items-center justify-center space-x-2 sm:space-x-4 my-1">
-            <TitleFlourish className="rotate-180 hidden sm:block" />
+          <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
+            <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
             <motion.h2 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.1 }}
-              className="script text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-maroon drop-shadow-lg leading-tight whitespace-nowrap"
-              style={{ textShadow: "0 4px 18px rgba(201,162,39,0.35)" }}
+              className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+              style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
             >
               Until We Say Yes
             </motion.h2>
-            <TitleFlourish className="hidden sm:block" />
+            <TitleFlourish className="hidden sm:block w-20 md:w-28" />
           </div>
-
-          <p className="display italic text-xs sm:text-sm md:text-base text-maroon-deep/80 mb-3 font-medium">
-            Aarav & Ishani's Wedding Countdown
-          </p>
 
           {/* Event Date Badge */}
           <motion.div

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "@tanstack/react-router";
 import { BottomNav } from "./BottomNav";
 import { AnimatedFoliage } from "./AnimatedFoliage";
 import cleanArchPortrait from "@/assets/clean-arch-portrait.png";
@@ -23,6 +24,8 @@ export function PageShell({
   showBottomNav?: boolean;
   showArch?: boolean;
 }) {
+  const { pathname } = useLocation();
+
   // Use AnimatedFoliage if any of the old props are true (for backward compatibility)
   const renderPlants = showFoliage && (showGarland || showCorners);
 
@@ -63,16 +66,19 @@ export function PageShell({
           because the Arch background already has the rich foliage built-in! */}
       {renderPlants && !showArch && <AnimatedFoliage />}
 
+      {/* Main Inner Page Content */}
       <motion.div
-        initial={{ opacity: 0, y: 15, filter: "blur(8px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        key={pathname}
+        initial={{ opacity: 0, y: 16, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className={`relative z-10 h-full w-full overflow-hidden flex flex-col 
           ${showArch ? "pt-[15vh] pb-[20vh] px-4 md:px-[15vw] items-center justify-center" : ""} 
           ${className}`}
       >
         {children}
       </motion.div>
+
       {showBottomNav && <BottomNav />}
     </main>
   );

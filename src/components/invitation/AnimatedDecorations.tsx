@@ -4,17 +4,24 @@ import { motion } from 'framer-motion';
 
 
 export const FallingPetals = () => {
+  const [count, setCount] = React.useState(10);
+
+  React.useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    setCount(isMobile ? 8 : 16);
+  }, []);
+
   const petals = useMemo(() => {
-    return Array.from({ length: 25 }).map((_, i) => ({
+    return Array.from({ length: count }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
-      size: Math.random() * 12 + 10, 
-      duration: Math.random() * 12 + 8,
-      delay: Math.random() * 10,
+      size: Math.random() * 10 + 10, 
+      duration: Math.random() * 10 + 10,
+      delay: Math.random() * 8,
       rotation: Math.random() * 360,
       type: Math.floor(Math.random() * 3), // 0: Rose, 1: Gold leaf, 2: Marigold
     }));
-  }, []);
+  }, [count]);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-50">
@@ -26,43 +33,39 @@ export const FallingPetals = () => {
         return (
           <motion.div
             key={p.id}
-            className={`absolute ${isRose ? 'text-maroon/70' : isGold ? 'text-gold/60' : 'text-[#E2B75A]/80'}`}
+            className={`absolute transform-gpu ${isRose ? 'text-maroon/70' : isGold ? 'text-gold/60' : 'text-[#E2B75A]/80'}`}
             style={{
               left: `${p.x}%`,
               top: `-30px`,
               width: p.size,
               height: p.size,
+              willChange: "transform",
             }}
             initial={{ y: -30, rotate: p.rotation }}
             animate={{
-              y: ['0vh', '100vh'],
-              x: ['0px', '30px', '-30px', '0px'],
+              y: ['0vh', '105vh'],
               rotate: p.rotation + 360,
-              opacity: [0, 1, 1, 0],
             }}
             transition={{
-              y: { duration: p.duration, repeat: Infinity, ease: "linear", delay: p.delay },
-              x: { duration: p.duration / 2, repeat: Infinity, ease: "easeInOut", repeatType: "mirror", delay: p.delay },
-              rotate: { duration: p.duration, repeat: Infinity, ease: "linear", delay: p.delay },
-              opacity: { duration: p.duration, repeat: Infinity, ease: "linear", delay: p.delay },
+              duration: p.duration,
+              repeat: Infinity,
+              ease: "linear",
+              delay: p.delay,
             }}
           >
             {isRose && (
-              <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-sm" style={{ transform: 'rotate(-45deg)' }}>
+              <svg viewBox="0 0 24 24" className="w-full h-full" style={{ transform: 'rotate(-45deg)' }}>
                 <path d="M12 2 C 20 8 20 18 12 22 C 4 18 4 8 12 2 Z" fill="currentColor" opacity="0.9" />
-                <path d="M12 4 C 18 9 18 17 12 20 C 6 17 6 9 12 4 Z" fill="#2A080D" opacity="0.3" />
               </svg>
             )}
             {isGold && (
-              <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-sm">
+              <svg viewBox="0 0 24 24" className="w-full h-full">
                 <path d="M12 2 C 16 8 16 16 12 22 C 8 16 8 8 12 2 Z" fill="currentColor" opacity="0.8" />
-                <path d="M12 4 C 15 9 15 15 12 20 C 9 15 9 9 12 4 Z" fill="#FDF5D3" opacity="0.4" />
               </svg>
             )}
             {isMarigold && (
-              <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-md">
+              <svg viewBox="0 0 24 24" className="w-full h-full">
                 <path d="M2 20 C 2 10 12 2 22 2 C 22 12 12 20 2 20 Z" fill="currentColor" opacity="0.9" />
-                <path d="M5 17 C 5 10 13 5 19 5 C 19 12 11 17 5 17 Z" fill="#D4AF37" opacity="0.6" />
               </svg>
             )}
           </motion.div>

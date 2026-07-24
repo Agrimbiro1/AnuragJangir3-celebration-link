@@ -6,13 +6,15 @@ export const pages = [
   { path: "/", label: "Welcome", icon: "✨" },
   { path: "/events", label: "Events", icon: "🎉" },
   { path: "/families", label: "Families", icon: "👑" },
-  { path: "/gallery", label: "Gallery", icon: "🌸" },
+  { path: "/gallery", label: "Our Story", icon: "🌸" },
   { path: "/countdown", label: "Countdown", icon: "⏳" },
   { path: "/rsvp", label: "RSVP", icon: "💌" },
   { path: "/blessings", label: "Blessings", icon: "📜" },
   { path: "/venue", label: "Venue", icon: "🏰" },
   { path: "/closing", label: "Thanks", icon: "💖" },
 ] as const;
+
+const MotionLink = motion(Link);
 
 export function BottomNav() {
   const { pathname } = useLocation();
@@ -23,47 +25,48 @@ export function BottomNav() {
   const current = idx >= 0 ? pages[idx] : pages[0];
 
   return (
-    <>
-      {/* Quick Navigation Full Menu Drawer */}
+    <nav className="fixed bottom-0 inset-x-0 z-40 pointer-events-none">
+      {/* Quick Menu Popover */}
       <AnimatePresence>
         {showQuickMenu && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-16 inset-x-0 z-50 p-3 max-w-lg mx-auto pointer-events-auto"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="pointer-events-auto max-w-md mx-auto px-4 mb-2"
           >
-            <div className="bg-gradient-to-b from-[#3D0A11]/98 via-[#5C131D]/98 to-[#3D0A11]/98 backdrop-blur-xl border-2 border-gold/70 rounded-2xl p-3.5 shadow-[0_15px_40px_rgba(0,0,0,0.6)] relative overflow-hidden">
-              <div className="flex items-center justify-between border-b border-gold/30 pb-2 mb-2.5 px-1">
-                <span className="label text-[10px] text-gold tracking-[0.2em] font-bold uppercase flex items-center gap-1.5">
-                  <span className="text-gold">✦</span> Quick Navigation
-                </span>
-                <button
-                  type="button"
+            <div className="bg-[#2D0B10]/95 backdrop-blur-md border-2 border-gold/70 rounded-2xl p-3 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-gold/30">
+                <span className="label text-xs text-gold uppercase font-bold tracking-widest">✦ Direct Jump ✦</span>
+                <motion.button 
                   onClick={() => setShowQuickMenu(false)}
-                  className="text-gold/70 hover:text-gold text-xs font-bold px-1.5 py-0.5 rounded cursor-pointer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="text-gold/70 hover:text-gold text-xs px-2 py-0.5 rounded-full border border-gold/30"
                 >
-                  ✕
-                </button>
+                  ✕ Close
+                </motion.button>
               </div>
-
               <div className="grid grid-cols-3 gap-2">
                 {pages.map((p) => {
                   const isActive = p.path === pathname;
                   return (
-                    <Link
+                    <MotionLink
                       key={p.path}
                       to={p.path}
                       onClick={() => setShowQuickMenu(false)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       className={`flex flex-col items-center justify-center p-2 rounded-xl border transition-all text-center ${
                         isActive
-                          ? "bg-gradient-to-r from-gold via-amber-300 to-gold text-maroon-deep border-gold font-bold shadow-md scale-[1.02]"
+                          ? "bg-gradient-to-r from-gold via-amber-300 to-gold text-maroon-deep border-gold font-bold shadow-md"
                           : "bg-maroon/40 hover:bg-maroon/70 text-cream/90 border-gold/25 hover:border-gold/60"
                       }`}
                     >
                       <span className="text-base mb-0.5">{p.icon}</span>
                       <span className="label text-[10px] tracking-wider truncate w-full">{p.label}</span>
-                    </Link>
+                    </MotionLink>
                   );
                 })}
               </div>
@@ -73,11 +76,11 @@ export function BottomNav() {
       </AnimatePresence>
 
       {/* Main Bottom Navbar */}
-      <motion.nav
+      <motion.div
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="fixed bottom-0 inset-x-0 z-40 pointer-events-none"
+        className="pointer-events-none"
       >
         <div className="mx-auto max-w-xl px-2 pb-2.5 pointer-events-auto">
           {/* Golden Outer Glow Ring */}
@@ -90,36 +93,41 @@ export function BottomNav() {
 
               {/* Prev Button */}
               {prev ? (
-                <Link
+                <MotionLink
                   to={prev.path}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-maroon/60 hover:bg-maroon text-cream border border-gold/40 hover:border-gold transition-all hover:scale-[1.03] active:scale-[0.97] group cursor-pointer shadow-xs shrink-0"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-maroon/60 hover:bg-maroon text-cream border border-gold/40 hover:border-gold transition-all group cursor-pointer shadow-xs shrink-0"
                 >
                   <span className="text-gold text-xs group-hover:-translate-x-0.5 transition-transform">←</span>
                   <span className="label text-[10px] sm:text-xs font-bold tracking-wider text-cream/90">{prev.label}</span>
-                </Link>
+                </MotionLink>
               ) : (
                 <div className="w-16 sm:w-20" />
               )}
 
               {/* Center Page Dots & Quick Menu Trigger */}
               <div className="flex items-center justify-center gap-1.5 flex-1 mx-1">
-                <button
+                <motion.button
                   type="button"
                   onClick={() => setShowQuickMenu(!showQuickMenu)}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   title="Open Quick Navigation Menu"
-                  className="flex items-center justify-center w-7 h-7 rounded-full bg-gold/20 hover:bg-gold/35 text-gold border border-gold/50 transition-all hover:scale-110 cursor-pointer shrink-0 shadow-xs"
+                  className="flex items-center justify-center w-7 h-7 rounded-full bg-gold/20 hover:bg-gold/35 text-gold border border-gold/50 transition-all cursor-pointer shrink-0 shadow-xs"
                 >
                   <span className="text-xs font-bold">☰</span>
-                </button>
+                </motion.button>
 
                 {/* Dots indicator */}
                 <div className="hidden sm:flex items-center gap-1.5">
                   {pages.map((p, i) => (
-                    <Link
+                    <MotionLink
                       key={p.path}
                       to={p.path}
                       aria-label={p.label}
                       title={p.label}
+                      whileHover={{ scale: 1.3 }}
                       className={`h-2 rounded-full transition-all ${
                         i === idx
                           ? "bg-gradient-to-r from-gold to-amber-200 w-5 shadow-[0_0_8px_rgba(212,175,55,0.8)]"
@@ -130,31 +138,35 @@ export function BottomNav() {
                 </div>
 
                 {/* Mobile Active Page Indicator Badge */}
-                <button
+                <motion.button
                   type="button"
                   onClick={() => setShowQuickMenu(!showQuickMenu)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   className="sm:hidden label text-[10px] text-gold font-bold tracking-wider px-2 py-0.5 rounded-full bg-gold/15 border border-gold/40 truncate max-w-[90px]"
                 >
                   {current.label}
-                </button>
+                </motion.button>
               </div>
 
               {/* Next Button */}
               {next ? (
-                <Link
+                <MotionLink
                   to={next.path}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-gold via-amber-300 to-gold text-maroon-deep font-bold border border-gold hover:brightness-110 transition-all hover:scale-[1.03] active:scale-[0.97] group cursor-pointer shadow-[0_4px_12px_rgba(212,175,55,0.4)] shrink-0"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-gold via-amber-300 to-gold text-maroon-deep font-bold border border-gold hover:brightness-110 transition-all group cursor-pointer shadow-[0_4px_12px_rgba(212,175,55,0.4)] shrink-0"
                 >
                   <span className="label text-[10px] sm:text-xs font-bold tracking-wider text-maroon-deep">{next.label}</span>
                   <span className="text-maroon-deep text-xs group-hover:translate-x-0.5 transition-transform">→</span>
-                </Link>
+                </MotionLink>
               ) : (
                 <div className="w-16 sm:w-20" />
               )}
             </div>
           </div>
         </div>
-      </motion.nav>
-    </>
+      </motion.div>
+    </nav>
   );
 }

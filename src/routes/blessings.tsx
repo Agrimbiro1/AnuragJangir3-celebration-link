@@ -5,8 +5,19 @@ import confetti from "canvas-confetti";
 import { invitation } from "@/lib/invitation-data";
 import { PageShell } from "@/components/invitation/PageShell";
 import { AnimatedDivider } from "@/components/invitation/AnimatedDecorations";
+import { useGuestName } from "@/hooks/useGuestName";
 
 export const Route = createFileRoute("/blessings")({ component: BlessingsPage });
+
+// Intricate Calligraphic Flourish
+const TitleFlourish = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 100 20" className={`w-8 sm:w-12 md:w-16 h-auto text-gold drop-shadow-md shrink-0 ${className}`}>
+    <path d="M0 10 Q25 0, 50 10 T100 10 M25 10 Q37.5 20, 50 10 T75 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <circle cx="50" cy="10" r="2.5" fill="currentColor" />
+    <circle cx="10" cy="10" r="1.5" fill="currentColor" />
+    <circle cx="90" cy="10" r="1.5" fill="currentColor" />
+  </svg>
+);
 
 // Sleek Jali Corner Accent
 const JaliCorner = ({ className = "" }: { className?: string }) => (
@@ -48,7 +59,7 @@ function BlessingsPage() {
   const [msg, setMsg] = useState("");
   const [err, setErr] = useState("");
   const [showMobileModal, setShowMobileModal] = useState(false);
-  const [guestName] = useState("Rahul Verma"); // Simulated guest name from backend
+  const guestName = useGuestName("Rahul Verma");
 
   const triggerConfetti = () => {
     confetti({
@@ -104,12 +115,19 @@ function BlessingsPage() {
         <div className="max-w-5xl w-full mx-auto flex flex-col min-h-0 h-full relative z-10">
           {/* Header */}
           <div className="text-center shrink-0 mb-2">
-            <p className="label text-[10px] md:text-xs text-gold animate-pulse-gold tracking-[0.3em] uppercase">
-              ASHIRWAD
-            </p>
-            <h2 className="script text-4xl sm:text-5xl md:text-6xl text-maroon mt-0.5 mb-0.5 drop-shadow-md">
-              Shower Your Blessings
-            </h2>
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
+              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+              <motion.h2 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.1 }}
+                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
+              >
+                Shower Your Blessings
+              </motion.h2>
+              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+            </div>
             <AnimatedDivider />
           </div>
 
@@ -141,7 +159,7 @@ function BlessingsPage() {
                     {/* Dynamic Greeting */}
                     <div>
                       <h3 className="script text-2.5xl sm:text-3xl md:text-4xl lg:text-5xl text-maroon font-bold drop-shadow-xs">
-                        Namaste, {guestName}
+                        Dear {guestName}
                       </h3>
                       <p className="display italic text-[11px] sm:text-xs md:text-sm text-maroon-deep/75 mt-0.5">
                         Leave your heartfelt wishes & blessings for the couple.

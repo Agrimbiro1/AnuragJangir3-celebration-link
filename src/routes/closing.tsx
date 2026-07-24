@@ -159,22 +159,9 @@ function ClosingPage() {
 
   return (
     <PageShell>
-      <section className="w-full min-h-[85vh] flex flex-col items-center justify-start sm:justify-center px-3 sm:px-6 py-4 sm:py-8 mt-[18vh] sm:mt-[22vh] md:mt-24 select-none">
+      <section className="w-full min-h-[85vh] flex flex-col items-center justify-start sm:justify-center px-3 sm:px-6 py-4 sm:py-8 mt-[32vh] sm:mt-[22vh] md:mt-24 select-none">
         <div className="max-w-3xl w-full mx-auto flex flex-col items-center text-center space-y-4 sm:space-y-6">
           
-          {/* Top Sanskrit Motto Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-center"
-          >
-            <span className="label text-[11px] sm:text-[13px] text-gold uppercase tracking-[0.4em] font-bold drop-shadow-sm">
-              ॥ Aashirwad & Kripa ॥
-            </span>
-            <div className="my-1 w-20 sm:w-32 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
-          </motion.div>
-
           {/* Central Animated Floating Couple Rings & Mandala Halo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -200,15 +187,15 @@ function ClosingPage() {
             transition={{ duration: 0.9, delay: 0.3 }}
             className="flex flex-col items-center max-w-xl px-2"
           >
-            <div className="flex items-center justify-center space-x-1.5 sm:space-x-3 mb-2 max-w-full">
-              <TitleFlourish className="rotate-180 hidden sm:block shrink-0" />
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
+              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
               <h2 
-                className="script text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-lg leading-tight whitespace-nowrap"
-                style={{ textShadow: "0 4px 18px rgba(201,162,39,0.35)" }}
+                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
               >
                 With Grateful Hearts
               </h2>
-              <TitleFlourish className="hidden sm:block shrink-0" />
+              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
             </div>
 
             {/* Closing Quote */}
@@ -251,19 +238,26 @@ function ClosingPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="pt-2 sm:pt-4"
+            className="pt-2 sm:pt-4 flex justify-center"
           >
-            <button
+            <motion.button
               onClick={handleShare}
-              className="h-[40px] sm:h-[46px] inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[9.5px] sm:text-[11.5px] font-bold tracking-wider rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer border border-gold/50 whitespace-nowrap"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative group px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[10.5px] sm:text-xs font-bold tracking-[0.25em] uppercase rounded-full shadow-[0_10px_35px_-5px_rgba(122,31,43,0.7)] hover:shadow-[0_15px_45px_rgba(212,175,55,0.6)] transition-all overflow-hidden border border-gold/60 cursor-pointer inline-flex items-center justify-center text-center"
             >
-              <svg viewBox="0 0 24 24" className="w-4 h-4 text-gold fill-none stroke-currentColor stroke-[2.2] shrink-0">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                <polyline points="16 6 12 2 8 6" />
-                <line x1="12" y1="2" x2="12" y2="15" />
-              </svg>
-              <span>{copied ? "✓ Link Copied to Clipboard" : "Share Invitation Link"}</span>
-            </button>
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
+              <span className="absolute inset-0 rounded-full ring-2 ring-gold/70 ring-offset-2 ring-offset-cream pointer-events-none" />
+              <span className="relative z-10 flex items-center justify-center gap-2.5 drop-shadow-md pl-[0.25em]">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 text-gold fill-none stroke-currentColor stroke-[2.2] shrink-0">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg>
+                <span>{copied ? "✓ Link Copied to Clipboard" : "Share Invitation"}</span>
+                <span className="w-4 h-4 opacity-0 pointer-events-none shrink-0" aria-hidden="true" />
+              </span>
+            </motion.button>
           </motion.div>
 
           {/* Bottom Pichwai Cows Art Motif */}

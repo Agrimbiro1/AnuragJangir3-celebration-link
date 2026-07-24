@@ -15,12 +15,14 @@ import { OpeningAnimation } from "@/components/invitation/OpeningAnimation";
 import { RotatingMandala, AnimatedDivider } from "@/components/invitation/AnimatedDecorations";
 import { ThreeBackground } from "@/components/invitation/ThreeBackground";
 import { AnimatedMandalaBackground } from "@/components/invitation/AnimatedMandalaBackground";
+import { useGuestName } from "@/hooks/useGuestName";
 
 
 
 export const Route = createFileRoute("/")({ component: Welcome });
 
 function Welcome() {
+  const guestName = useGuestName("Rahul Verma");
   const [showIntro, setShowIntro] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
   const [clickPos, setClickPos] = useState({ x: 0, y: 0 });
@@ -119,11 +121,25 @@ function Welcome() {
 
             {/* Sacred Motto */}
             <motion.p
-              className="label text-[10px] sm:text-[11.5px] text-gold tracking-[0.35em] uppercase font-bold animate-pulse-gold mb-2 sm:mb-3 drop-shadow-sm"
+              className="label text-[10px] sm:text-[11.5px] text-gold tracking-[0.35em] uppercase font-bold animate-pulse-gold mb-1.5 sm:mb-2 drop-shadow-sm"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.3, duration: 1 }}
             >
               ॥ Shri Ganeshaya Namah ॥
             </motion.p>
+
+            {/* Personalized Guest Greeting - Same as Blessing Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 3.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="relative my-1.5 sm:my-2 px-5 sm:px-6 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-gold/15 via-amber-100/40 to-gold/15 border border-gold/45 shadow-[0_4px_20px_-4px_rgba(212,175,55,0.25)] backdrop-blur-xs flex items-center gap-2"
+            >
+              <span className="text-gold text-xs sm:text-sm animate-pulse">🌸</span>
+              <h3 className="script text-2xl sm:text-3xl md:text-4xl text-maroon font-bold drop-shadow-xs tracking-wide">
+                Dear {guestName}
+              </h3>
+              <span className="text-gold text-xs sm:text-sm animate-pulse">🌸</span>
+            </motion.div>
 
             {/* Event Tagline */}
             <motion.p
@@ -165,10 +181,12 @@ function Welcome() {
               </p>
 
               {/* Ultra-Premium Action CTA Button */}
-              <a
+              <motion.a
                 href="/events"
                 onClick={handleOpenInvitation}
-                className="mt-3 group relative px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[10.5px] sm:text-xs font-bold tracking-[0.25em] uppercase rounded-full shadow-[0_10px_35px_-5px_rgba(122,31,43,0.7)] hover:shadow-[0_15px_45px_rgba(212,175,55,0.6)] transition-all hover:scale-105 active:scale-95 overflow-hidden border border-gold/60 cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="mt-3 group relative px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[10.5px] sm:text-xs font-bold tracking-[0.25em] uppercase rounded-full shadow-[0_10px_35px_-5px_rgba(122,31,43,0.7)] hover:shadow-[0_15px_45px_rgba(212,175,55,0.6)] transition-all overflow-hidden border border-gold/60 cursor-pointer"
               >
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
                 <span className="absolute inset-0 rounded-full ring-2 ring-gold/70 ring-offset-2 ring-offset-cream pointer-events-none" />
@@ -177,7 +195,7 @@ function Welcome() {
                   <span>ENTER INVITATION</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </span>
-              </a>
+              </motion.a>
             </motion.div>
           </motion.div>
         </section>

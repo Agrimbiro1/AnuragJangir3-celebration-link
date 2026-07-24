@@ -142,18 +142,13 @@
   &::-webkit-scrollbar { display: none; }
 }
 
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: true;
-  initial-value: 0turn;
-}
-
-@keyframes spinBorder {
-  0% { --border-angle: 0turn; }
-  100% { --border-angle: 1turn; }
+@keyframes borderPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.95; }
 }
 
 @utility animate-spin-border {
-  animation: spinBorder 4s linear infinite;
+  animation: borderPulse 3s ease-in-out infinite;
+  will-change: opacity;
 }
 

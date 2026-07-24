@@ -185,32 +185,23 @@ function VenuePage() {
 
   return (
     <PageShell>
-      <section className="w-full min-h-[85vh] flex flex-col items-center justify-start sm:justify-center px-2 sm:px-4 py-2 sm:py-6 md:py-8 mt-[18vh] sm:mt-[24vh] md:mt-24 pt-2 sm:pt-8 select-none">
+      <section className="w-full min-h-[85vh] flex flex-col items-center justify-start sm:justify-center px-2 sm:px-4 py-2 sm:py-6 md:py-8 mt-[37vh] sm:mt-[24vh] md:mt-24 pt-2 sm:pt-8 select-none">
         <div className="max-w-4xl w-full mx-auto flex flex-col items-center">
           
           {/* Header Section */}
           <div className="text-center mb-2 sm:mb-4 md:mb-5 w-full flex flex-col items-center">
-            <motion.p 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="label text-[10.5px] sm:text-[11.5px] md:text-[12.5px] text-gold uppercase tracking-[0.35em] mb-0.5 font-bold drop-shadow-sm"
-            >
-              ॥ Sthaan & Raj-Prasad ॥
-            </motion.p>
-
-            <div className="flex items-center justify-center space-x-2 sm:space-x-4 my-0.5 w-full">
-              <TitleFlourish className="rotate-180 hidden sm:block" />
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
+              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
               <motion.h2 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.1 }}
-                className="script text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-maroon drop-shadow-lg leading-tight text-center px-1 md:whitespace-nowrap"
-                style={{ textShadow: "0 4px 18px rgba(201,162,39,0.35)" }}
+                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
               >
                 Find Your Way to Celebration
               </motion.h2>
-              <TitleFlourish className="hidden sm:block" />
+              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
             </div>
 
             <motion.p

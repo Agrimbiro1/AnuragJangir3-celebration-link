@@ -202,20 +202,11 @@ function FamiliesPage() {
 
   return (
     <PageShell>
-      <section className="w-full min-h-[82vh] flex flex-col items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 mt-8 sm:mt-12 md:mt-16 pt-4 sm:pt-6 select-none">
+      <section className="w-full min-h-[82vh] flex flex-col items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 mt-[24vh] sm:mt-12 md:mt-16 pt-4 sm:pt-6 select-none">
         <div className="max-w-5xl w-full mx-auto flex flex-col items-center">
           
           {/* Header Section */}
           <div className="text-center mb-3 sm:mb-5 md:mb-8 w-full flex flex-col items-center">
-            <motion.p 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="label text-[10px] md:text-[12px] text-gold uppercase tracking-[0.4em] mb-1 drop-shadow-sm font-bold"
-            >
-              ॥ Parampara & Aashirwad ॥
-            </motion.p>
-
             <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
               <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
               <motion.h2 

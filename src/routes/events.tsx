@@ -6,6 +6,16 @@ import { RotatingMandala, AnimatedDivider } from "@/components/invitation/Animat
 
 export const Route = createFileRoute("/events")({ component: EventsPage });
 
+// Intricate Calligraphic Flourish
+const TitleFlourish = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 100 20" className={`w-8 sm:w-12 md:w-16 h-auto text-gold drop-shadow-md shrink-0 ${className}`}>
+    <path d="M0 10 Q25 0, 50 10 T100 10 M25 10 Q37.5 20, 50 10 T75 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <circle cx="50" cy="10" r="2.5" fill="currentColor" />
+    <circle cx="10" cy="10" r="1.5" fill="currentColor" />
+    <circle cx="90" cy="10" r="1.5" fill="currentColor" />
+  </svg>
+);
+
 // Helper to generate Google Calendar links
 const createGoogleCalendarLink = (event: typeof invitation.events[0]) => {
   const title = encodeURIComponent(`${invitation.groom} & ${invitation.bride} - ${event.name}`);
@@ -222,34 +232,44 @@ const EventCard = ({ e, i }: { e: typeof invitation.events[0]; i: number }) => {
             </div>
           </div>
 
-          {/* Bottom Action Buttons - Sleek Compact Button Size */}
-          <div className="mt-1 md:mt-3 pt-1 md:pt-2 border-t border-gold/20 w-[90%] sm:w-[94%] md:w-full flex flex-row items-center justify-center gap-1 sm:gap-2 md:gap-3 z-30">
-            <a
+          {/* Bottom Action Buttons - Stacked Vertical Column Layout */}
+          <div className="mt-1 md:mt-3 pt-1 md:pt-2 border-t border-gold/20 w-full flex flex-col items-center justify-center gap-1.5 md:gap-2 z-30 px-1">
+            <motion.a
               href={createGoogleCalendarLink(e)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 max-w-[102px] sm:max-w-[125px] md:max-w-none h-[30px] sm:h-[35px] md:h-[38px] inline-flex items-center justify-center text-center gap-1 px-1.5 py-1 sm:px-2.5 sm:py-1.5 md:px-3.5 md:py-2 bg-gradient-to-r from-maroon to-maroon-deep text-cream text-[8px] sm:text-[9px] md:text-[10.5px] font-bold rounded-md md:rounded-lg shadow-sm hover:shadow transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-none h-[32px] sm:h-[36px] md:h-[38px] inline-flex items-center justify-center px-3 py-1 bg-gradient-to-r from-maroon via-maroon-deep to-maroon text-cream text-[9px] sm:text-[10px] md:text-[11px] font-bold rounded-lg shadow-sm hover:shadow transition-all cursor-pointer whitespace-nowrap border border-gold/30"
             >
-              <svg viewBox="0 0 24 24" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 fill-none stroke-currentColor stroke-[2.2] shrink-0">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-              <span className="truncate">Add to Calendar</span>
-            </a>
+              <div className="w-full flex items-center justify-between gap-1">
+                <svg viewBox="0 0 24 24" className="w-3 h-3 md:w-3.5 md:h-3.5 fill-none stroke-currentColor stroke-[2.2] shrink-0">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <span className="flex-1 text-center truncate">Add to Calendar</span>
+                <span className="w-3 md:w-3.5 shrink-0 pointer-events-none" aria-hidden="true" />
+              </div>
+            </motion.a>
 
-            <button
+            <motion.button
               onClick={() => navigate({ to: "/venue" })}
-              className="flex-1 max-w-[102px] sm:max-w-[125px] md:max-w-none h-[30px] sm:h-[35px] md:h-[38px] inline-flex items-center justify-center text-center gap-1 px-1.5 py-1 sm:px-2.5 sm:py-1.5 md:px-3.5 md:py-2 bg-gold/15 hover:bg-gold/25 border border-gold/40 text-maroon-deep text-[8px] sm:text-[9px] md:text-[10.5px] font-bold rounded-md md:rounded-lg transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-none h-[32px] sm:h-[36px] md:h-[38px] inline-flex items-center justify-center px-3 py-1 bg-gold/15 hover:bg-gold/25 border border-gold/40 text-maroon-deep text-[9px] sm:text-[10px] md:text-[11px] font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap"
             >
-              <svg viewBox="0 0 24 24" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0">
-                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-                <line x1="8" y1="2" x2="8" y2="18" />
-                <line x1="16" y1="6" x2="16" y2="22" />
-              </svg>
-              <span className="truncate">View Venue</span>
-            </button>
+              <div className="w-full flex items-center justify-between gap-1">
+                <svg viewBox="0 0 24 24" className="w-3 h-3 md:w-3.5 md:h-3.5 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0">
+                  <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                  <line x1="8" y1="2" x2="8" y2="18" />
+                  <line x1="16" y1="6" x2="16" y2="22" />
+                </svg>
+                <span className="flex-1 text-center truncate">View Venue</span>
+                <span className="w-3 md:w-3.5 shrink-0 pointer-events-none" aria-hidden="true" />
+              </div>
+            </motion.button>
           </div>
 
         </div>
@@ -261,29 +281,24 @@ const EventCard = ({ e, i }: { e: typeof invitation.events[0]; i: number }) => {
 function EventsPage() {
   return (
     <PageShell>
-      <section className="w-full min-h-[82vh] flex flex-col items-center justify-center px-1.5 sm:px-4 py-4 sm:py-6 md:py-10 select-none">
+      <section className="w-full min-h-[82vh] flex flex-col items-center justify-center px-1.5 sm:px-4 py-4 sm:py-6 md:py-10 mt-[22vh] sm:mt-8 md:mt-12 select-none">
         <div className="max-w-5xl w-full mx-auto flex flex-col items-center">
           
           {/* Header Section */}
           <div className="text-center mb-2 sm:mb-4 md:mb-8 w-full flex flex-col items-center">
-            <motion.p 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="label text-[10px] md:text-[12px] text-gold uppercase tracking-[0.4em] mb-1 drop-shadow-sm font-bold"
-            >
-              ॥ Shubh Muhurat ॥
-            </motion.p>
-
-            <motion.h2 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.1 }}
-              className="script text-4xl sm:text-5xl md:text-7xl text-maroon drop-shadow-lg leading-tight"
-              style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
-            >
-              Our Celebrations
-            </motion.h2>
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-1 sm:mt-2">
+              <TitleFlourish className="rotate-180 hidden sm:block w-20 md:w-28" />
+              <motion.h2 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.1 }}
+                className="script text-3xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                style={{ textShadow: "0 4px 15px rgba(201,162,39,0.3)" }}
+              >
+                Our Celebrations
+              </motion.h2>
+              <TitleFlourish className="hidden sm:block w-20 md:w-28" />
+            </div>
 
             <motion.p
               initial={{ opacity: 0 }}

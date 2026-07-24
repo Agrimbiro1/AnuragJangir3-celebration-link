@@ -1,19 +1,19 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-function Particles({ count = 200 }) {
+function Particles({ count = 40 }: { count?: number }) {
   const mesh = useRef<THREE.InstancedMesh>(null!);
 
   const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
-      const x = (Math.random() - 0.5) * 20;
-      const y = (Math.random() - 0.5) * 20;
-      const z = (Math.random() - 0.5) * 15;
+      const x = (Math.random() - 0.5) * 18;
+      const y = (Math.random() - 0.5) * 18;
+      const z = (Math.random() - 0.5) * 12;
       
-      const factor = Math.random() * 0.5 + 0.2; // size factor
-      const speed = Math.random() * 0.005 + 0.002;
+      const factor = Math.random() * 0.4 + 0.2;
+      const speed = Math.random() * 0.004 + 0.002;
       
       temp.push({ t: Math.random() * Math.PI * 2, factor, speed, x, y, z });
     }
@@ -22,66 +22,59 @@ function Particles({ count = 200 }) {
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
-  useFrame((state) => {
+  useFrame(() => {
+    if (!mesh.current) return;
+    
     particles.forEach((particle, i) => {
       let { t, factor, speed, x, y, z } = particle;
-      
       t += speed;
       particle.t = t;
       
-      // Calculate floating motion
-      const a = Math.cos(t) + Math.sin(t * 1) / 10;
-      const b = Math.sin(t) + Math.cos(t * 2) / 10;
+      const a = Math.cos(t);
+      const b = Math.sin(t);
       const s = Math.cos(t);
 
-      dummy.position.set(
-        x + a * 2,
-        y + b * 2,
-        z + s * 1
-      );
+      dummy.position.set(x + a * 1.5, y + b * 1.5, z + s * 0.8);
       dummy.scale.set(factor, factor, factor);
-      dummy.rotation.set(s * 5, s * 5, s * 5);
+      dummy.rotation.set(s * 3, s * 3, s * 3);
       dummy.updateMatrix();
       
-      if (mesh.current) {
-        mesh.current.setMatrixAt(i, dummy.matrix);
-      }
+      mesh.current.setMatrixAt(i, dummy.matrix);
     });
-    if (mesh.current) {
-      mesh.current.instanceMatrix.needsUpdate = true;
-    }
-    
-    // Very gentle camera parallax
-    const time = state.clock.getElapsedTime();
-    state.camera.position.x = Math.sin(time * 0.1) * 0.5;
-    state.camera.position.y = Math.cos(time * 0.05) * 0.5;
-    state.camera.lookAt(0, 0, 0);
+
+    mesh.current.instanceMatrix.needsUpdate = true;
   });
 
   return (
-    <>
-      <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
-        <icosahedronGeometry args={[0.06, 0]} />
-        <meshStandardMaterial 
-          color="#D4AF37" 
-          emissive="#D4AF37"
-          emissiveIntensity={0.2}
-          roughness={0.1} 
-          metalness={0.9} 
-        />
-      </instancedMesh>
-    </>
+    <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
+      <icosahedronGeometry args={[0.05, 0]} />
+      <meshBasicMaterial 
+        color="#D4AF37" 
+        transparent
+        opacity={0.7}
+      />
+    </instancedMesh>
   );
 }
 
 export function ThreeBackground() {
+  const [particleCount, setParticleCount] = useState(30);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    setParticleCount(isMobile ? 18 : 45);
+  }, []);
+
   return (
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden mix-blend-screen">
-      <Canvas camera={{ position: [0, 0, 5], fov: 75 }} gl={{ antialias: false, alpha: true }}>
-        <ambientLight intensity={1.5} />
-        <directionalLight position={[10, 10, 5]} intensity={2} color="#FDF5D3" />
-        <directionalLight position={[-10, -10, -5]} intensity={1} color="#D4AF37" />
-        <Particles count={150} />
+      <Canvas 
+        camera={{ position: [0, 0, 5], fov: 75 }} 
+        gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
+        dpr={[1, 1.5]}
+      >
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[5, 5, 5]} intensity={1.5} color="#FDF5D3" />
+        <Particles count={particleCount} />
       </Canvas>
     </div>
   );
