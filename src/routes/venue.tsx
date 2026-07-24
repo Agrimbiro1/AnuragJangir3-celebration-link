@@ -204,15 +204,6 @@ function VenuePage() {
               <TitleFlourish className="hidden sm:block w-20 md:w-28" />
             </div>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="display italic text-maroon-deep/80 text-[11px] sm:text-sm md:text-base mt-0.5 max-w-md font-medium"
-            >
-              A grand heritage palace awaiting your presence
-            </motion.p>
-
             {/* 3D Segmented View Mode Controller */}
             <div className="flex items-center justify-center mt-2.5 sm:mt-4 p-1 rounded-full bg-gold/15 border border-gold/30 shadow-inner w-full max-w-[260px] sm:max-w-[300px]">
               <button
@@ -330,17 +321,17 @@ function VenuePage() {
                           <div className="grid grid-cols-2 sm:grid-cols-2 gap-1.5 sm:gap-3 w-full">
                             {[
                               { 
-                                side: "Groom's Host", 
-                                fullSide: "Groom's Family Host",
+                                side: "Groom's Father", 
+                                fullSide: "Groom's Father",
                                 name: invitation.groomFamily.contact?.name || invitation.groomFamily.contactName, 
-                                relation: invitation.groomFamily.contact?.relation || "Father",
+                                relation: "Father",
                                 phone: invitation.groomFamily.contact?.phone || invitation.groomFamily.contactPhone 
                               },
                               { 
-                                side: "Bride's Host", 
-                                fullSide: "Bride's Family Host",
+                                side: "Bride's Father", 
+                                fullSide: "Bride's Father",
                                 name: invitation.brideFamily.contact?.name || invitation.brideFamily.contactName, 
-                                relation: invitation.brideFamily.contact?.relation || "Family Host",
+                                relation: "Father",
                                 phone: invitation.brideFamily.contact?.phone || invitation.brideFamily.contactPhone 
                               },
                             ].map((host, idx) => (
@@ -354,7 +345,7 @@ function VenuePage() {
                                     <span className="hidden sm:inline">{host.fullSide}</span>
                                   </span>
                                   <p className="display text-[10.5px] sm:text-sm text-maroon-deep font-bold truncate w-full mt-0.5">
-                                    {host.name} <span className="hidden sm:inline text-[10px] text-maroon-deep/70 font-normal italic">({host.relation})</span>
+                                    {host.name}
                                   </p>
                                   <p className="hidden sm:block label text-[9px] sm:text-[10px] text-maroon-deep/80 font-semibold mt-0.5">
                                     📞 {host.phone}

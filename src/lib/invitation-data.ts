@@ -27,7 +27,7 @@ export const invitation = {
     parents: "Shri. Rajesh & Smt. Anjali Kapoor",
     siblings: "Rhea Kapoor (sister)",
     note: "With immense joy and gratitude, we welcome you into our home to bless our son.",
-    contactName: "Rajesh Kapoor",
+    contactName: "Shri. Rajesh Kapoor",
     contactPhone: "+91 98765 43210",
     members: [
       { name: "Shri. Rajesh Kapoor", relation: "Father" },
@@ -35,7 +35,7 @@ export const invitation = {
       { name: "Rhea Kapoor", relation: "Sister" }
     ],
     contact: {
-      name: "Rajesh Kapoor",
+      name: "Shri. Rajesh Kapoor",
       relation: "Father",
       phone: "+91 98765 43210"
     }
@@ -45,7 +45,7 @@ export const invitation = {
     parents: "Shri. Vikram & Smt. Meera Malhotra",
     siblings: "Advait Malhotra (brother)",
     note: "It is our greatest honour to have you share this precious moment with our daughter.",
-    contactName: "Vikram Malhotra",
+    contactName: "Shri. Vikram Malhotra",
     contactPhone: "+91 98765 43211",
     members: [
       { name: "Shri. Vikram Malhotra", relation: "Father" },
@@ -53,8 +53,8 @@ export const invitation = {
       { name: "Advait Malhotra", relation: "Brother" }
     ],
     contact: {
-      name: "Advait Malhotra",
-      relation: "Brother",
+      name: "Shri. Vikram Malhotra",
+      relation: "Father",
       phone: "+91 98765 43211"
     }
   },

@@ -99,52 +99,72 @@ function GalleryPage() {
             </div>
           </div>
 
-          {/* CHAPTER NAVIGATION TIMELINE CONNECTOR (ENHANCED) */}
-          <div className="w-full max-w-xl mx-auto mb-3 sm:mb-4 px-3 sm:px-6">
+          {/* CHAPTER NAVIGATION TIMELINE CONNECTOR (LUXURY ROYAL STEPPER) */}
+          <div className="w-full max-w-xl mx-auto mb-4 sm:mb-6 px-3 sm:px-6">
             <div className="relative flex items-center justify-between">
               {/* Background Golden Track Line */}
-              <div className="absolute top-1/2 left-4 right-4 h-[2.5px] bg-gold/30 -translate-y-1/2 z-0 rounded-full" />
+              <div className="absolute top-[16px] sm:top-[20px] left-5 right-5 h-[3px] bg-gradient-to-r from-gold/20 via-gold/40 to-gold/20 z-0 rounded-full" />
               
-              {/* Active Animated Golden Progress Line */}
+              {/* Active Animated Golden Progress Track */}
               <motion.div
-                className="absolute top-1/2 left-4 h-[2.5px] bg-gradient-to-r from-gold via-amber-300 to-gold -translate-y-1/2 z-0 rounded-full shadow-[0_0_10px_rgba(212,175,55,0.8)]"
+                className="absolute top-[16px] sm:top-[20px] left-5 h-[3px] bg-gradient-to-r from-gold via-amber-300 to-gold z-0 rounded-full shadow-[0_0_12px_rgba(212,175,55,0.9)]"
                 initial={false}
                 animate={{
-                  width: `calc(${(activeIndex / (storyData.length - 1)) * 100}% - ${(activeIndex / (storyData.length - 1)) * 16}px)`,
+                  width: `calc(${(activeIndex / (storyData.length - 1)) * 100}% - ${(activeIndex / (storyData.length - 1)) * 20}px)`,
                 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               />
 
               {storyData.map((item, idx) => {
                 const isActive = idx === activeIndex;
                 const isPassed = idx <= activeIndex;
+                const romanNumerals = ["I", "II", "III", "IV"];
+
                 return (
                   <motion.button
                     key={item.title}
                     onClick={() => setActiveIndex(idx)}
-                    whileHover={{ scale: 1.15 }}
+                    whileHover={{ scale: 1.18, y: -2 }}
                     whileTap={{ scale: 0.92 }}
                     className="relative z-10 flex flex-col items-center group cursor-pointer"
                   >
+                    {/* Active Crown Indicator Spark */}
+                    {isActive && (
+                      <motion.span
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute -top-3 text-[10px] sm:text-xs text-gold drop-shadow-md pointer-events-none"
+                      >
+                        ✦
+                      </motion.span>
+                    )}
+
+                    {/* Royal Medallion Badge Node */}
                     <div
-                      className={`w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 border-2 ${
+                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 border-2 ${
                         isActive
-                          ? "bg-maroon text-gold border-gold shadow-[0_0_18px_rgba(212,175,55,0.9)] scale-110 ring-2 ring-gold/50"
+                          ? "bg-gradient-to-br from-maroon via-maroon-deep to-maroon text-gold border-gold shadow-[0_0_22px_rgba(212,175,55,0.95)] scale-110 ring-2 ring-gold/60"
                           : isPassed
-                          ? "bg-gradient-to-br from-gold/30 via-cream to-gold/20 text-maroon border-gold shadow-sm"
-                          : "bg-cream text-maroon-deep/50 border-gold/35 hover:border-gold"
+                          ? "bg-gradient-to-br from-gold/30 via-cream to-gold/20 text-maroon-deep border-gold shadow-sm"
+                          : "bg-cream text-maroon-deep/50 border-gold/40 hover:border-gold"
                       }`}
                     >
-                      <span className={`label text-[9px] sm:text-[11px] font-bold ${isActive ? "text-gold" : "text-maroon-deep"}`}>
+                      <span className={`label text-[10px] sm:text-xs font-black tracking-tighter ${isActive ? "text-gold drop-shadow-xs" : "text-maroon-deep"}`}>
                         {idx + 1}
                       </span>
                     </div>
+
+                    {/* Chapter Title Badge */}
                     <span
-                      className={`hidden sm:block label text-[8px] sm:text-[9px] uppercase tracking-wider font-bold mt-1 transition-all ${
-                        isActive ? "text-maroon font-extrabold scale-105" : "text-maroon-deep/60"
+                      className={`label text-[8px] sm:text-[9.5px] uppercase tracking-wider font-bold mt-1.5 transition-all ${
+                        isActive 
+                          ? "text-maroon font-extrabold scale-105 drop-shadow-xs" 
+                          : isPassed
+                          ? "text-maroon-deep/80 font-bold"
+                          : "text-maroon-deep/50"
                       }`}
                     >
-                      {item.chapter}
+                      {romanNumerals[idx]}
                     </span>
                   </motion.button>
                 );

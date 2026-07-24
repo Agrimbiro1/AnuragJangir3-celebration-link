@@ -149,17 +149,17 @@ function RsvpPage() {
                 className="relative z-10 w-full max-w-lg mx-auto px-2 mt-2 sm:mt-4 flex flex-col items-center"
               >
                 {/* Royal Stamp Seal Badge (Containerless) */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-gold via-amber-300 to-gold p-0.5 shadow-[0_0_25px_rgba(212,175,55,0.7)] flex items-center justify-center mb-3 animate-pulse">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-gold via-amber-300 to-gold p-0.5 shadow-[0_0_25px_rgba(212,175,55,0.7)] flex items-center justify-center mb-4 sm:mb-5 animate-pulse">
                   <div className="w-full h-full rounded-full bg-maroon flex items-center justify-center border border-gold/70">
                     <span className="text-2xl sm:text-3xl text-gold">👑</span>
                   </div>
                 </div>
 
-                <span className="label text-[9.5px] sm:text-[11px] text-gold uppercase tracking-[0.35em] font-extrabold mb-1">
+                <span className="label text-[9.5px] sm:text-[11px] text-gold uppercase tracking-[0.35em] font-extrabold mb-4 sm:mb-5">
                   ✦ RSVP CONFIRMED ✦
                 </span>
 
-                <h3 className="script text-3.5xl sm:text-6xl md:text-7xl text-maroon-deep drop-shadow-md leading-none mb-2">
+                <h3 className="script text-3.5xl sm:text-6xl md:text-7xl text-maroon-deep drop-shadow-md leading-normal pt-2 sm:pt-3 mb-3 sm:mb-4">
                   Thank You, Dear {guestName}!
                 </h3>
 

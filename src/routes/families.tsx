@@ -56,11 +56,11 @@ const DecorativeKalash = () => (
 );
 
 // Arch-shaped Portrait Frame
-const ArchPortrait = ({ name, relation }: { name: string; relation: string }) => (
+const ArchPortrait = ({ name, relation, image }: { name: string; relation: string; image?: string }) => (
   <div className="flex flex-col items-center">
     <div className="w-16 h-20 sm:w-20 sm:h-24 md:w-24 md:h-30 rounded-t-full rounded-b-md border-[2px] border-gold p-0.5 bg-maroon-deep shadow-[0_5px_15px_rgba(0,0,0,0.5)] relative overflow-hidden group">
       <div className="absolute inset-0 border border-gold/40 rounded-t-full rounded-b-sm m-0.5 z-10 pointer-events-none" />
-      <img src={getPortraitForRelation(relation)} alt={name} className="w-full h-full object-cover rounded-t-full rounded-b-sm filter sepia-[0.3] brightness-90 group-hover:brightness-110 group-hover:scale-110 transition-all duration-700" />
+      <img src={image || getPortraitForRelation(relation)} alt={name} className="w-full h-full object-cover rounded-t-full rounded-b-sm filter sepia-[0.3] brightness-90 group-hover:brightness-110 group-hover:scale-110 transition-all duration-700" />
     </div>
     <p className="display text-xs md:text-sm text-cream mt-1.5 font-semibold text-center leading-tight">{name}</p>
     <p className="label text-[8px] md:text-[9.5px] text-gold uppercase tracking-[0.2em]">{relation}</p>
@@ -68,11 +68,11 @@ const ArchPortrait = ({ name, relation }: { name: string; relation: string }) =>
 );
 
 // Circular Portrait Frame
-const CirclePortrait = ({ name, relation }: { name: string; relation: string }) => (
+const CirclePortrait = ({ name, relation, image }: { name: string; relation: string; image?: string }) => (
   <div className="flex flex-col items-center">
     <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-[2px] border-gold p-0.5 bg-maroon-deep shadow-[0_5px_15px_rgba(0,0,0,0.5)] relative overflow-hidden group">
       <div className="absolute inset-0 border border-gold/40 rounded-full m-0.5 z-10 pointer-events-none" />
-      <img src={getPortraitForRelation(relation)} alt={name} className="w-full h-full object-cover rounded-full filter sepia-[0.3] brightness-90 group-hover:brightness-110 group-hover:scale-110 transition-all duration-700" />
+      <img src={image || getPortraitForRelation(relation)} alt={name} className="w-full h-full object-cover rounded-full filter sepia-[0.3] brightness-90 group-hover:brightness-110 group-hover:scale-110 transition-all duration-700" />
     </div>
     <p className="display text-xs md:text-sm text-cream mt-1.5 font-semibold text-center leading-tight">{name}</p>
     <p className="label text-[8px] md:text-[9px] text-gold uppercase tracking-[0.2em]">{relation}</p>
@@ -164,30 +164,20 @@ const FamilyCard = ({ side, data, onOpen, delay }: { side: string; data: typeof 
             </p>
           </div>
 
-          {/* Action Buttons Row - Equal Width & Visible Call Host on Mobile */}
+          {/* Action Buttons Row */}
           <div className="mt-2.5 pt-2 border-t border-gold/20 w-full flex flex-row items-center justify-center gap-1.5 sm:gap-2.5 z-30">
             <button
               onClick={onOpen}
-              className="flex-1 h-[34px] sm:h-[38px] md:h-[42px] inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[8.5px] sm:text-[10px] md:text-[11px] font-bold tracking-wider rounded-lg shadow-sm hover:shadow transition-all hover:scale-[1.02] cursor-pointer border border-gold/40 whitespace-nowrap"
+              className="w-full h-[34px] sm:h-[38px] md:h-[42px] inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 bg-gradient-to-r from-maroon via-maroon-deep to-maroon text-cream label text-[8.5px] sm:text-[10px] md:text-[11px] font-bold rounded-lg shadow-sm hover:shadow transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap border border-gold/30"
             >
-              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-none stroke-currentColor stroke-[2] shrink-0 text-gold">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-none stroke-currentColor stroke-[2.2] shrink-0">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
               <span className="truncate">View Lineage</span>
             </button>
-
-            {data.contact && (
-              <a
-                href={`tel:${data.contact.phone}`}
-                className="flex-1 h-[34px] sm:h-[38px] md:h-[42px] inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 bg-gold/15 hover:bg-gold/25 border border-gold/40 text-maroon-deep label text-[8.5px] sm:text-[10px] md:text-[11px] font-bold rounded-lg transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap"
-                title={`Call ${data.contact.name}`}
-              >
-                <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-                <span className="truncate">Call Host</span>
-              </a>
-            )}
           </div>
 
         </div>
@@ -304,99 +294,55 @@ function FamiliesPage() {
         </div>
       </section>
 
-      <GroomTreeModal isOpen={activeSide === "groom"} onClose={() => setActiveSide(null)} />
-      <BrideTreeModal isOpen={activeSide === "bride"} onClose={() => setActiveSide(null)} />
-
+      <FamilyTreeModal
+        isOpen={activeSide !== null}
+        onClose={() => setActiveSide(null)}
+        family={activeSide === "groom" ? invitation.groomFamily : activeSide === "bride" ? invitation.brideFamily : null}
+      />
     </PageShell>
   );
 }
 
-function GroomTreeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const family = invitation.groomFamily;
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-black/70 backdrop-blur-md"
-            onClick={onClose}
-          />
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
-            transition={{ duration: 0.4, type: "spring", damping: 25, stiffness: 220 }}
-            className="relative z-10 w-full max-w-md bg-gradient-to-b from-[#2A080D] via-maroon-deep to-[#1A0508] border-[3px] border-[#D4AF37] rounded-t-[50px] rounded-b-[32px] shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col group max-h-[90vh]"
-          >
-            <div className="absolute inset-0 rounded-t-[48px] rounded-b-[30px] border border-gold/30 m-1 opacity-60 pointer-events-none z-0" />
-            <ModalDecoBackground />
-
-            {/* Modal Header */}
-            <div className="p-4 pt-6 pb-4 text-center border-b border-gold/30 bg-gradient-to-b from-maroon to-maroon-deep/90 relative z-10 flex flex-col items-center shrink-0">
-              <button 
-                onClick={onClose} 
-                className="absolute top-3.5 right-3.5 w-7 h-7 rounded-full border border-gold/50 text-gold flex items-center justify-center hover:bg-gold hover:text-maroon-deep transition-all hover:rotate-90 text-sm z-50 cursor-pointer"
-              >
-                ✕
-              </button>
-              
-              <div className="flex items-center space-x-2">
-                <TitleFlourish className="w-8 md:w-10 rotate-180" />
-                <h2 className="script text-2xl sm:text-3xl text-gold drop-shadow-md">{family.surname}</h2>
-                <TitleFlourish className="w-8 md:w-10" />
-              </div>
-              <p className="label text-[8px] text-gold uppercase tracking-[0.25em] mt-1 font-semibold">Lineage & Family Tree</p>
-            </div>
-
-            {/* Modal Body - Scrollable Lineage */}
-            <div className="p-4 sm:p-6 relative flex flex-col items-center overflow-y-auto z-10 space-y-6">
-              <div className="absolute top-6 bottom-16 left-1/2 w-0.5 bg-gradient-to-b from-gold via-gold/60 to-transparent -translate-x-1/2 pointer-events-none" />
-              
-              <div className="relative z-10 flex flex-col items-center space-y-5 w-full">
-                {/* Parents Layer */}
-                <div className="flex justify-center space-x-6 sm:space-x-8 w-full">
-                  <ArchPortrait name="Shri. Rajesh" relation="Father" />
-                  <ArchPortrait name="Smt. Anjali" relation="Mother" />
-                </div>
-
-                {/* Sibling Layer */}
-                <div className="flex justify-center w-full pt-2">
-                  <CirclePortrait name="Rhea Kapoor" relation="Sister" />
-                </div>
-              </div>
-
-              {/* Host Contact Footer Box inside Modal */}
-              {family.contact && (
-                <div className="w-full mt-4 p-3 rounded-xl bg-gold/10 border border-gold/30 text-center flex flex-col items-center gap-1 z-20">
-                  <span className="label text-[8px] text-gold uppercase tracking-widest font-bold">Family Host Contact</span>
-                  <p className="text-xs text-cream font-semibold">{family.contact.name} ({family.contact.relation})</p>
-                  <a
-                    href={`tel:${family.contact.phone}`}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-gold text-maroon-deep label text-[9px] font-bold rounded-full shadow hover:bg-cream transition-all mt-1"
-                  >
-                    <svg viewBox="0 0 24 24" className="w-3 h-3 fill-none stroke-currentColor stroke-2">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
-                    <span>{family.contact.phone}</span>
-                  </a>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
-  );
+interface FamilyMember {
+  name: string;
+  relation: string;
+  image?: string;
+  type?: "parent" | "sibling" | "relative" | "elder";
 }
 
-function BrideTreeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const family = invitation.brideFamily;
+interface FamilyData {
+  surname: string;
+  members: FamilyMember[];
+}
+
+function FamilyTreeModal({
+  family,
+  isOpen,
+  onClose,
+}: {
+  family: FamilyData | null;
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  if (!family) return null;
+
+  // Dynamically group family members for future backend expansion:
+  // Elders & Parents (Arch Frames) vs. Siblings & Relatives (Circle Frames)
+  const parents = family.members.filter((m) => {
+    const rel = m.relation.toLowerCase();
+    return (
+      m.type === "parent" ||
+      m.type === "elder" ||
+      rel.includes("father") ||
+      rel.includes("mother") ||
+      rel.includes("dada") ||
+      rel.includes("dadi") ||
+      rel.includes("nana") ||
+      rel.includes("nani")
+    );
+  });
+
+  const siblingsAndRelatives = family.members.filter((m) => !parents.includes(m));
 
   return (
     <AnimatePresence>
@@ -410,26 +356,26 @@ function BrideTreeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
             className="absolute inset-0 bg-black/70 backdrop-blur-md"
             onClick={onClose}
           />
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.4, type: "spring", damping: 25, stiffness: 220 }}
-            className="relative z-10 w-full max-w-md bg-gradient-to-b from-[#2A080D] via-maroon-deep to-[#1A0508] border-[3px] border-[#D4AF37] rounded-t-[50px] rounded-b-[32px] shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col group max-h-[90vh]"
+            className="relative z-10 w-full max-w-md bg-gradient-to-b from-[#2A080D] via-maroon-deep to-[#1A0508] border-[3px] border-[#D4AF37] rounded-t-[50px] rounded-b-[32px] shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col group max-h-[85vh] sm:max-h-[90vh]"
           >
             <div className="absolute inset-0 rounded-t-[48px] rounded-b-[30px] border border-gold/30 m-1 opacity-60 pointer-events-none z-0" />
             <ModalDecoBackground />
 
             {/* Modal Header */}
             <div className="p-4 pt-6 pb-4 text-center border-b border-gold/30 bg-gradient-to-b from-maroon to-maroon-deep/90 relative z-10 flex flex-col items-center shrink-0">
-              <button 
-                onClick={onClose} 
+              <button
+                onClick={onClose}
                 className="absolute top-3.5 right-3.5 w-7 h-7 rounded-full border border-gold/50 text-gold flex items-center justify-center hover:bg-gold hover:text-maroon-deep transition-all hover:rotate-90 text-sm z-50 cursor-pointer"
               >
                 ✕
               </button>
-              
+
               <div className="flex items-center space-x-2">
                 <TitleFlourish className="w-8 md:w-10 rotate-180" />
                 <h2 className="script text-2xl sm:text-3xl text-gold drop-shadow-md">{family.surname}</h2>
@@ -438,39 +384,30 @@ function BrideTreeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
               <p className="label text-[8px] text-gold uppercase tracking-[0.25em] mt-1 font-semibold">Lineage & Family Tree</p>
             </div>
 
-            {/* Modal Body - Scrollable Lineage */}
-            <div className="p-4 sm:p-6 relative flex flex-col items-center overflow-y-auto z-10 space-y-6">
-              <div className="absolute top-6 bottom-16 left-1/2 w-0.5 bg-gradient-to-b from-gold via-gold/60 to-transparent -translate-x-1/2 pointer-events-none" />
-              
-              <div className="relative z-10 flex flex-col items-center space-y-5 w-full">
-                {/* Parents Layer */}
-                <div className="flex justify-center space-x-6 sm:space-x-8 w-full">
-                  <ArchPortrait name="Shri. Vikram" relation="Father" />
-                  <ArchPortrait name="Smt. Meera" relation="Mother" />
-                </div>
+            {/* Modal Body - Fully Dynamic & Scrollable Lineage Container */}
+            <div className="p-4 sm:p-6 relative flex flex-col items-center overflow-y-auto z-10 space-y-6 scrollbar-none flex-1 max-h-[65vh] sm:max-h-[70vh]">
+              {/* Dynamic Connecting Trunk Line */}
+              <div className="absolute top-6 bottom-6 left-1/2 w-0.5 bg-gradient-to-b from-gold via-gold/60 to-transparent -translate-x-1/2 pointer-events-none" />
 
-                {/* Sibling Layer */}
-                <div className="flex justify-center w-full pt-2">
-                  <CirclePortrait name="Advait Malhotra" relation="Brother" />
-                </div>
+              <div className="relative z-10 flex flex-col items-center space-y-6 w-full">
+                {/* Layer 1: Elders / Parents */}
+                {parents.length > 0 && (
+                  <div className="flex flex-wrap justify-center gap-6 sm:gap-8 w-full">
+                    {parents.map((m, idx) => (
+                      <ArchPortrait key={`${m.name}-${idx}`} name={m.name} relation={m.relation} image={m.image} />
+                    ))}
+                  </div>
+                )}
+
+                {/* Layer 2: Siblings & Next Generation */}
+                {siblingsAndRelatives.length > 0 && (
+                  <div className="flex flex-wrap justify-center gap-5 sm:gap-6 w-full pt-2">
+                    {siblingsAndRelatives.map((m, idx) => (
+                      <CirclePortrait key={`${m.name}-${idx}`} name={m.name} relation={m.relation} image={m.image} />
+                    ))}
+                  </div>
+                )}
               </div>
-
-              {/* Host Contact Footer Box inside Modal */}
-              {family.contact && (
-                <div className="w-full mt-4 p-3 rounded-xl bg-gold/10 border border-gold/30 text-center flex flex-col items-center gap-1 z-20">
-                  <span className="label text-[8px] text-gold uppercase tracking-widest font-bold">Family Host Contact</span>
-                  <p className="text-xs text-cream font-semibold">{family.contact.name} ({family.contact.relation})</p>
-                  <a
-                    href={`tel:${family.contact.phone}`}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-gold text-maroon-deep label text-[9px] font-bold rounded-full shadow hover:bg-cream transition-all mt-1"
-                  >
-                    <svg viewBox="0 0 24 24" className="w-3 h-3 fill-none stroke-currentColor stroke-2">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
-                    <span>{family.contact.phone}</span>
-                  </a>
-                </div>
-              )}
             </div>
           </motion.div>
         </div>

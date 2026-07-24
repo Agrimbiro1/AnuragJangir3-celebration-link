@@ -233,32 +233,7 @@ function ClosingPage() {
             </p>
           </motion.div>
 
-          {/* Floating Interactive Action Dock */}
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="pt-2 sm:pt-4 flex justify-center"
-          >
-            <motion.button
-              onClick={handleShare}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative group px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[10.5px] sm:text-xs font-bold tracking-[0.25em] uppercase rounded-full shadow-[0_10px_35px_-5px_rgba(122,31,43,0.7)] hover:shadow-[0_15px_45px_rgba(212,175,55,0.6)] transition-all overflow-hidden border border-gold/60 cursor-pointer inline-flex items-center justify-center text-center"
-            >
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
-              <span className="absolute inset-0 rounded-full ring-2 ring-gold/70 ring-offset-2 ring-offset-cream pointer-events-none" />
-              <span className="relative z-10 flex items-center justify-center gap-2.5 drop-shadow-md pl-[0.25em]">
-                <svg viewBox="0 0 24 24" className="w-4 h-4 text-gold fill-none stroke-currentColor stroke-[2.2] shrink-0">
-                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                  <polyline points="16 6 12 2 8 6" />
-                  <line x1="12" y1="2" x2="12" y2="15" />
-                </svg>
-                <span>{copied ? "✓ Link Copied to Clipboard" : "Share Invitation"}</span>
-                <span className="w-4 h-4 opacity-0 pointer-events-none shrink-0" aria-hidden="true" />
-              </span>
-            </motion.button>
-          </motion.div>
+
 
           {/* Bottom Pichwai Cows Art Motif */}
           <motion.img 
