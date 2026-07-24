@@ -66,18 +66,21 @@ export function PageShell({
           because the Arch background already has the rich foliage built-in! */}
       {renderPlants && !showArch && <AnimatedFoliage />}
 
-      {/* Main Inner Page Content */}
-      <motion.div
-        key={pathname}
-        initial={{ opacity: 0, y: 16, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`relative z-10 h-full w-full overflow-hidden flex flex-col 
-          ${showArch ? "pt-[15vh] pb-[20vh] px-4 md:px-[15vw] items-center justify-center" : ""} 
-          ${className}`}
-      >
-        {children}
-      </motion.div>
+      {/* Main Inner Page Content — crossfade to avoid blink on nav */}
+      <AnimatePresence mode="sync" initial={false}>
+        <motion.div
+          key={pathname}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+          className={`absolute inset-0 z-10 h-full w-full overflow-hidden flex flex-col 
+            ${showArch ? "pt-[15vh] pb-[20vh] px-4 md:px-[15vw] items-center justify-center" : ""} 
+            ${className}`}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
 
       {showBottomNav && <BottomNav />}
     </main>

@@ -159,9 +159,9 @@ function ClosingPage() {
 
   return (
     <PageShell>
-      <section className="w-full min-h-[85vh] flex flex-col items-center justify-start sm:justify-center px-3 sm:px-6 py-4 sm:py-8 mt-[32vh] sm:mt-[22vh] md:mt-24 select-none">
-        <div className="max-w-3xl w-full mx-auto flex flex-col items-center text-center space-y-4 sm:space-y-6">
-          
+      <section className="w-full min-h-[85vh] flex flex-col items-center justify-start sm:justify-center px-3 sm:px-6 py-4 sm:py-8 mt-[22vh] sm:mt-[22vh] md:mt-24 select-none">
+        <div className="max-w-3xl w-full mx-auto flex flex-col items-center text-center space-y-3 sm:space-y-5">
+
           {/* Central Animated Floating Couple Rings & Mandala Halo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -204,12 +204,26 @@ function ClosingPage() {
             </p>
           </motion.div>
 
+          {/* Animated Gold Ornament Divider */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.9, delay: 0.45 }}
+            className="flex items-center gap-2 sm:gap-3 w-full max-w-xs sm:max-w-sm"
+          >
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-gold/60 to-gold/30" />
+            <span className="text-gold text-xs sm:text-sm">✦</span>
+            <span className="label text-[8px] sm:text-[9px] text-gold/70 uppercase tracking-[0.35em] font-bold">Two Souls, One Journey</span>
+            <span className="text-gold text-xs sm:text-sm">✦</span>
+            <span className="flex-1 h-px bg-gradient-to-l from-transparent via-gold/60 to-gold/30" />
+          </motion.div>
+
           {/* Royal Couple Monogram & Signature */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="flex flex-col items-center pt-2 sm:pt-4 max-w-full"
+            className="flex flex-col items-center max-w-full"
           >
             <span className="label text-[8.5px] sm:text-[10px] text-gold uppercase tracking-[0.35em] font-bold">
               With Warm Regards
@@ -233,7 +247,28 @@ function ClosingPage() {
             </p>
           </motion.div>
 
-
+          {/* Floating Blessing Stanza */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.65 }}
+            className="flex flex-col items-center gap-1 max-w-sm sm:max-w-md px-3"
+          >
+            <div className="flex items-center gap-2 w-full justify-center opacity-70">
+              <span className="flex-1 h-px bg-gradient-to-r from-transparent to-gold/40" />
+              <span className="text-gold/60 text-[10px]">❋</span>
+              <span className="flex-1 h-px bg-gradient-to-l from-transparent to-gold/40" />
+            </div>
+            <p className="display italic text-[10px] sm:text-xs text-maroon-deep/70 leading-relaxed font-medium text-center">
+              May the blessings of our elders, the joy of our families,<br className="hidden sm:block"/>
+              and the grace of the divine light your path always.
+            </p>
+            <div className="flex gap-2 mt-1 text-[9px] sm:text-xs text-gold/50">
+              <span>🪷</span>
+              <span>🕯️</span>
+              <span>🪷</span>
+            </div>
+          </motion.div>
 
           {/* Bottom Pichwai Cows Art Motif */}
           <motion.img 
@@ -243,7 +278,7 @@ function ClosingPage() {
             src={cows} 
             alt="Pichwai Art" 
             aria-hidden 
-            className="mt-4 sm:mt-6 w-full max-w-[220px] sm:max-w-md max-h-14 sm:max-h-20 object-contain drop-shadow-md pointer-events-none" 
+            className="mt-2 sm:mt-4 w-full max-w-[220px] sm:max-w-md max-h-14 sm:max-h-20 object-contain drop-shadow-md pointer-events-none" 
             loading="lazy" 
           />
 

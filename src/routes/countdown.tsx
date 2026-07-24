@@ -51,7 +51,7 @@ function CountdownPage() {
       { v: d, l: "Days" },
       { v: h, l: "Hours" },
       { v: m, l: "Minutes" },
-      { v: s, l: "Seconds", isPulse: true },
+      { v: s, l: "Seconds", isPulse: false },
     ],
     [d, h, m, s]
   );
@@ -141,21 +141,19 @@ function CountdownPage() {
                     {units.map((u) => (
                       <div
                         key={u.l}
-                        className={`flex flex-col items-center justify-center p-3 sm:p-5 rounded-t-full rounded-b-2xl bg-gradient-to-b from-[#FFFDFB] via-[#FAF3E0] to-[#F4E8D3] border-2 border-gold/60 shadow-[0_8px_20px_rgba(122,31,43,0.1)] relative overflow-hidden group/tile transition-all duration-300 hover:scale-105 hover:border-gold ${
-                          u.isPulse ? "ring-1 ring-gold/40" : ""
-                        }`}
+                        className="flex flex-col items-center justify-center p-3 sm:p-5 rounded-t-full rounded-b-2xl bg-gradient-to-b from-[#FFFDFB] via-[#FAF3E0] to-[#F4E8D3] border-2 border-gold/60 shadow-[0_8px_20px_rgba(122,31,43,0.1)] relative overflow-hidden group/tile transition-all duration-300 hover:scale-105 hover:border-gold"
                       >
                         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/20 via-transparent to-transparent pointer-events-none" />
                         
                         {/* Number Display with 3D Gold Foil Styling */}
                         <div className="relative overflow-hidden h-12 sm:h-16 md:h-20 flex items-center justify-center my-0.5">
-                          <AnimatePresence mode="wait">
+                          <AnimatePresence mode="popLayout">
                             <motion.span
                               key={u.v}
-                              initial={{ y: 14, opacity: 0 }}
+                              initial={{ y: 10, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
-                              exit={{ y: -14, opacity: 0 }}
-                              transition={{ duration: 0.35, ease: "easeOut" }}
+                              exit={{ y: -10, opacity: 0 }}
+                              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                               className="display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-[#FFEFA8] via-[#D4AF37] to-[#805C00] drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)] leading-none"
                             >
                               {String(u.v).padStart(2, "0")}

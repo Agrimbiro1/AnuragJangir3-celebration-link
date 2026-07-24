@@ -79,7 +79,7 @@ function GalleryPage() {
 
   return (
     <PageShell>
-      <section className="w-full min-h-[85vh] flex flex-col items-center justify-between sm:justify-center px-3 sm:px-4 pt-[18vh] sm:pt-[22vh] md:pt-16 pb-[74px] sm:pb-6 select-none">
+      <section className="w-full min-h-[85vh] flex flex-col items-center justify-between sm:justify-center px-3 sm:px-4 pt-[16vh] sm:pt-[22vh] md:pt-16 pb-[74px] sm:pb-6 select-none">
         <div className="max-w-4xl w-full mx-auto flex flex-col items-center">
           
           {/* HEADER SECTION */}
@@ -154,18 +154,7 @@ function GalleryPage() {
                       </span>
                     </div>
 
-                    {/* Chapter Title Badge */}
-                    <span
-                      className={`label text-[8px] sm:text-[9.5px] uppercase tracking-wider font-bold mt-1.5 transition-all ${
-                        isActive 
-                          ? "text-maroon font-extrabold scale-105 drop-shadow-xs" 
-                          : isPassed
-                          ? "text-maroon-deep/80 font-bold"
-                          : "text-maroon-deep/50"
-                      }`}
-                    >
-                      {romanNumerals[idx]}
-                    </span>
+
                   </motion.button>
                 );
               })}
