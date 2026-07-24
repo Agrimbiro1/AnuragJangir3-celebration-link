@@ -233,24 +233,25 @@ const EventCard = ({ e, i }: { e: typeof invitation.events[0]; i: number }) => {
           </div>
 
           {/* Bottom Action Buttons - Stacked Vertical Column Layout */}
-          <div className="mt-1 md:mt-3 pt-1 md:pt-2 border-t border-gold/25 w-full flex flex-col items-center justify-center gap-1.5 md:gap-2 z-30 px-1">
+          <div className="mt-1 md:mt-3 pt-1 md:pt-2 border-t border-gold/30 w-full flex flex-col items-center justify-center gap-1.5 md:gap-2 z-30 px-1">
             <motion.a
               href={createGoogleCalendarLink(e)}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-none h-[32px] sm:h-[36px] md:h-[38px] inline-flex items-center justify-center px-3 py-1 bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-amber-100 text-[9px] sm:text-[10px] md:text-[11px] font-extrabold rounded-lg shadow-sm hover:shadow-[0_4px_16px_rgba(212,175,55,0.45)] transition-all cursor-pointer whitespace-nowrap border border-gold/50"
+              className="group relative w-full h-[34px] sm:h-[38px] flex items-center justify-between px-3 bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] text-[9px] xs:text-[10px] sm:text-[11px] font-extrabold rounded-xl shadow-[0_4px_14px_rgba(122,31,43,0.35)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.5)] transition-all cursor-pointer whitespace-nowrap border-1.5 border-gold/60 overflow-hidden"
             >
-              <div className="w-full flex items-center justify-between gap-1">
-                <svg viewBox="0 0 24 24" className="w-3 h-3 md:w-3.5 md:h-3.5 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0">
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_1.8s_infinite]" />
+              <div className="relative z-10 flex items-center justify-between w-full">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0 drop-shadow-xs">
                   <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                   <line x1="16" y1="2" x2="16" y2="6" />
                   <line x1="8" y1="2" x2="8" y2="6" />
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
-                <span className="flex-1 text-center truncate">Add to Calendar</span>
-                <span className="w-3 md:w-3.5 shrink-0 pointer-events-none" aria-hidden="true" />
+                <span className="flex-1 text-center font-extrabold tracking-wide px-1">Add to Calendar</span>
+                <span className="w-4 h-4 shrink-0 pointer-events-none" aria-hidden="true" />
               </div>
             </motion.a>
 
@@ -258,16 +259,16 @@ const EventCard = ({ e, i }: { e: typeof invitation.events[0]; i: number }) => {
               onClick={() => navigate({ to: "/venue" })}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-none h-[32px] sm:h-[36px] md:h-[38px] inline-flex items-center justify-center px-3 py-1 bg-gradient-to-r from-gold/15 via-gold/30 to-gold/15 hover:bg-gold/35 border border-gold/50 text-maroon-deep text-[9px] sm:text-[10px] md:text-[11px] font-extrabold rounded-lg transition-all cursor-pointer whitespace-nowrap shadow-2xs"
+              className="group relative w-full h-[34px] sm:h-[38px] flex items-center justify-between px-3 bg-gradient-to-r from-gold/20 via-amber-200/35 to-gold/20 hover:bg-gold/40 border-1.5 border-gold/60 text-maroon-deep text-[9px] xs:text-[10px] sm:text-[11px] font-extrabold rounded-xl transition-all cursor-pointer whitespace-nowrap shadow-xs backdrop-blur-xs overflow-hidden"
             >
-              <div className="w-full flex items-center justify-between gap-1">
-                <svg viewBox="0 0 24 24" className="w-3 h-3 md:w-3.5 md:h-3.5 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0">
+              <div className="relative z-10 flex items-center justify-between w-full">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-currentColor stroke-[2.2] text-maroon-deep shrink-0">
                   <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
                   <line x1="8" y1="2" x2="8" y2="18" />
                   <line x1="16" y1="6" x2="16" y2="22" />
                 </svg>
-                <span className="flex-1 text-center truncate">View Venue</span>
-                <span className="w-3 md:w-3.5 shrink-0 pointer-events-none" aria-hidden="true" />
+                <span className="flex-1 text-center font-extrabold tracking-wide px-1">View Venue</span>
+                <span className="w-4 h-4 shrink-0 pointer-events-none" aria-hidden="true" />
               </div>
             </motion.button>
           </div>

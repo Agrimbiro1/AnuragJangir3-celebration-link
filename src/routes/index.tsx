@@ -198,14 +198,14 @@ function Welcome() {
                 onClick={handleOpenInvitation}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="mt-3 group relative px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[10.5px] sm:text-xs font-bold tracking-[0.25em] uppercase rounded-full shadow-[0_10px_35px_-5px_rgba(122,31,43,0.7)] hover:shadow-[0_15px_45px_rgba(212,175,55,0.6)] transition-all overflow-hidden border border-gold/60 cursor-pointer"
+                className="mt-3 group relative px-9 sm:px-11 py-3.5 sm:py-4 bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] via-maroon to-[#4A0E17] text-[#FFF7D6] label text-[11px] sm:text-xs font-extrabold tracking-[0.28em] uppercase rounded-full shadow-[0_12px_40px_-5px_rgba(122,31,43,0.85)] hover:shadow-[0_16px_50px_rgba(212,175,55,0.7)] transition-all overflow-hidden border-2 border-gold/70 cursor-pointer"
               >
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
-                <span className="absolute inset-0 rounded-full ring-2 ring-gold/70 ring-offset-2 ring-offset-cream pointer-events-none" />
-                <span className="relative z-10 flex items-center gap-2.5 drop-shadow-md">
-                  <Mail className="w-4 h-4 text-gold" />
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/50 to-transparent group-hover:animate-[shimmer_1.8s_infinite]" />
+                <span className="absolute inset-0 rounded-full ring-2 ring-gold/80 ring-offset-2 ring-offset-[#FAF3E2] pointer-events-none opacity-80" />
+                <span className="relative z-10 flex items-center gap-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+                  <Mail className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-gold animate-pulse" />
                   <span>ENTER INVITATION</span>
-                  <ChevronRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-gold group-hover:translate-x-1.5 transition-transform duration-300" />
                 </span>
               </motion.a>
             </motion.div>

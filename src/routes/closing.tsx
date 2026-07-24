@@ -169,27 +169,27 @@ function ClosingPage() {
 
   return (
     <PageShell>
-      <div className="w-full h-full flex flex-col items-center justify-start xs:justify-center px-3 xs:px-4 sm:px-6 py-2 sm:py-6 overflow-y-auto scrollbar-none select-none">
+      <div className="w-full h-[100dvh] flex flex-col justify-between items-center px-4 pt-[clamp(3.25rem,6dvh,4.75rem)] pb-[clamp(5.5rem,12dvh,7.5rem)] overflow-hidden select-none">
         
-        {/* Strictly Containerless Content Section */}
-        <div className="w-full max-w-xl mx-auto flex flex-col items-center text-center my-auto space-y-2.5 xs:space-y-3 sm:space-y-5 mt-16 xs:mt-24 sm:mt-0">
+        {/* Fluid Responsive Containerless Content Section with Generous Line Gaps */}
+        <div className="w-full max-w-xl mx-auto flex-1 flex flex-col justify-between items-center text-center gap-[clamp(0.5rem,1.5dvh,1.5rem)]">
 
           {/* Central Animated Floating Couple Rings & Mandala Halo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative flex items-center justify-center my-1 sm:my-2"
+            className="relative flex items-center justify-center shrink-0 my-[clamp(0.2rem,0.5dvh,0.5rem)]"
           >
             {/* Dual Rotating Mandalas */}
-            <RotatingMandala className="absolute w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 text-gold/35 pointer-events-none" />
-            <RotatingMandala className="absolute w-14 h-14 xs:w-16 xs:h-16 sm:w-22 sm:h-22 text-gold/20 pointer-events-none -rotate-180" />
+            <RotatingMandala className="absolute text-gold/35 pointer-events-none w-[clamp(60px,10dvh,115px)] h-[clamp(60px,10dvh,115px)]" />
+            <RotatingMandala className="absolute text-gold/20 pointer-events-none -rotate-180 w-[clamp(44px,7.5dvh,86px)] h-[clamp(44px,7.5dvh,86px)]" />
             
             {/* Soft Ambient Radial Glow Halo */}
-            <div className="absolute w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28 rounded-full bg-radial from-gold/30 via-gold/10 to-transparent blur-md pointer-events-none" />
+            <div className="absolute rounded-full bg-radial from-gold/30 via-gold/10 to-transparent blur-md pointer-events-none w-[clamp(52px,8.5dvh,96px)] h-[clamp(52px,8.5dvh,96px)]" />
 
             {/* Couple Engagement Rings Icon */}
-            <CoupleRingsIcon className="w-10 h-10 xs:w-12 xs:h-12 sm:w-16 sm:h-16 relative z-10 drop-shadow-[0_4px_16px_rgba(201,162,39,0.7)]" />
+            <CoupleRingsIcon className="relative z-10 drop-shadow-[0_4px_16px_rgba(201,162,39,0.7)] w-[clamp(34px,5dvh,60px)] h-[clamp(34px,5dvh,60px)]" />
           </motion.div>
 
           {/* Guest Personalization Pill */}
@@ -198,13 +198,13 @@ function ClosingPage() {
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-gold/20 via-amber-200/30 to-gold/20 border border-gold/60 shadow-xs max-w-full"
+              className="inline-flex items-center gap-1.5 px-[clamp(0.75rem,1.8vw,1.2rem)] py-[clamp(0.25rem,0.6dvh,0.45rem)] rounded-full bg-gradient-to-r from-gold/20 via-amber-200/30 to-gold/20 border border-gold/60 shadow-xs max-w-full shrink-0 my-[clamp(0.15rem,0.4dvh,0.4rem)]"
             >
-              <Sparkles className="w-3 h-3 text-gold animate-pulse shrink-0" />
-              <span className="label text-[8.5px] xs:text-[9.5px] sm:text-[10.5px] text-maroon-deep uppercase tracking-widest font-extrabold truncate">
+              <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse shrink-0" />
+              <span className="label text-[clamp(9px,0.6vw+0.7dvh,11.5px)] text-maroon-deep uppercase tracking-widest font-extrabold truncate">
                 With Love To Dear {guestName}
               </span>
-              <Sparkles className="w-3 h-3 text-gold animate-pulse shrink-0" />
+              <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse shrink-0" />
             </motion.div>
           )}
 
@@ -213,23 +213,18 @@ function ClosingPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
-            className="flex flex-col items-center px-1 w-full"
+            className="flex flex-col items-center px-1 w-full shrink-0 gap-[clamp(0.3rem,0.7dvh,0.7rem)]"
           >
             <div className="flex items-center justify-center space-x-1 sm:space-x-3 w-full flex-nowrap">
-              <TitleFlourish className="rotate-180 w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
+              <TitleFlourish className="rotate-180 text-gold drop-shadow-sm shrink-0 w-[clamp(30px,4vw+1dvh,96px)]" />
               <h2 
-                className="script text-2xl sm:text-5xl md:text-6xl text-maroon drop-shadow-md leading-tight whitespace-nowrap"
+                className="script text-[clamp(1.65rem,2.2vw+2.6dvh,3.65rem)] text-maroon drop-shadow-md leading-tight whitespace-nowrap"
                 style={{ textShadow: "0 4px 18px rgba(201,162,39,0.35)" }}
               >
                 With Grateful Hearts
               </h2>
-              <TitleFlourish className="w-8 sm:w-16 md:w-24 text-gold drop-shadow-sm shrink-0" />
+              <TitleFlourish className="text-gold drop-shadow-sm shrink-0 w-[clamp(30px,4vw+1dvh,96px)]" />
             </div>
-
-            {/* Closing Quote */}
-            <p className="display italic text-xs xs:text-sm sm:text-xl md:text-2xl text-maroon-deep leading-relaxed font-semibold mt-1 max-w-md">
-              "{invitation.closing}"
-            </p>
           </motion.div>
 
           {/* Containerless Gold Filigree Divider */}
@@ -237,14 +232,14 @@ function ClosingPage() {
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.45 }}
-            className="flex items-center gap-2 w-full max-w-xs mx-auto my-1"
+            className="flex items-center gap-2 w-full max-w-xs mx-auto shrink-0 my-[clamp(0.2rem,0.5dvh,0.5rem)]"
           >
             <span className="flex-1 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-            <span className="text-gold text-xs sm:text-sm animate-spin-slow">✦</span>
-            <span className="label text-[8px] xs:text-[9px] sm:text-[10px] text-gold uppercase tracking-[0.3em] font-extrabold whitespace-nowrap">
+            <span className="text-gold text-[clamp(10px,1.1dvh,14px)] animate-spin-slow">✦</span>
+            <span className="label text-[clamp(8px,0.55vw+0.65dvh,10.5px)] text-gold uppercase tracking-[0.25em] font-extrabold whitespace-nowrap">
               Two Souls, One Journey
             </span>
-            <span className="text-gold text-xs sm:text-sm animate-spin-slow">✦</span>
+            <span className="text-gold text-[clamp(10px,1.1dvh,14px)] animate-spin-slow">✦</span>
             <span className="flex-1 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
           </motion.div>
 
@@ -253,27 +248,27 @@ function ClosingPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.5 }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center shrink-0 gap-[clamp(0.3rem,0.7dvh,0.7rem)]"
           >
-            <span className="label text-[8.5px] xs:text-[9.5px] sm:text-[11px] text-gold uppercase tracking-[0.35em] font-bold">
+            <span className="label text-[clamp(8.5px,0.55vw+0.7dvh,11.5px)] text-gold uppercase tracking-[0.3em] font-bold">
               With Warm Regards & Gratitude
             </span>
             
             <h3 
-              className="script text-3.5xl xs:text-4.5xl sm:text-6xl md:text-7xl lg:text-8xl text-maroon drop-shadow-xl mt-0.5 leading-none"
+              className="script text-[clamp(2.2rem,3.8vw+3.2dvh,4.85rem)] text-maroon drop-shadow-xl leading-none my-[clamp(0.2rem,0.5dvh,0.5rem)]"
               style={{ textShadow: "0 6px 24px rgba(201,162,39,0.45)" }}
             >
-              {invitation.groom} <span className="text-gold script text-2.5xl xs:text-3.5xl sm:text-5xl">&</span> {invitation.bride}
+              {invitation.groom} <span className="text-gold script text-[clamp(1.65rem,2.8vw+2.2dvh,3.75rem)]">&</span> {invitation.bride}
             </h3>
 
             {/* Event Date Badge Pill */}
-            <div className="mt-2 sm:mt-3 px-4 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-gold/15 via-gold/30 to-gold/15 border border-gold/50 shadow-xs inline-block max-w-full">
-              <p className="label text-[7.5px] xs:text-[8.5px] sm:text-[10px] text-maroon font-bold uppercase tracking-wider">
+            <div className="px-[clamp(0.75rem,1.8vw,1.2rem)] py-[clamp(0.25rem,0.6dvh,0.45rem)] rounded-full bg-gradient-to-r from-gold/15 via-gold/30 to-gold/15 border border-gold/50 shadow-xs inline-block max-w-full my-[clamp(0.2rem,0.5dvh,0.5rem)]">
+              <p className="label text-[clamp(8px,0.55vw+0.55dvh,10px)] text-maroon font-bold uppercase tracking-wider">
                 ✦ 21 September 2026 • Heritage Palace, Jaipur ✦
               </p>
             </div>
 
-            <p className="label text-[8px] xs:text-[9px] sm:text-[11px] text-gold/90 mt-2 uppercase tracking-[0.2em] font-extrabold">
+            <p className="label text-[clamp(8px,0.55vw+0.65dvh,10.5px)] text-gold/90 uppercase tracking-[0.18em] font-extrabold mt-[clamp(0.2rem,0.5dvh,0.5rem)]">
               Thank You For Being Part Of Our Story
             </p>
           </motion.div>
@@ -283,17 +278,18 @@ function ClosingPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex justify-center w-full max-w-xs mt-2"
+            className="flex justify-center w-full max-w-xs shrink-0 my-[clamp(0.3rem,0.7dvh,0.7rem)]"
           >
             <motion.button
               onClick={handleFlowerShower}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="relative group px-6 py-2.5 rounded-full bg-gradient-to-r from-maroon via-maroon-deep to-maroon text-cream border border-gold/60 shadow-[0_6px_20px_rgba(122,31,43,0.35)] transition-all cursor-pointer overflow-hidden min-w-[210px]"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="relative group rounded-full bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] border border-gold/70 shadow-[0_6px_20px_rgba(122,31,43,0.4)] hover:shadow-[0_10px_30px_rgba(212,175,55,0.6)] transition-all cursor-pointer overflow-hidden w-[clamp(210px,60vw,290px)] h-[clamp(38px,5.2dvh,48px)] px-[clamp(1rem,2.5vw,2rem)] flex items-center justify-center"
             >
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/30 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
-              <span className="relative z-10 label text-[10px] xs:text-xs font-bold tracking-[0.18em] flex items-center justify-center gap-2">
-                <Heart className={`w-4 h-4 text-rose-300 transition-transform duration-300 ${blessingsSent ? "scale-110 text-rose-400" : ""}`} fill="#F43F5E" />
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/50 to-transparent group-hover:animate-[shimmer_1.8s_infinite]" />
+              <span className="absolute inset-0 rounded-full ring-2 ring-gold/70 ring-offset-1 ring-offset-[#FAF3E2] pointer-events-none opacity-80" />
+              <span className="relative z-10 label text-[clamp(10px,0.65vw+0.75dvh,12.5px)] font-extrabold tracking-[0.2em] flex items-center justify-center gap-2">
+                <Heart className={`w-3.5 h-3.5 text-rose-300 transition-transform duration-300 ${blessingsSent ? "scale-125 text-rose-400" : ""}`} fill="#F43F5E" />
                 <span>{blessingsSent ? "SHOWERING PETALS!" : "SHOWER PETALS"}</span>
               </span>
             </motion.button>
@@ -304,25 +300,13 @@ function ClosingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-col items-center gap-1 mt-2 px-2"
+            className="flex flex-col items-center gap-0.5 px-2 shrink-0 pb-1 mt-[clamp(0.2rem,0.5dvh,0.5rem)]"
           >
-            <p className="display italic text-[11px] xs:text-xs sm:text-sm text-maroon-deep/80 leading-relaxed font-medium text-center">
+            <p className="display italic text-[clamp(10.5px,0.65vw+0.75dvh,13.5px)] text-maroon-deep leading-snug font-semibold text-center drop-shadow-xs">
               May the blessings of our elders, the joy of our families,<br className="hidden sm:block"/>
               and the grace of the divine light your path always.
             </p>
           </motion.div>
-
-          {/* Bottom Pichwai Cows Art Motif */}
-          <motion.img 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 0.9 }} 
-            transition={{ delay: 0.85, duration: 1.2 }}
-            src={cows} 
-            alt="Pichwai Art" 
-            aria-hidden 
-            className="mt-2 mx-auto w-full max-w-[180px] xs:max-w-[220px] sm:max-w-xs max-h-12 sm:max-h-16 object-contain drop-shadow-md pointer-events-none" 
-            loading="lazy" 
-          />
 
         </div>
       </div>

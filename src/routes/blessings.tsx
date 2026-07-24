@@ -218,15 +218,15 @@ function BlessingsPage() {
                         type="submit"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="relative group w-full py-2.5 sm:py-3 bg-gradient-to-r from-maroon via-maroon-deep to-maroon text-cream label text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase rounded-full shadow-[0_8px_25px_-5px_rgba(122,31,43,0.6)] hover:shadow-[0_12px_35px_rgba(212,175,55,0.6)] transition-all border border-gold/50 flex items-center justify-center gap-2 cursor-pointer overflow-hidden"
+                        className="relative group w-full py-2.5 sm:py-3 bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] label text-[11px] sm:text-xs font-extrabold tracking-[0.22em] uppercase rounded-full shadow-[0_8px_25px_-5px_rgba(122,31,43,0.7)] hover:shadow-[0_12px_35px_rgba(212,175,55,0.7)] transition-all border-1.5 border-gold/70 flex items-center justify-center gap-2 cursor-pointer overflow-hidden"
                       >
                         {/* Shimmer Light Beam */}
-                        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_2s_infinite]" />
-                        <span className="absolute inset-0 rounded-full ring-2 ring-gold/50 ring-offset-1 ring-offset-cream pointer-events-none" />
+                        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/50 to-transparent group-hover:animate-[shimmer_1.8s_infinite]" />
+                        <span className="absolute inset-0 rounded-full ring-2 ring-gold/70 ring-offset-1 ring-offset-[#FAF3E2] pointer-events-none" />
                         <span className="relative z-10 drop-shadow-md flex items-center justify-center gap-2">
-                          <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
-                          <span>SEND BLESSINGS</span>
-                          <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
+                          <Sparkles className="w-4 h-4 text-gold animate-pulse" />
+                          <span>SEND SACRED BLESSINGS</span>
+                          <Sparkles className="w-4 h-4 text-gold animate-pulse" />
                         </span>
                       </motion.button>
 
@@ -236,12 +236,12 @@ function BlessingsPage() {
                         onClick={() => setShowMobileModal(true)}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="relative group w-full py-2 sm:py-2.5 bg-gold/15 hover:bg-gold/25 text-maroon-deep label text-[10.5px] sm:text-xs font-bold tracking-[0.18em] uppercase rounded-full shadow-xs transition-all border border-gold/50 flex items-center justify-center gap-2 cursor-pointer md:hidden overflow-hidden"
+                        className="relative group w-full py-2 sm:py-2.5 bg-gradient-to-r from-gold/20 via-amber-200/35 to-gold/20 hover:bg-gold/40 text-maroon-deep label text-[10.5px] sm:text-xs font-extrabold tracking-[0.18em] uppercase rounded-full shadow-xs transition-all border-1.5 border-gold/60 flex items-center justify-center gap-2 cursor-pointer md:hidden overflow-hidden"
                       >
-                        <span className="relative z-10 flex items-center gap-1.5">
-                          <Scroll className="w-3.5 h-3.5 text-maroon-deep" />
+                        <span className="relative z-10 flex items-center gap-2">
+                          <Scroll className="w-4 h-4 text-maroon-deep" />
                           <span>VIEW ALL BLESSINGS</span>
-                          <span className="bg-maroon text-cream rounded-full px-2 py-0.5 text-[9.5px] font-bold">
+                          <span className="bg-maroon text-[#FFF8D6] rounded-full px-2 py-0.5 text-[9.5px] font-extrabold border border-gold/40">
                             {items.length}
                           </span>
                         </span>

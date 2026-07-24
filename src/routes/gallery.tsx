@@ -229,22 +229,22 @@ function GalleryPage() {
                     </div>
 
                     {/* Navigation Bar inside Card */}
-                    <div className="flex items-center justify-between pt-2 sm:pt-3 border-t border-gold/25">
+                    <div className="flex items-center justify-between pt-2.5 sm:pt-3 border-t border-gold/30">
                       <button
                         onClick={handlePrev}
-                        className="inline-flex items-center gap-1 px-3 py-1 sm:py-1.5 rounded-full bg-gold/15 hover:bg-gold/30 text-maroon-deep border border-gold/40 label text-[8.5px] sm:text-[10px] font-bold transition-all hover:scale-105 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-gold/20 via-amber-200/35 to-gold/20 hover:bg-gold/40 text-maroon-deep border-1.5 border-gold/60 label text-[9px] sm:text-[10.5px] font-extrabold transition-all hover:scale-105 cursor-pointer shadow-2xs"
                       >
                         <span>←</span>
                         <span>PREV</span>
                       </button>
 
-                      <span className="label text-[8.5px] sm:text-[10px] text-gold font-bold tracking-widest">
+                      <span className="label text-[9px] sm:text-[11px] text-gold font-extrabold tracking-widest px-2.5 py-0.5 rounded-full bg-gold/15 border border-gold/40">
                         {activeIndex + 1} / {storyData.length}
                       </span>
 
                       <button
                         onClick={handleNext}
-                        className="inline-flex items-center gap-1 px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-maroon to-maroon-deep text-cream border border-gold/40 label text-[8.5px] sm:text-[10px] font-bold transition-all hover:scale-105 cursor-pointer shadow-sm"
+                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] border-1.5 border-gold/70 label text-[9px] sm:text-[10.5px] font-extrabold transition-all hover:scale-105 cursor-pointer shadow-[0_4px_15px_rgba(122,31,43,0.4)]"
                       >
                         <span>NEXT</span>
                         <span>→</span>

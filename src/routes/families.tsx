@@ -165,18 +165,22 @@ const FamilyCard = ({ side, data, onOpen, delay }: { side: string; data: typeof 
           </div>
 
           {/* Action Buttons Row */}
-          <div className="mt-1 sm:mt-1.5 pt-1.5 border-t border-gold/25 w-full flex flex-row items-center justify-center gap-1.5 sm:gap-2.5 z-30">
+          <div className="mt-1 sm:mt-1.5 pt-1.5 border-t border-gold/30 w-full flex flex-row items-center justify-center gap-1.5 sm:gap-2.5 z-30">
             <button
               onClick={onOpen}
-              className="w-full h-[34px] sm:h-[38px] md:h-[42px] inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-amber-100 label text-[8.5px] sm:text-[10px] md:text-[11px] font-extrabold rounded-lg shadow-sm hover:shadow-[0_4px_16px_rgba(212,175,55,0.45)] transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap border border-gold/50"
+              className="group relative w-full h-[36px] sm:h-[40px] md:h-[42px] flex items-center justify-between px-3 py-1.5 bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] label text-[9px] sm:text-[10.5px] md:text-[11.5px] font-extrabold rounded-xl shadow-[0_4px_16px_rgba(122,31,43,0.35)] hover:shadow-[0_6px_22px_rgba(212,175,55,0.5)] transition-all hover:scale-[1.02] cursor-pointer whitespace-nowrap border-1.5 border-gold/60 overflow-hidden"
             >
-              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-              <span className="truncate">View Lineage</span>
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_1.8s_infinite]" />
+              <div className="relative z-10 flex items-center justify-between w-full">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-currentColor stroke-[2.2] text-gold shrink-0 drop-shadow-xs">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span className="flex-1 text-center font-extrabold tracking-wide px-1">VIEW FAMILY TREE</span>
+                <span className="w-4 h-4 shrink-0 pointer-events-none" aria-hidden="true" />
+              </div>
             </button>
           </div>
 
@@ -192,7 +196,7 @@ function FamiliesPage() {
 
   return (
     <PageShell>
-      <section className="w-full min-h-[82vh] flex flex-col items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 mt-[28vh] sm:mt-16 md:mt-20 pt-4 sm:pt-6 select-none">
+      <section className="w-full min-h-[85vh] flex flex-col items-center justify-center px-1.5 sm:px-4 py-3 sm:py-6 md:py-8 mt-[24vh] sm:mt-10 md:mt-12 select-none">
         <div className="max-w-5xl w-full mx-auto flex flex-col items-center">
           
           {/* Header Section */}
@@ -212,19 +216,23 @@ function FamiliesPage() {
             </div>
 
             {/* Mobile Segmented Tab Control (< md) */}
-            <div className="md:hidden flex items-center justify-center mt-3 p-1 rounded-full bg-gold/15 border border-gold/30 shadow-inner w-full max-w-[280px]">
+            <div className="md:hidden flex items-center justify-center mt-3 p-1.5 rounded-full bg-[#1A0508]/25 backdrop-blur-md border border-gold/50 shadow-md w-full max-w-[280px]">
               <button
                 onClick={() => setMobileTab("groom")}
-                className={`flex-1 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
-                  mobileTab === "groom" ? "bg-maroon text-cream shadow-md" : "text-maroon-deep hover:text-maroon"
+                className={`flex-1 py-1.5 text-[10px] font-extrabold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
+                  mobileTab === "groom"
+                    ? "bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] shadow-[0_4px_15px_rgba(122,31,43,0.6)] border border-gold/60 scale-102"
+                    : "text-maroon-deep/90 hover:text-maroon hover:bg-gold/15"
                 }`}
               >
                 Groom's Side
               </button>
               <button
                 onClick={() => setMobileTab("bride")}
-                className={`flex-1 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
-                  mobileTab === "bride" ? "bg-maroon text-cream shadow-md" : "text-maroon-deep hover:text-maroon"
+                className={`flex-1 py-1.5 text-[10px] font-extrabold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
+                  mobileTab === "bride"
+                    ? "bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] shadow-[0_4px_15px_rgba(122,31,43,0.6)] border border-gold/60 scale-102"
+                    : "text-maroon-deep/90 hover:text-maroon hover:bg-gold/15"
                 }`}
               >
                 Bride's Side

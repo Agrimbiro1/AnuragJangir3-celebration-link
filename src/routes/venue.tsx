@@ -205,19 +205,23 @@ function VenuePage() {
             </div>
 
             {/* 3D Segmented View Mode Controller */}
-            <div className="flex items-center justify-center mt-2.5 sm:mt-4 p-1 rounded-full bg-gold/15 border border-gold/30 shadow-inner w-full max-w-[260px] sm:max-w-[300px]">
+            <div className="flex items-center justify-center mt-2.5 sm:mt-4 p-1.5 rounded-full bg-[#1A0508]/25 backdrop-blur-md border border-gold/50 shadow-md w-full max-w-[280px] sm:max-w-[320px]">
               <button
                 onClick={() => setViewMode("details")}
-                className={`flex-1 py-1.5 px-2.5 sm:px-3 text-[8.5px] sm:text-[10.5px] font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer flex items-center justify-center ${
-                  viewMode === "details" ? "bg-maroon text-cream shadow-md scale-102" : "text-maroon-deep hover:text-maroon"
+                className={`flex-1 py-1.5 px-3 text-[9px] sm:text-[11px] font-extrabold uppercase tracking-wider rounded-full transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                  viewMode === "details"
+                    ? "bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] shadow-[0_4px_15px_rgba(122,31,43,0.6)] border border-gold/60 scale-102"
+                    : "text-maroon-deep/90 hover:text-maroon hover:bg-gold/15"
                 }`}
               >
                 <span>Palace Details</span>
               </button>
               <button
                 onClick={() => setViewMode("map")}
-                className={`flex-1 py-1.5 px-2.5 sm:px-3 text-[8.5px] sm:text-[10.5px] font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer flex items-center justify-center ${
-                  viewMode === "map" ? "bg-maroon text-cream shadow-md scale-102" : "text-maroon-deep hover:text-maroon"
+                className={`flex-1 py-1.5 px-3 text-[9px] sm:text-[11px] font-extrabold uppercase tracking-wider rounded-full transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                  viewMode === "map"
+                    ? "bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] shadow-[0_4px_15px_rgba(122,31,43,0.6)] border border-gold/60 scale-102"
+                    : "text-maroon-deep/90 hover:text-maroon hover:bg-gold/15"
                 }`}
               >
                 <span>Interactive Map</span>
@@ -412,19 +416,22 @@ function VenuePage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="w-full max-w-[280px] sm:max-w-md mt-2 sm:mt-2 md:mt-2.5 flex justify-center px-1"
+            className="w-full max-w-[280px] sm:max-w-md mt-2.5 sm:mt-3 flex justify-center px-1"
           >
             <a
               href={v.mapUrl}
               target="_blank"
               rel="noreferrer"
-              className="w-full h-[36px] sm:h-[44px] inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 bg-gradient-to-r from-maroon-deep via-maroon to-maroon-deep text-cream label text-[9px] sm:text-[11px] font-bold tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer border border-gold/50 whitespace-nowrap"
+              className="group relative w-full h-[38px] sm:h-[46px] flex items-center justify-between px-4 bg-gradient-to-r from-[#4A0E17] via-[#7A1F2B] to-[#4A0E17] text-[#FFF8D6] label text-[10px] sm:text-[11.5px] font-extrabold tracking-wider rounded-xl shadow-[0_6px_22px_rgba(122,31,43,0.4)] hover:shadow-[0_10px_30px_rgba(212,175,55,0.6)] transition-all hover:scale-[1.02] cursor-pointer border-1.5 border-gold/70 whitespace-nowrap overflow-hidden"
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gold fill-none stroke-currentColor stroke-[2.2] shrink-0">
-                <polygon points="3 11 22 2 13 21 11 13 3 11" />
-              </svg>
-              <span>Navigate via Google Maps</span>
-              <span className="text-gold">→</span>
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/40 to-transparent group-hover:animate-[shimmer_1.8s_infinite]" />
+              <div className="relative z-10 flex items-center justify-between w-full">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 text-gold fill-none stroke-currentColor stroke-[2.2] shrink-0 drop-shadow-xs">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                </svg>
+                <span className="flex-1 text-center font-extrabold tracking-wider px-1">NAVIGATE VIA GOOGLE MAPS</span>
+                <span className="w-4 h-4 text-gold group-hover:translate-x-1 transition-transform flex items-center justify-end shrink-0">→</span>
+              </div>
             </a>
           </motion.div>
 
